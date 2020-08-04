@@ -16,9 +16,9 @@ public class LeerlingEndpoint {
 
 
 	@GetMapping("/leerlingOverzicht")
-	public Leerling probeerverbindingtemaken() {
+	public Iterable<Leerling> geefOverzichtLeerling() {
 		System.out.println("Overzicht");
-		return new Leerling();
+		return ls.laatLeerlingZien();
 
 	}
 

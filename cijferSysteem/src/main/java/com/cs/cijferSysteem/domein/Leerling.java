@@ -14,11 +14,17 @@ public class Leerling {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	long id;
-	int leerlingnummer;
+	int leerlingNummer;
 	String naam;
 	LocalDateTime geboorteDatum;
 	
-	
+
+
+
+
+
+
+
 	public LocalDateTime getGeboorteDatum() {
 		return geboorteDatum;
 	}
@@ -32,12 +38,14 @@ public class Leerling {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public int getLeerlingnummer() {
-		return leerlingnummer;
+		return leerlingNummer;
 	}
 	public void setLeerlingnummer(int leerlingnummer) {
-		this.leerlingnummer = leerlingnummer;
+		this.leerlingNummer = leerlingnummer;
 	}
+
 	public String getNaam() {
 		return naam;
 	}

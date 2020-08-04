@@ -19,8 +19,9 @@ public class LeerlingEndpoint {
 	public Iterable<Leerling> geefOverzichtLeerling() {
 		System.out.println("Overzicht");
 		return ls.laatLeerlingZien();
-
 	}
+
+
 
 }
 

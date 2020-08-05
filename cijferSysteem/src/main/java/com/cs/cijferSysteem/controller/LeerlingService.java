@@ -1,7 +1,5 @@
 package com.cs.cijferSysteem.controller;
 
-import java.util.Random;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,13 @@ public class LeerlingService {
 	@Autowired
 	LeerlingRepository lr;
 	
+<<<<<<< HEAD
+=======
+	public void maakLeerling(){
+		Leerling leerling = new Leerling();
+		lr.save(leerling);
+	}
+>>>>>>> master
 
 
 	public void maakLeerling(Leerling leerling){

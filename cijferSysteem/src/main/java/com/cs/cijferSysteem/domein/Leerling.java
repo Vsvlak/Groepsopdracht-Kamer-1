@@ -12,6 +12,7 @@ public class Leerling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+<<<<<<< HEAD
 
 	long leerlingNummer;
 	String voornaam;
@@ -24,6 +25,12 @@ public class Leerling {
 
 
 
+=======
+	private long id;
+	private int leerlingNummer;
+	private String naam;
+	private LocalDateTime geboorteDatum;
+>>>>>>> master
 
 	public LocalDateTime getGeboorteDatum() {
 		return geboorteDatum;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VakkenOverzicht</title>
+    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <script defer src="VakOverzicht.js"></script>
+    <script defer src="modal.js"></script>
+</head>
+
+<body>
+    <hr>
+    <hr>
+    <h1>WELKOM IN HET VAKKENOVERZICHT</h1>
+    <p> hier kun je vakken bekijken en aanmaken </p>
+    <hr>
+    <hr>
+    <input type=button value="Toon alle vakken" onclick=laatVakkenZien()>
+    <hr>
+    <hr>
+    <table border=2 id=tabel></table>
+
+    <button data-modal-target="#modal">Maak een nieuw vak aan</button>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Maak een nieuw vak aan</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-text"> Naam <input type="text" id="naamInput" class="modal-textInput"></div>
+        </div>
+        <button data-create-button class="create-button" onclick=maakVakAan()>Maak vak aan</button>
+    </div>
+    </div>
+
+    <div id="overlay"></div>
+</body>
+
+</html>

@@ -18,7 +18,7 @@ public class LeerlingService {
 	public void maakLeerling(){
 		Leerling leerling = new Leerling();
 		lr.save(leerling);
-		}
+	}
 
 
 	public Iterable<Leerling> laatLeerlingZien(){

@@ -1,99 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <script src="moment.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <style>
+let tabelLatenZien = false;
         
         
-        img.editB{
-            opacity:0.0;
-        }
-        img.editB:hover{
-            opacity:1.0;
-        }
-        td{
-            font-family: Verdana;
-        }
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: 200ms ease-in-out;
-            border: 1px solid black;
-            border-radius: 10px;
-            z-index: 10;
-            background-color: white;
-            width: 500px;
-            max-width: 80%;
-        }
-
-        .modal.active {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .modal-header {
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-        }
-
-        .modal-header .title {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .modal-header .close-button {
-            cursor: pointer;
-            border: none;
-            outline: none;
-            background: none;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .modal-body {
-            padding: 10px 15px;
-        }
-
-        #overlay {
-            position: fixed;
-            opacity: 0;
-            transition: 200ms ease-in-out;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, .5);
-            pointer-events: none;
-        }
-
-        #overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-    
-    </style>
-    <script>
-        
-        let tabelLatenZien = false;
-        
-        /*function showEditButton(x){
-            document.getElementById("editButton"+x).style.borderColor = "#000000";
-            document.getElementById("editButton"+x).style.color = "#000000";
-        }
-
-        function hideEditButton(x){
-            document.getElementById("editButton"+x).style.borderColor = "#FFFFFF";
-            document.getElementById("editButton"+x).style.color = "#FFFFFF";
-        }*/
         
         function laatLeerlingenTabelZien(){
         
@@ -116,7 +23,6 @@
                             "<td>"+alleinfo[x].naam+"</td>"+
                             "<td>"+moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY')+"</td>"+
                             "<td>"+alleinfo[x].leerlingnummer+"</td>"+
-                            //"<td><input type=button id=editButton"+x+" value='Edit' style='background:transparent; border:none; color:transparent;' onmouseover=showEditButton("+x+") onmouseout=hideEditButton("+x+")></td>"+
                             "<td><img src='EditButton.png' class='editB' id=editButton"+x+" style='height:20px;width20px;'></td>"+
                             "</tr>";
                         }
@@ -199,51 +105,3 @@
             modal.classList.remove('active')
             overlay.classList.remove('active')
         }
-
-    
-    </script>
-</head>
-
-
-
-
-
-
-<body>
-    
-    <hr><hr>
-    <h1>WELKOM IN HET LEERLINGOVERZICHT</h1>
-    <p> hier kun je leerlingen bekijken, aanpassen en toevoegen </p>
-    <hr><hr>
-  
-       <input type=button value="toon leerlingen" onclick=laatLeerlingenTabelZien() >
-       <input type=button value="leerling aanpassen" onclick=adapt() >
-  
-      <input type=button value="leerling aanmaken" onclick=create() >
-  <hr><hr>
-        <div id="leerlingOproep">kies menuoptie...</div>
-        
-        <table border=2 id=tabel></table>
-
-
-        <button data-modal-target="#modal">Open Modal</button>
-        <div class="modal" id="modal">
-          <div class="modal-header">
-            <div class="title">Example Modal</div>
-            <button data-close-button class="close-button">&times;</button>
-          </div>
-          <div class="modal-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quod alias ut illo doloremque eum ipsum obcaecati distinctio debitis reiciendis quae quia soluta totam doloribus quos nesciunt necessitatibus, consectetur quisquam accusamus ex, dolorum, dicta vel? Nostrum voluptatem totam, molestiae rem at ad autem dolor ex aperiam. Amet assumenda eos architecto, dolor placeat deserunt voluptatibus tenetur sint officiis perferendis atque! Voluptatem maxime eius eum dolorem dolor exercitationem quis iusto totam! Repudiandae nobis nesciunt sequi iure! Eligendi, eius libero. Ex, repellat sapiente!
-          </div>
-        </div>
-        <div id="overlay"></div>
-
-
-
-
-
-          <div id=selLijst>///////// EINDE////// </div>
-
-
-</body>
-</html>

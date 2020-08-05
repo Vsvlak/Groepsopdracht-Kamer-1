@@ -19,7 +19,6 @@ let tabelLatenZien = false;
                         for(var x = 0; x < alleinfo.length ; x++){
                             document.getElementById("tabel").innerHTML += "<tr>"+
                     
-                            "<td>"+alleinfo[x].id+"</td>"+ //IK DENK DAT WE DEZE REGEL WEG MOETEN LATEN. ID IS NUTTELOOS OM TE LATEN ZIEN AAN EEN DOCENT
                             "<td>"+alleinfo[x].naam+"</td>"+
                             "<td>"+moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY')+"</td>"+
                             "<td>"+alleinfo[x].leerlingnummer+"</td>"+
@@ -104,4 +103,21 @@ let tabelLatenZien = false;
             if (modal == null) return
             modal.classList.remove('active')
             overlay.classList.remove('active')
+        }
+
+        function maakLeerlingAan(){
+            var voornaamInput = document.getElementById("voornaamInput").value;
+            var achternaamInput = document.getElementById("achternaamInput").value;
+            var geboortedatumInput = document.getElementById("geboortedatumInput").value;
+            var leerling = '{"voornaam":"'+voornaamInput+'","achternaam":"'+achternaamInput+'","geboortedatumInput":"'+geboortedatumInput+'"}';
+            postData(leerling);
+        }
+
+        function postData(leerling){
+            var xhttp = new XMLHttpRequest();
+            //xhttp.onreadystatechange = function(){
+            //};
+            xhttp.open("POST", "http://localhost:8082/api/maakLeerling", true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(leerling);
         }

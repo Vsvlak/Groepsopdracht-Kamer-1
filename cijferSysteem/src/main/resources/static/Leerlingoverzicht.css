@@ -19,6 +19,7 @@ td{
     background-color: white;
     width: 500px;
     max-width: 80%;
+    font-family: Verdana;
 }
 
 .modal.active {
@@ -50,6 +51,23 @@ td{
 .modal-body {
     padding: 10px 15px;
 }
+
+.modal-text{
+    padding: 10px 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-textInput{
+    width: 48%;
+}
+
+.modal-header .close-button{
+    size: 100px;
+
+}
+
 
 #overlay {
     position: fixed;

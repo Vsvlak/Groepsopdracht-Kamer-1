@@ -17,15 +17,17 @@ public class LeerlingService {
 	@Autowired
 	LeerlingRepository lr;
 	
-	public void maakLeerling(){
-		Leerling leerling = new Leerling();
-		lr.save(leerling);
-		}
 
+
+	public void maakLeerling(Leerling leerling){
+		lr.save(leerling);
+	}
 
 	public Iterable<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
+
+
 
 
 

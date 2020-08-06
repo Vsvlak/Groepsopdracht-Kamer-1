@@ -20,14 +20,8 @@ public class LeerlingService {
 
 
 
-	public void maakLeerling(){
-		Leerling leerling = new Leerling();
-		lr.save(leerling);
-	}
 
-
-
-	public void maakLeerling(Leerling leerling){
+	public void save(Leerling leerling){
 		lr.save(leerling);
 	}
 

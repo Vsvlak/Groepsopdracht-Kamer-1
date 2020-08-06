@@ -13,14 +13,9 @@ import com.cs.cijferSysteem.domein.Leerling;
 @Transactional
 public class LeerlingService {
 
-
 	@Autowired
 	LeerlingRepository lr;
 	
-
-
-
-
 	public void save(Leerling leerling){
 		lr.save(leerling);
 	}

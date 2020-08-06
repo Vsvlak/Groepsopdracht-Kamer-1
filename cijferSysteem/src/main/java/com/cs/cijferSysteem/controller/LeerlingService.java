@@ -17,20 +17,30 @@ public class LeerlingService {
 	@Autowired
 	LeerlingRepository lr;
 	
+
+
+
 	public void maakLeerling(){
 		Leerling leerling = new Leerling();
 		lr.save(leerling);
 	}
 
 
+
+	public void maakLeerling(Leerling leerling){
+		lr.save(leerling);
+	}
+
 	public Iterable<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
 	
 	public Optional<Leerling> toonLeerling(Long id) {
-		System.out.println(lr.findById(id).get().getId() + lr.findById(id).get().getNaam());
+		//System.out.println(lr.findById(id).get().getId() + lr.findById(id).get().getNaam());
 		return lr.findById(id);
 	}
+
+
 
 
 }

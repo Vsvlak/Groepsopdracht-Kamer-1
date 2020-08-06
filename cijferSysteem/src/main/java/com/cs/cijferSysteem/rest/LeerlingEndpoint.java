@@ -1,7 +1,10 @@
 package com.cs.cijferSysteem.rest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +29,14 @@ public class LeerlingEndpoint {
 	}
 
 	@PostMapping("/api/maakLeerling")
-	public void maakLeerlingAan(@RequestBody Leerling leerling){
-		ls.maakLeerling(leerling);
+	public void maakLeerlingAan(@RequestBody CreateLeerlingDto createLeerlingDto){
+		Leerling leerling = new Leerling();
+		leerling.setVoornaam(createLeerlingDto.getVoornaam());
+		leerling.setAchternaam(createLeerlingDto.getAchternaam());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
+		this.ls.save(leerling);
+
 		System.out.println(leerling.getVoornaam());
 		System.out.println(leerling.getAchternaam());
 		System.out.println(leerling.getLeerlingNummer());

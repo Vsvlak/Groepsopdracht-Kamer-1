@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.domein;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,11 +17,11 @@ public class Leerling {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
 
-	private long id;
+	private Long id;
 	private int leerlingNummer;
 	private String voornaam;
 	private String achternaam;
-	private LocalDateTime geboorteDatum;
+	private LocalDate geboorteDatum;
 
 	
 	@ManyToMany
@@ -28,10 +29,10 @@ public class Leerling {
 
 
 
-	public LocalDateTime getGeboorteDatum() {
+	public LocalDate getGeboorteDatum() {
 		return geboorteDatum;
 	}
-	public void setGeboorteDatum(LocalDateTime geboorteDatum) {
+	public void setGeboorteDatum(LocalDate geboorteDatum) {
 		this.geboorteDatum = geboorteDatum;
 	}
 	

@@ -1,9 +1,9 @@
 package com.cs.cijferSysteem.domein;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,27 +15,28 @@ public class Leerling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
-
 	private Long id;
 	private int leerlingNummer;
 	private String voornaam;
 	private String achternaam;
 	private LocalDate geboorteDatum;
 
-	
-	@ManyToMany
+	@ManyToMany(mappedBy = "leerlingen", cascade = CascadeType.ALL)
 	private List<Klas> klassen;
-
-
-
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public LocalDate getGeboorteDatum() {
 		return geboorteDatum;
 	}
 	public void setGeboorteDatum(LocalDate geboorteDatum) {
 		this.geboorteDatum = geboorteDatum;
 	}
-	
 
 	public long getLeerlingNummer() {
 		return leerlingNummer;

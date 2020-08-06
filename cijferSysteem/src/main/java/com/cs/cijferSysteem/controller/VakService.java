@@ -14,6 +14,7 @@ public class VakService {
 	@Autowired
 	VakRepository vr;
 	
+
 	public void maakVak() {
 		Vak vak = new Vak();
 		vak.setNaam("Engels");

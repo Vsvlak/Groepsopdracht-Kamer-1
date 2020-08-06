@@ -21,17 +21,17 @@ function laatKlassenZien() {
     xhr.send();
 }
 
-    function maakKlasAan(){
-        var naam = document.getElementById("naamInput").value;
-        var niveau = document.getElementById("niveauInput").value;
-        var klas = '{"naam":"'+naam+'","niveau":"'+niveau+'"}';
-        postData(klas);
-    }
+function maakKlasAan() {
+    var naam = document.getElementById("naamInput").value;
+    var niveau = document.getElementById("niveauInput").value;
+    var klas = '{"naam":"' + naam + '","niveau":"' + niveau + '"}';
+    postData(klas);
+}
 
-    function postData(klas){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "http://localhost:8082/api/maakKlas", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(klas);
-    }
+function postData(klas) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8082/api/maakKlas", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(klas);
+}
 

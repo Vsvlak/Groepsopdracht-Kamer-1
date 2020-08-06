@@ -1,9 +1,13 @@
 package com.cs.cijferSysteem.domein;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Vak {
@@ -12,6 +16,26 @@ public class Vak {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String naam;
+
+	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
+	private List<Docent> docenten;
+
+	
+	public List<Docent> getDocenten(Docent d) {
+		return docenten;
+	}
+	public void setDocenten(List<Docent> docenten) {
+		this.docenten = docenten;
+	}
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNaam() {
 		return naam;

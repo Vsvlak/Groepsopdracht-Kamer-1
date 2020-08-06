@@ -2,13 +2,11 @@ package com.cs.cijferSysteem.controller;
 
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cs.cijferSysteem.domein.Klas;
-import com.cs.cijferSysteem.domein.Leerling;
 
 @Service
 @Transactional
@@ -17,7 +15,8 @@ public class KlasService {
 	@Autowired
 	KlasRepository kr;
 	
-	public void maakKlas(Klas k) {
+	@Transactional(readOnly = false)
+	public void update(Klas k) {
 		kr.save(k);
 	}
 

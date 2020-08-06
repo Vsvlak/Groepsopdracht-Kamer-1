@@ -8,13 +8,13 @@ let tabelLatenZien = false;
                 xhr.onreadystatechange = function (){
                     if (xhr.readyState == 3){
                         var alleinfo = JSON.parse(this.responseText);
-                        document.getElementById("tabel").innerHTML += "<tr><td><b>ID</b></td><td><b>voornaam</b></td><td><b>achternaam</b></td><td></td></tr>"
+                        document.getElementById("tabel").innerHTML += "<tr><td><b>voornaam</b></td><td><b>achternaam</b></td><td><b>vakken</b></td><td></td></tr>"
                      
                         for(var x = 0; x < alleinfo.length ; x++){
                             document.getElementById("tabel").innerHTML += "<tr>"+
-                            "<td>"+alleinfo[x].id+"</td>"+ 
                             "<td>"+alleinfo[x].voornaam+"</td>"+
                             "<td>"+alleinfo[x].achternaam+"</td>"+
+                            "<td>"+alleinfo[x].vakken+"</td>"+ 
                             "<td><img src='EditButton.png' class='editB' id=editButton"+x+" style='height:20px;width20px;'></td>"+
                             "</tr>";
                         }
@@ -34,7 +34,8 @@ let tabelLatenZien = false;
 
             var voornaamInput = document.getElementById("voornaamInput").value;
             var achternaamInput = document.getElementById("achternaamInput").value;
-            var docent = '{ "voornaam":" '+voornaamInput+'", "achternaam":"'+achternaamInput+'"}';
+            var vakkenInput = document.getElementById("vakkenInput").value;
+            var docent = '{ "voornaam":" '+voornaamInput+'", "achternaam":"'+achternaamInput+'", "vakken":"'+vakkenInput+'"}';
             postData(docent);
             modal.classList.remove('active')
             overlay.classList.remove('active')

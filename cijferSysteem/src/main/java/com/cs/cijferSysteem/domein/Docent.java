@@ -1,27 +1,34 @@
 package com.cs.cijferSysteem.domein;
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Docent {
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		
-		long id;
-		String achternaam;
-		String voornaam;
-		private ArrayList<Vak> vakken;
+		private Long id;
+		private String achternaam;
+		private String voornaam;
+		
+		@ManyToMany(mappedBy = "vakken")
+		private List<Vak> vakken;
 
-
-		public void voegLeerlingToe(Vak v) {
-			vakken.add(v);
+		
+		public List<Vak> getVakken(Vak vak) {
+			return vakken;
 		}
+		public void setVakken(List<Vak> vakken) {
+			this.vakken = vakken;
+		}
+		
 		
 		public String getAchternaam() {
 			return achternaam;

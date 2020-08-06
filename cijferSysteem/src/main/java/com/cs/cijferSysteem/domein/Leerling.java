@@ -14,13 +14,19 @@ public class Leerling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
+
 	private long id;
 	private int leerlingNummer;
-	private String naam;
+	private String voornaam;
+	private String achternaam;
 	private LocalDateTime geboorteDatum;
+
 	
 	@ManyToMany
 	private List<Klas> klassen;
+
+
 
 	public LocalDateTime getGeboorteDatum() {
 		return geboorteDatum;
@@ -29,28 +35,29 @@ public class Leerling {
 		this.geboorteDatum = geboorteDatum;
 	}
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 
-	public int getLeerlingnummer() {
+	public long getLeerlingNummer() {
 		return leerlingNummer;
 	}
-	public void setLeerlingnummer(int leerlingnummer) {
-		this.leerlingNummer = leerlingnummer;
+
+	public void setLeerlingNummer(int leerlingNummer) {
+		this.leerlingNummer = leerlingNummer;
 	}
 
-	public String getNaam() {
-		return naam;
-	}
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public String getVoornaam() {
+		return voornaam;
 	}
 
-	
-	
+	public void setVoornaam(String voornaam) {
+		this.voornaam = voornaam;
+	}
+
+	public String getAchternaam() {
+		return achternaam;
+	}
+
+	public void setAchternaam(String achternaam) {
+		this.achternaam = achternaam;
+	}
 }
 

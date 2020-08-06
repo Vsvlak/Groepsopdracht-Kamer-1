@@ -1,5 +1,7 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,14 @@ public class LeerlingService {
 	@Autowired
 	LeerlingRepository lr;
 	
-<<<<<<< HEAD
-=======
+
+
+
 	public void maakLeerling(){
 		Leerling leerling = new Leerling();
 		lr.save(leerling);
 	}
->>>>>>> master
+
 
 
 	public void maakLeerling(Leerling leerling){
@@ -31,7 +34,11 @@ public class LeerlingService {
 	public Iterable<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
-
+	
+	public Optional<Leerling> toonLeerling(Long id) {
+		//System.out.println(lr.findById(id).get().getId() + lr.findById(id).get().getNaam());
+		return lr.findById(id);
+	}
 
 
 

@@ -1,36 +1,32 @@
 package com.cs.cijferSysteem.domein;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Leerling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-<<<<<<< HEAD
-
-	long leerlingNummer;
-	String voornaam;
-	String achternaam;
-	LocalDateTime geboorteDatum;
-	
 
 
-
-
-
-
-=======
 	private long id;
 	private int leerlingNummer;
-	private String naam;
+	private String voornaam;
+	private String achternaam;
 	private LocalDateTime geboorteDatum;
->>>>>>> master
+
+	
+	@ManyToMany
+	private List<Klas> klassen;
+
+
 
 	public LocalDateTime getGeboorteDatum() {
 		return geboorteDatum;

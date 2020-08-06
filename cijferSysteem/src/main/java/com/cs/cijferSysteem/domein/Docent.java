@@ -3,6 +3,7 @@ package com.cs.cijferSysteem.domein;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,17 +19,21 @@ public class Docent {
 		private String achternaam;
 		private String voornaam;
 		
-		@ManyToMany(mappedBy = "vakken")
+		//@ManyToMany(mappedBy = "docenten", cascade = {CascadeType.ALL })
+		@ManyToMany()
 		private List<Vak> vakken;
 
 		
-		public List<Vak> getVakken(Vak vak) {
+		public List<Vak> getVakken() {
 			return vakken;
 		}
-		public void setVakken(List<Vak> vakken) {
-			this.vakken = vakken;
-		}
+//		public void setVakken(List<Vak> vakken) {
+//			this.vakken = vakken;
+//		}
 		
+		public void voegVakToe(Vak v) { 
+			vakken.add(v);
+		}
 		
 		public String getAchternaam() {
 			return achternaam;
@@ -42,10 +47,10 @@ public class Docent {
 		public void setVoornaam(String voornaam) {
 			this.voornaam = voornaam;
 		}
-		public long getId() {
+		public Long getId() {
 			return id;
 		}
-		public void setId(long id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 

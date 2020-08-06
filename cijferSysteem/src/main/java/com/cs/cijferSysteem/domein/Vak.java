@@ -2,6 +2,7 @@ package com.cs.cijferSysteem.domein;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Vak {
 	private Long id;
 	private String naam;
 
-	@ManyToMany()
+	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
 	private List<Docent> docenten;
 
 	

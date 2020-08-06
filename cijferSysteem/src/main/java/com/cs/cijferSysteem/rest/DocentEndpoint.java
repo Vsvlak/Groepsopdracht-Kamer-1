@@ -25,8 +25,9 @@ public class DocentEndpoint {
 	
 	@PostMapping("api/maakDocent")
 	public void maakDocent(@RequestBody Docent docent) { 
+		
 		ds.maakDocent(docent);
-
+		
 	}
 
 }

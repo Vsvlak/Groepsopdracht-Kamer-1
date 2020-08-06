@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.KlasService;
+import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.dto.KlasLeerlingDto;
 
 @RestController
 public class KlasEndpoint {
 
 	@Autowired
 	KlasService ks;
+	@Autowired
+	LeerlingService ls;	
 	
 	@GetMapping("/klassenOverzicht")
 	public Iterable<Klas> toonKlassenOverzicht(){
@@ -31,11 +35,15 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/maakKlas")
 	public void maakVak(@RequestBody Klas k) {
-		ks.maakKlas(k);
+		ks.update(k);
 	}
 	
-//	@PostMapping("/api/voegLeerlingToe/{klasid}/{leerlingid}")
-//	public void voegLeerlingToe(@PathVariable("klasid") Klas klasid, @PathVariable("leerlingid") Long leerlingid) {
-//		ks.getKlasById(klasid).get().voegLeerlingToe(leerlingid);
-//	}
+	@PostMapping("/api/voegLeerlingToe")
+	public void voegLeerlingToe(@RequestBody KlasLeerlingDto klasLeerlingDto) {
+		Klas k = ks.getKlasById(klasLeerlingDto.getKlasid()).get();
+		Leerling l = ls.toonLeerling(klasLeerlingDto.getLeerlingid()).get();
+		//k.voegLeerlingToe(l);
+		k.getLeerlingen().add(l);
+		ks.update(k);
+	}
 }

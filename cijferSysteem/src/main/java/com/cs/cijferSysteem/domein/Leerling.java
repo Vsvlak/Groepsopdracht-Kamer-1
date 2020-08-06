@@ -1,51 +1,64 @@
 package com.cs.cijferSysteem.domein;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Leerling {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private int leerlingNummer;
-	private String naam;
-	private LocalDateTime geboorteDatum;
 
-	public LocalDateTime getGeboorteDatum() {
+
+	private Long id;
+	private int leerlingNummer;
+	private String voornaam;
+	private String achternaam;
+	private LocalDate geboorteDatum;
+
+	
+	@ManyToMany
+	private List<Klas> klassen;
+
+
+
+	public LocalDate getGeboorteDatum() {
 		return geboorteDatum;
 	}
-	public void setGeboorteDatum(LocalDateTime geboorteDatum) {
+	public void setGeboorteDatum(LocalDate geboorteDatum) {
 		this.geboorteDatum = geboorteDatum;
 	}
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 
-	public int getLeerlingnummer() {
+	public long getLeerlingNummer() {
 		return leerlingNummer;
 	}
-	public void setLeerlingnummer(int leerlingnummer) {
-		this.leerlingNummer = leerlingnummer;
+
+	public void setLeerlingNummer(int leerlingNummer) {
+		this.leerlingNummer = leerlingNummer;
 	}
 
-	public String getNaam() {
-		return naam;
-	}
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public String getVoornaam() {
+		return voornaam;
 	}
 
-	
-	
+	public void setVoornaam(String voornaam) {
+		this.voornaam = voornaam;
+	}
+
+	public String getAchternaam() {
+		return achternaam;
+	}
+
+	public void setAchternaam(String achternaam) {
+		this.achternaam = achternaam;
+	}
 }
 

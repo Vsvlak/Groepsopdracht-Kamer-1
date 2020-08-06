@@ -40,7 +40,7 @@ function laatLeerlingenTabelZien() {
 
 
 
-function adapt() {
+/*function adapt() {
     document.getElementById("leerlingOproep").innerHTML = "";
 
     let xhr = new XMLHttpRequest();
@@ -59,6 +59,23 @@ function adapt() {
             }
         }
     }
-    xhr.open("GET", "http://localhost:8082/leerlingOverzicht", true);
-    xhr.send();
-}
+}*/
+
+        function maakLeerlingAan(){
+            var voornaamInput = document.getElementById("voornaamInput").value;
+            var achternaamInput = document.getElementById("achternaamInput").value;
+            var geboortedatumInput = document.getElementById("geboortedatumInput").value;
+            var leerling = '{"voornaam":"'+voornaamInput+'","achternaam":"'+achternaamInput+'","geboortedatum":"'+geboortedatumInput+'"}';
+            postData(leerling);
+        }
+
+        function postData(leerling){
+            var xhttp = new XMLHttpRequest();
+            //xhttp.onreadystatechange = function(){
+            //};
+            xhttp.open("POST", "http://localhost:8082/api/maakLeerling", true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(leerling);
+        }
+      
+    

@@ -11,7 +11,7 @@ public class Vak {
 	private Long id;
 	private String naam;
 
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany//(cascade = {CascadeType.ALL})
 	private List <Toets> toetsen;
 
 	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})

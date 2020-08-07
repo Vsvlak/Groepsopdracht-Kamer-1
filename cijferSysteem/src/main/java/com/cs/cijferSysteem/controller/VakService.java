@@ -1,5 +1,7 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,12 @@ public class VakService {
 		vr.save(v);
 	}
 	
-	public Iterable<Vak> laatVakkenZien(){
+	
+	public Iterable<Vak> laatVakZien(){
 		return vr.findAll();
+	}
+	
+	public Optional<Vak> toonVakById(Long id){
+		return vr.findById(id);
 	}
 }

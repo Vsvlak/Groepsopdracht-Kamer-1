@@ -1,11 +1,14 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cs.cijferSysteem.domein.Docent;
+import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Vak;
 
 
@@ -17,20 +20,18 @@ public class DocentService {
 		@Autowired
 		DocentRepository dr;
 
-//		
-//		public void maakDocent(){
-//			Docent docent = new Docent();
-//			dr.save(docent);
-//			}
-//		
-		public void maakDocent(Docent docent){
-			dr.save(docent);
-			}
-		
-
+		@Transactional///(readOnly = false)
+		public void update(Docent d){
+			dr.save(d);
+		}
 
 		public Iterable<Docent> laatDocentZien(){
 			return dr.findAll();
 		}
+
+		public Optional<Docent> toonDocentById(Long id){
+			return dr.findById(id);
+		}
+
 
 }

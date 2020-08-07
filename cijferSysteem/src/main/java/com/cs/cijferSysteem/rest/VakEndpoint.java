@@ -17,8 +17,7 @@ public class VakEndpoint {
 	
 	@GetMapping("/vakkenOverzicht")
 	public Iterable<Vak> toonVakkenOverzicht(){
-		System.out.println("Vakken overzicht getoond");
-		return vs.laatVakkenZien();
+		return vs.laatVakZien();
 	}
 	
 	@PostMapping("/api/maakVak")

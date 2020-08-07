@@ -20,19 +20,15 @@ public class Docent {
 		private String voornaam;
 		
 		//@ManyToMany(mappedBy = "docenten", cascade = {CascadeType.ALL })
-		@ManyToMany()
+		@ManyToMany
 		private List<Vak> vakken;
-
-		
-		public List<Vak> getVakken() {
-			return vakken;
-		}
-//		public void setVakken(List<Vak> vakken) {
-//			this.vakken = vakken;
-//		}
 		
 		public void voegVakToe(Vak v) { 
 			vakken.add(v);
+		}
+		
+		public List<Vak> getVakken() {
+			return vakken;
 		}
 		
 		public String getAchternaam() {

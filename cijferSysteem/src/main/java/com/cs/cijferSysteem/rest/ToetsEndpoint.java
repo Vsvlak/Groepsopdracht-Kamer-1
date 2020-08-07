@@ -58,9 +58,3 @@ public class ToetsEndpoint {
         System.out.println("id = " + id);
         return ts.toonToets(id);
     }
-
-
-
-
-
-}

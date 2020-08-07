@@ -1,7 +1,13 @@
 package com.cs.cijferSysteem.domein;
 
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Vak {
@@ -19,7 +25,7 @@ public class Vak {
 
 	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
 	private List<Klas> klassen;
-	
+
 
 
 	public void voegToetsToe(Toets t){

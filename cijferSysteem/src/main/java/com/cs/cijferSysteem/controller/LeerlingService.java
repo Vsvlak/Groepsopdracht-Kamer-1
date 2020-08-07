@@ -27,4 +27,5 @@ public class LeerlingService {
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
+	
 }

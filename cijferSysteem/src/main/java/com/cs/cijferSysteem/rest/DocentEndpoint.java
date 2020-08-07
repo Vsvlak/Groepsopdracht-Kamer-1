@@ -11,12 +11,8 @@ import com.cs.cijferSysteem.domein.Docent;
 
 @RestController
 public class DocentEndpoint {
-
-	
-
 	@Autowired
 	DocentService ds;
-
 
 	@GetMapping("/docentOverzicht")
 	public Iterable<Docent> geefOverzichtDocent() {
@@ -25,9 +21,6 @@ public class DocentEndpoint {
 	
 	@PostMapping("api/maakDocent")
 	public void maakDocent(@RequestBody Docent docent) { 
-		
 		ds.maakDocent(docent);
-		
 	}
-
 }

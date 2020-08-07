@@ -20,6 +20,8 @@ public class Vak {
 	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
 	private List<Docent> docenten;
 
+	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
+	private List<Klas> klassen;
 	
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;

@@ -17,10 +17,8 @@ import com.cs.cijferSysteem.domein.Leerling;
 @RestController
 public class LeerlingEndpoint {
 
-
 	@Autowired
 	LeerlingService ls;
-
 
 	@GetMapping("/leerlingOverzicht")
 	public Iterable<Leerling> geefOverzichtLeerling() {
@@ -35,17 +33,15 @@ public class LeerlingEndpoint {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
 		this.ls.save(leerling);
-
-		System.out.println(leerling.getVoornaam());
-		System.out.println(leerling.getAchternaam());
-		System.out.println(leerling.getLeerlingNummer());
-		System.out.println(leerling.getGeboorteDatum());
+//		System.out.println(leerling.getVoornaam());
+//		System.out.println(leerling.getAchternaam());
+//		System.out.println(leerling.getLeerlingNummer());
+//		System.out.println(leerling.getGeboorteDatum());
 	}
 
 
 	@GetMapping("/leerling/{id}")
 	public Optional<Leerling> getLeerlingById(@PathVariable("id") Long id){
-		System.out.println("id = " + id);
 		return ls.toonLeerling(id);
 	}
 

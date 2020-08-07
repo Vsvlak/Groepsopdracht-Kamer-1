@@ -1,9 +1,6 @@
 package com.cs.cijferSysteem.domein;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,9 +15,9 @@ public class Toets {
     private Long id;
     private LocalDate datum;
     private LocalTime tijd;
-    private String vak;
 
-
+    /*@ManyToOne
+    private Vak vak;*/
 
 
 
@@ -49,11 +46,4 @@ public class Toets {
         this.datum = datum;
     }
 
-    public String getVak() {
-        return vak;
-    }
-
-    public void setVak(String vak) {
-        this.vak = vak;
-    }
 }

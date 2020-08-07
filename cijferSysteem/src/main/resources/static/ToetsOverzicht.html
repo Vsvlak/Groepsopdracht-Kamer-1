@@ -10,7 +10,7 @@
     <script defer src="modal.js"></script>
 </head>
 
-<body>
+<body onload=maakToetsenDropdown()>
     <hr>
     <hr>
     <h1>WELKOM IN HET TOETSOVERZICHT</h1>
@@ -31,7 +31,7 @@
         <div class="modal-body">
             <div class="modal-text"> Datum DD/MM/YYYY<input type="text" id="datumInput" class="modal-textInput"></div>
             <div class="modal-text"> Tijd HH:MM<input type="text" id="tijdInput" class="modal-textInput"></div>
-            <div class="modal-text"> Vak <input type="text" id="vakInput" class="modal-textInput"></div>
+            <div class="modal-text"> Vak <select id="kiesvak" class="modal-textInput"></select>
         </div>
         <button data-create-button class="create-button" onclick=maakToetsAan()>Maak toets aan</button>
     </div>

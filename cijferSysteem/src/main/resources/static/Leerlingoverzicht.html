@@ -1,63 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <script src="moment.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeerlingOverzicht</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
-    <script defer src="Leerlingoverzicht.js"></script>
-    <script defer src="modal.js"></script>
-    
+  <script src="moment.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeerlingOverzicht</title>
+  <link href="Leerlingoverzicht.css" rel="stylesheet">
+  <script defer src="Leerlingoverzicht.js"></script>
+  <script defer src="modal.js"></script>
+
 </head>
 
+<body onload = laatLeerlingenTabelZien()>
 
-<body>
-    
-    
-    
-    
-    <hr><hr>
-    <h1>WELKOM IN HET LEERLINGOVERZICHT</h1>
-    <p> hier kun je leerlingen bekijken, aanpassen en toevoegen </p>
-    <hr><hr>
-  
-       <input type=button value="toon leerlingen" onclick=laatLeerlingenTabelZien() >
-       <input type=button value="leerling aanpassen" onclick=adapt() >
-  
-      <input type=button value="leerling aanmaken" onclick=create() >
-  <hr><hr>
-        <div id="leerlingOproep">kies menuoptie...</div>
-        
-        <table border=2 id=tabel></table>
+  <hr>
+  <hr>
+  <h1>WELKOM IN HET LEERLINGOVERZICHT</h1>
+  <p> hier kun je leerlingen bekijken, aanpassen en toevoegen </p>
+  <hr>
+  <hr>
+
+  <div id="leerlingOproep"></div>
+
+  <table border=2 id=tabel></table>
 
 
-        <button data-modal-target="#modal">Open Modal</button>
-        <div class="modal" id="modal">
-          <div class="modal-header">
-            <div class="title">Maak een nieuwe leerling aan</div>
-            <button data-close-button class="close-button">&times;</button>
-          </div>
-          <div class="modal-body">
-            <div class="modal-text"> Voornaam   <input type="text" id="voornaamInput" class="modal-textInput"></div>
-            <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
-            <div class="modal-text"> Geboortedatum  DD/MM/YYYY<input type="text" id="geboortedatumInput" class="modal-textInput"></div>
-            <button data-create-button class="create-button" onclick=maakLeerlingAan()>Maak leerling aan</button>
-          </div>
-        </div>
-        <div id="overlay"></div>
+  <button data-modal-target="#modal">Open Modal</button>
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="title">Maak een nieuwe leerling aan</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
+      <div class="modal-text"> Geboortedatum DD/MM/YYYY<input type="text" id="geboortedatumInput"
+          class="modal-textInput"></div>
+      <button data-create-button class="create-button" onclick=maakLeerlingAan()>Maak leerling aan</button>
+    </div>
+  </div>
+  <div id="overlay"></div>
 
-
-
-
-
-          <div id=selLijst>///////// EINDE////// </div>
-
-
-
-
-
-
+  <div id=selLijst>///////// EINDE////// </div>
 </body>
+
 </html>

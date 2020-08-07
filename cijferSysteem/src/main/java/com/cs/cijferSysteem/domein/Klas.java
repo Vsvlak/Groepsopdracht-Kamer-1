@@ -2,7 +2,6 @@ package com.cs.cijferSysteem.domein;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +18,15 @@ public class Klas {
 
 	@ManyToMany
 	private List<Leerling> leerlingen;
+	
+	@ManyToMany
+	private List<Vak> vakkenpakket;
 
 	public void voegLeerlingToe(Leerling l) {
 		leerlingen.add(l);
+	}
+	public void voegVakToe(Vak v) {
+		vakkenpakket.add(v);
 	}
 	
 	public Long getId() {
@@ -44,5 +49,8 @@ public class Klas {
 	}
 	public List<Leerling> getLeerlingen() {
 		return leerlingen;
+	}
+	public List<Vak> getVakken(){
+		return vakkenpakket;
 	}
 }

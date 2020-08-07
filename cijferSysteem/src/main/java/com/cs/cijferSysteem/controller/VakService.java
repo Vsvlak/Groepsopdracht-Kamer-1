@@ -16,12 +16,6 @@ public class VakService {
 	@Autowired
 	VakRepository vr;
 	
-
-	public void maakVak() {
-		Vak vak = new Vak();
-		vak.setNaam("Engels");
-	}
-	
 	public void maakVak(Vak v) {
 		vr.save(v);
 	}
@@ -31,7 +25,13 @@ public class VakService {
 		return vr.findAll();
 	}
 	
+	/// hieronder dubbele method; nog 1 van maken ; oorzaak merge
 	public Optional<Vak> toonVakById(Long id){
+	return vr.findById(id);
+	
+	}
+
+	public Optional<Vak> getVakById(Long id) {
 		return vr.findById(id);
 	}
 }

@@ -21,12 +21,17 @@ public class Vak {
 	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
 	private List<Docent> docenten;
 
-//	public List<Docent> getDocenten() {
-//		return docenten;
-//	}
-//	public void setDocenten(List<Docent> docenten) {
-//		this.docenten = docenten;
-//	}
+	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
+	private List<Klas> klassen;
+	
+	
+	public List<Docent> getDocenten(Docent d) {
+		return docenten;
+	}
+	public void setDocenten(List<Docent> docenten) {
+		this.docenten = docenten;
+	}
+
 	
 	public Long getId() {
 		return id;

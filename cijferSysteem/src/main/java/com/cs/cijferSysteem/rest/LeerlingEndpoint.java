@@ -17,10 +17,8 @@ import com.cs.cijferSysteem.domein.Leerling;
 @RestController
 public class LeerlingEndpoint {
 
-
 	@Autowired
 	LeerlingService ls;
-
 
 	@GetMapping("/leerlingOverzicht")
 	public Iterable<Leerling> geefOverzichtLeerling() {
@@ -44,7 +42,6 @@ public class LeerlingEndpoint {
 
 	@GetMapping("/leerling/{id}")
 	public Optional<Leerling> getLeerlingById(@PathVariable("id") Long id){
-		System.out.println("id = " + id);
 		return ls.toonLeerling(id);
 	}
 

@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
+import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.KlasLeerlingDto;
+import com.cs.cijferSysteem.dto.KlasVakDto;
 
 @RestController
 public class KlasEndpoint {
@@ -22,6 +25,8 @@ public class KlasEndpoint {
 	KlasService ks;
 	@Autowired
 	LeerlingService ls;	
+	@Autowired
+	VakService vs;	
 	
 	@GetMapping("/klassenOverzicht")
 	public Iterable<Klas> toonKlassenOverzicht(){
@@ -31,6 +36,11 @@ public class KlasEndpoint {
 	@GetMapping("/leerlingenInKlas/{id}")
 	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("id") Long id){
 		return ks.getKlasById(id).get().getLeerlingen();
+	}
+	
+	@GetMapping("/vakkenVanKlas/{id}")
+	public List<Vak> toonVakkenVanKlas(@PathVariable("id") Long id){
+		return ks.getKlasById(id).get().getVakken();
 	}
 	
 	@PostMapping("/api/maakKlas")
@@ -44,6 +54,16 @@ public class KlasEndpoint {
 		Leerling l = ls.toonLeerling(klasLeerlingDto.getLeerlingid()).get();
 		if(!k.getLeerlingen().contains(l)) {
 			k.getLeerlingen().add(l);
+			ks.update(k);
+		}
+	}
+	
+	@PostMapping("/api/voegVakToe")
+	public void voegVakToe(@RequestBody KlasVakDto klasVakDto) {
+		Klas k = ks.getKlasById(klasVakDto.getKlasid()).get();
+		Vak v = vs.getVakById(klasVakDto.getVakid()).get();
+		if(!k.getVakken().contains(v)) {
+			k.getVakken().add(v);
 			ks.update(k);
 		}
 	}

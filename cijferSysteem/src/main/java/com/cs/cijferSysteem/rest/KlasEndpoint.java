@@ -42,8 +42,9 @@ public class KlasEndpoint {
 	public void voegLeerlingToe(@RequestBody KlasLeerlingDto klasLeerlingDto) {
 		Klas k = ks.getKlasById(klasLeerlingDto.getKlasid()).get();
 		Leerling l = ls.toonLeerling(klasLeerlingDto.getLeerlingid()).get();
-		//k.voegLeerlingToe(l);
-		k.getLeerlingen().add(l);
-		ks.update(k);
+		if(!k.getLeerlingen().contains(l)) {
+			k.getLeerlingen().add(l);
+			ks.update(k);
+		}
 	}
 }

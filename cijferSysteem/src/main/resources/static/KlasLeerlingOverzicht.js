@@ -1,6 +1,7 @@
 function maakDropDowns(){
     maakKlassenDropDown();
     maakLeerlingenDropdown();
+    //TODO: Toon leerlingenlijst van geselecteerde klas
 }
 
 function maakKlassenDropDown(){
@@ -9,7 +10,7 @@ function maakKlassenDropDown(){
         if (xhr.readyState == 3) {
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
-                document.getElementById("kiesklas").innerHTML += "<option>" + info[x].id + "</option>";
+                document.getElementById("kiesklas").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
             }
         }
     }
@@ -23,7 +24,7 @@ function maakLeerlingenDropdown(){
         if (xhr.readyState == 3) {
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
-                document.getElementById("kiesleerling").innerHTML += "<option>" + info[x].id + "</option>";
+                document.getElementById("kiesleerling").innerHTML += "<option>" + info[x].id + ". " + info[x].voornaam + " " + info[x].achternaam + "</option>";
             }
         }
     }
@@ -32,6 +33,8 @@ function maakLeerlingenDropdown(){
 }
 
 function toonLeerlingen(klasid){
+    //TODO: Error oplossen wanneer leerlingen lijst nog leeg is
+    klasid = klasid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -39,7 +42,9 @@ function toonLeerlingen(klasid){
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
                 document.getElementById("tabel").innerHTML += 
-                "<tr><td>" + info[x].naam + "</td>";
+                "<tr><td>" + info[x].voornaam + "</td>" +
+                "<td>" + info[x].achternaam + "</td>" +
+                "<td>" + info[x].geboorteDatum + "</td>";
             }
         }
     }
@@ -48,26 +53,15 @@ function toonLeerlingen(klasid){
 }
 
 function voegLeerlingToe(){
-    var leerlingid = document.getElementById("kiesleerling").value;
-    //value van dropdown is nog klasnaam, moet id worden...
-    var klasid = document.getElementById("kiesklas").value;
+    var tekst = document.getElementById("kiesleerling").value;
+    var leerlingid = tekst.split(".")[0];
+    var tekst2 = document.getElementById("kiesklas").value;
+    var klasid = tekst2.split(".")[0];
     var leerlingklas = {"klasid":klasid, "leerlingid":leerlingid};
     var json = JSON.stringify(leerlingklas);
-    console.log(leerlingid + " " + klasid);
-    //var leerling = getLeerlingById(leerlingid);
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:8082/api/voegLeerlingToe", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(json);
-}
-
-function getLeerlingById(id){
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 3) {
-            return this.responseText;
-        }
-    }
-    xhr.open("GET", "http://localhost:8082/leerling/"+id);
-    xhr.send();
+    //TODO: Auto refresh van leerlingen lijst toevoegen
 }

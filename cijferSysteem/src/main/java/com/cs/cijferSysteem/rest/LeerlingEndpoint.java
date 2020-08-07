@@ -35,11 +35,10 @@ public class LeerlingEndpoint {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
 		this.ls.save(leerling);
-
-		System.out.println(leerling.getVoornaam());
-		System.out.println(leerling.getAchternaam());
-		System.out.println(leerling.getLeerlingNummer());
-		System.out.println(leerling.getGeboorteDatum());
+//		System.out.println(leerling.getVoornaam());
+//		System.out.println(leerling.getAchternaam());
+//		System.out.println(leerling.getLeerlingNummer());
+//		System.out.println(leerling.getGeboorteDatum());
 	}
 
 

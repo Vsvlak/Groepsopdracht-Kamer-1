@@ -4,28 +4,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.util.List;
 
 @Entity
 public class Toets {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
     private LocalDate datum;
     private LocalTime tijd;
-    private String vak;
 
+    @OneToMany
+	private List<ToetsCijfer> cijfers;
 
+    public void voegCijferToe(ToetsCijfer tc) {
+    	cijfers.add(tc);
+    }
+    
+    public List<ToetsCijfer> getCijfers() {
+		return cijfers;
+	}
 
-
-
-
-    public LocalTime getTijd() {
+	public LocalTime getTijd() {
         return tijd;
     }
 
@@ -47,13 +52,5 @@ public class Toets {
 
     public void setDatum(LocalDate datum) {
         this.datum = datum;
-    }
-
-    public String getVak() {
-        return vak;
-    }
-
-    public void setVak(String vak) {
-        this.vak = vak;
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Leerling {
@@ -24,6 +25,17 @@ public class Leerling {
 	@ManyToMany(mappedBy = "leerlingen", cascade = CascadeType.ALL)
 	private List<Klas> klassen;
 	
+	@OneToMany
+	private List<ToetsCijfer> cijfers;
+	
+	public void voegCijferToe(ToetsCijfer tc) {
+		cijfers.add(tc);
+	}
+	
+	public List<ToetsCijfer> getCijfers() {
+		return cijfers;
+	}
+
 	public Long getId() {
 		return id;
 	}

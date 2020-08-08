@@ -30,6 +30,11 @@ function maakKlasAan() {
 
 function postData(klas) {
     var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {    
+        if (xhttp.readyState == 4) {
+            laatKlassenZien();
+        }
+    };
     xhttp.open("POST", "http://localhost:8082/api/maakKlas", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(klas);

@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cs.cijferSysteem.domein.Docent;
-import com.cs.cijferSysteem.domein.Klas;
-import com.cs.cijferSysteem.domein.Vak;
-
 
 
 @Service
 @Transactional
 public class DocentService {
+
 
 		@Autowired
 		DocentRepository dr;
@@ -25,13 +23,18 @@ public class DocentService {
 			dr.save(d);
 		}
 
-		public Iterable<Docent> laatDocentZien(){
-			return dr.findAll();
-		}
+	public void maakDocent(Docent docent){
+		dr.save(docent);
+	}
+
 
 		public Optional<Docent> toonDocentById(Long id){
 			return dr.findById(id);
 		}
 
+
+	public Iterable<Docent> laatDocentZien(){
+		return dr.findAll();
+	}
 
 }

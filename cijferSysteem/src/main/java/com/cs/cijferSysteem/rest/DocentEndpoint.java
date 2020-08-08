@@ -20,14 +20,10 @@ import com.cs.cijferSysteem.dto.DocentVakkenDto;
 
 @RestController
 public class DocentEndpoint {
-
-	
-
 	@Autowired
 	DocentService ds;
 	@Autowired
 	VakService vs;
-
 
 	@GetMapping("/docentOverzicht")
 	public Iterable<Docent> geefOverzichtDocent() {
@@ -35,6 +31,7 @@ public class DocentEndpoint {
 	}
 	
 	@PostMapping("api/maakDocent")
+
 	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
 		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();
 		Vak v = vs.toonVakById(docentVakkenDto.getVakid()).get();
@@ -53,4 +50,6 @@ public class DocentEndpoint {
 		return ds.toonDocentById(id).get().getVakken();
 	}
 	
-} 
+
+}
+

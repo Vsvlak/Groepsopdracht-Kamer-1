@@ -26,15 +26,21 @@ public class Vak {
 	
 	@OneToMany
 	private List<Toets> toetsen;
-	
+
+
+
+	public List<Toets> getToetsen() {
+		return toetsen;
+	}
+
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;
 	}
+
 	public void setDocenten(List<Docent> docenten) {
 		this.docenten = docenten;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}

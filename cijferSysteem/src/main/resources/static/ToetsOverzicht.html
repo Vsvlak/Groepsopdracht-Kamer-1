@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToetsOverzicht</title>
+    <link href="LeerlingOverzicht.css" rel="stylesheet">
+    <script defer src="ToetsOverzicht.js"></script>
+    <script defer src="modal.js"></script>
+</head>
+
+<body>
+    <hr>
+    <hr>
+    <h1>WELKOM IN HET TOETSOVERZICHT</h1>
+    <p> hier kun je toetsen bekijken en aanmaken </p>
+    <hr>
+    <hr>
+    <input type=button value="Toon alle toetsen" onclick=laatToetsenZien()>
+    <hr>
+    <hr>
+    <table border=2 id=tabel></table>
+
+    <button data-modal-target="#modal">Maak een nieuwe toets aan</button>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Maak een nieuwe toets aan</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-text"> Datum DD/MM/YYYY<input type="text" id="datumInput" class="modal-textInput"></div>
+            <div class="modal-text"> Tijd HH:MM<input type="text" id="tijdInput" class="modal-textInput"></div>
+            <div class="modal-text"> Vak <input type="text" id="vakInput" class="modal-textInput"></div>
+        </div>
+        <button data-create-button class="create-button" onclick=maakToetsAan()>Maak toets aan</button>
+    </div>
+    </div>
+
+    <div id="overlay"></div>
+</body>
+
+</html>

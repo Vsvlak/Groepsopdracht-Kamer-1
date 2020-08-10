@@ -1,8 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +10,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.KlasService;
+import com.cs.cijferSysteem.controller.LeerlingService;
+import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.domein.Vak;
+import com.cs.cijferSysteem.dto.KlasLeerlingDto;
+import com.cs.cijferSysteem.dto.KlasVakDto;
 
 @RestController
 public class KlasEndpoint {
 
 	@Autowired
 	KlasService ks;
+	@Autowired
+	LeerlingService ls;	
+	@Autowired
+	VakService vs;	
 	
 	@GetMapping("/klassenOverzicht")
 	public Iterable<Klas> toonKlassenOverzicht(){
@@ -31,13 +38,33 @@ public class KlasEndpoint {
 		return ks.getKlasById(id).get().getLeerlingen();
 	}
 	
-	@PostMapping("/api/maakKlas")
-	public void maakVak(@RequestBody Klas k) {
-		ks.maakKlas(k);
+	@GetMapping("/vakkenVanKlas/{id}")
+	public List<Vak> toonVakkenVanKlas(@PathVariable("id") Long id){
+		return ks.getKlasById(id).get().getVakken();
 	}
 	
-//	@PostMapping("/api/voegLeerlingToe/{klasid}/{leerlingid}")
-//	public void voegLeerlingToe(@PathVariable("klasid") Klas klasid, @PathVariable("leerlingid") Long leerlingid) {
-//		ks.getKlasById(klasid).get().voegLeerlingToe(leerlingid);
-//	}
+	@PostMapping("/api/maakKlas")
+	public void maakVak(@RequestBody Klas k) {
+		ks.update(k);
+	}
+	
+	@PostMapping("/api/voegLeerlingToe")
+	public void voegLeerlingToe(@RequestBody KlasLeerlingDto klasLeerlingDto) {
+		Klas k = ks.getKlasById(klasLeerlingDto.getKlasid()).get();
+		Leerling l = ls.toonLeerling(klasLeerlingDto.getLeerlingid()).get();
+		if(!k.getLeerlingen().contains(l)) {
+			k.getLeerlingen().add(l);
+			ks.update(k);
+		}
+	}
+	
+	@PostMapping("/api/voegVakToe")
+	public void voegVakToe(@RequestBody KlasVakDto klasVakDto) {
+		Klas k = ks.getKlasById(klasVakDto.getKlasid()).get();
+		Vak v = vs.getVakById(klasVakDto.getVakid()).get();
+		if(!k.getVakken().contains(v)) {
+			k.getVakken().add(v);
+			ks.update(k);
+		}
+	}
 }

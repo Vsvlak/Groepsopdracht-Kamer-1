@@ -1,32 +1,35 @@
 package com.cs.cijferSysteem.domein;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Klas {
-	//Wil eigenlijk id er uit slopen en naam als ID opslaan.
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String naam;
 	private String niveau;
 
-	@ManyToMany(mappedBy = "klassen")
+	@ManyToMany
 	private List<Leerling> leerlingen;
+	
+	@ManyToMany
+	private List<Vak> vakkenpakket;
 
 	public void voegLeerlingToe(Leerling l) {
 		leerlingen.add(l);
 	}
+	public void voegVakToe(Vak v) {
+		vakkenpakket.add(v);
+	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	public void setId(long id) {
@@ -46,5 +49,8 @@ public class Klas {
 	}
 	public List<Leerling> getLeerlingen() {
 		return leerlingen;
+	}
+	public List<Vak> getVakken(){
+		return vakkenpakket;
 	}
 }

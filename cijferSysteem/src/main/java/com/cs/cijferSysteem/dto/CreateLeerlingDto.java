@@ -2,11 +2,9 @@ package com.cs.cijferSysteem.dto;
 
 public class CreateLeerlingDto {
 
-
     String voornaam;
     String achternaam;
     String geboortedatum;
-
 
     public String getVoornaam() {
         return voornaam;

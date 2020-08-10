@@ -13,14 +13,9 @@ import com.cs.cijferSysteem.domein.Leerling;
 @Transactional
 public class LeerlingService {
 
-
 	@Autowired
 	LeerlingRepository lr;
 	
-
-
-
-
 	public void save(Leerling leerling){
 		lr.save(leerling);
 	}
@@ -30,11 +25,7 @@ public class LeerlingService {
 	}
 	
 	public Optional<Leerling> toonLeerling(Long id) {
-		//System.out.println(lr.findById(id).get().getId() + lr.findById(id).get().getNaam());
 		return lr.findById(id);
 	}
-
-
-
-
+	
 }

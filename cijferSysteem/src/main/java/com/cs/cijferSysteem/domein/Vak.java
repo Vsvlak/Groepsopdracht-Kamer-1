@@ -17,14 +17,14 @@ public class Vak {
 	private Long id;
 	private String naam;
 
-	@OneToMany//(cascade = {CascadeType.ALL})
-	private List <Toets> toetsen;
-
 	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
 	private List<Docent> docenten;
 
 	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
 	private List<Klas> klassen;
+
+	@OneToMany
+	private List<Toets> toetsen;
 
 
 
@@ -33,20 +33,12 @@ public class Vak {
 	}
 
 
-
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;
-	}
-	public void setDocenten(List<Docent> docenten) {
-		this.docenten = docenten;
 	}
 
 	public List<Toets> getToetsen() {
 		return toetsen;
-	}
-
-	public void setToetsen(List<Toets> toetsen) {
-		this.toetsen = toetsen;
 	}
 
 	public List<Docent> getDocenten() {

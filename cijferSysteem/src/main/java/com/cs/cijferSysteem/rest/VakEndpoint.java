@@ -40,4 +40,10 @@ public class VakEndpoint {
 	public Optional<Vak> getVakById(@PathVariable("id") Long id){
 		return vs.getVakById(id);
 	}
+
+	@GetMapping("/toetsenVanVak/{vakId}")
+	public List<Toets> toonToetsenVanVak(@PathVariable("vakId") Long id){
+		return vs.getVakById(id).get().getToetsen();
+	}
 }
+

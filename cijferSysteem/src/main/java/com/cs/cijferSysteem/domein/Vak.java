@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.domein;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.persistence.CascadeType;
@@ -28,13 +29,32 @@ public class Vak {
 	@OneToMany
 	private List<Toets> toetsen;
 
+
+	public void voegToetsToe(Toets t){
+		toetsen.add(t);
+	}
+
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;
 	}
 
-	public void setDocenten(List<Docent> docenten) {
-		this.docenten = docenten;
+
+	public List<Toets> getToetsen() {
+		return toetsen;
 	}
+
+	public List<Docent> getDocenten() {
+		return docenten;
+	}
+
+	public List<Klas> getKlassen() {
+		return klassen;
+	}
+
+	public void setKlassen(List<Klas> klassen) {
+		this.klassen = klassen;
+	}
+
 
 	public Long getId() {
 		return id;

@@ -1,3 +1,19 @@
+function maakToetsenDropdown(){
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 3) {
+            var info = JSON.parse(this.responseText);
+            for (var x = 0; x < info.length; x++) {
+                document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+            }
+        }
+    }
+    xhr.open("GET", "http://localhost:8082/vakkenOverzicht", true);
+    xhr.send();
+}
+
+
+
 function laatToetsenZien() {
     document.getElementById("tabel").innerHTML = "";
 
@@ -16,7 +32,6 @@ function laatToetsenZien() {
                     "</tr>";
             }
         }
-
     }
     xhr.open("GET", "http://localhost:8082/toetsOverzicht", true);
     xhr.send();
@@ -24,9 +39,10 @@ function laatToetsenZien() {
 
     function maakToetsAan(){
         var datum = document.getElementById("datumInput").value;
-        var vak = document.getElementById("vakInput").value;
+        var vak = document.getElementById("kiesvak").value;
+        vak = vak.split(".")[0];
         var tijd = document.getElementById("tijdInput").value;
-        var toets = '{"datum":"'+datum+'","tijd":"'+tijd+'","vak":"'+vak+'"}';
+        var toets = '{"datum":"'+datum+'","tijd":"'+tijd+'","vakId":"'+vak+'"}';
         postData(toets);
     }
 

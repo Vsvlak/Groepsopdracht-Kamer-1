@@ -36,5 +36,7 @@ public class DocentService {
 	public Iterable<Docent> laatDocentZien(){
 		return dr.findAll();
 	}
+	
+	
 
 }

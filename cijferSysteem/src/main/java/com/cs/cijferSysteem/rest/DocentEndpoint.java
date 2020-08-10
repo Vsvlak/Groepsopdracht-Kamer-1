@@ -29,9 +29,12 @@ public class DocentEndpoint {
 	public Iterable<Docent> geefOverzichtDocent() {
 		return ds.laatDocentZien();
 	}
-	
 	@PostMapping("api/maakDocent")
-
+	public void maakDocent(@RequestBody Docent docent) { 
+		ds.maakDocent(docent);
+	}
+	
+	@PostMapping("/api/maakDocentAanVak")
 	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
 		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();
 		Vak v = vs.toonVakById(docentVakkenDto.getVakid()).get();

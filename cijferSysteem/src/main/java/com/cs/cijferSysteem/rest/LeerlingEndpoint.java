@@ -47,5 +47,11 @@ public class LeerlingEndpoint {
 	public List<ToetsCijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
 		return ls.toonLeerling(id).get().getCijfers();
 	}
+	
+//	@GetMapping("/leerlingOverzicht/{start}/{end}")
+//	public List<Leerling> search(@PathVariable("start") int start, @PathVariable("end") int end){ 
+//		return ls.search(start, end);
+//		
+//	}
 }
 

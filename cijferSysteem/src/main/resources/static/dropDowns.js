@@ -39,3 +39,4 @@ function maakVakkenDropdown(){
     xhr.open("GET", "http://localhost:8082/vakkenOverzicht", true);
     xhr.send();
 }
+

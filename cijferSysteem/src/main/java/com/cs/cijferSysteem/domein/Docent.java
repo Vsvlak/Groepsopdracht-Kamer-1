@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Docent {
@@ -24,7 +25,10 @@ public class Docent {
 	}
 
 	public void voegVakToe(Vak v) { 
+		if(!vakken.contains(v)) {
+		
 		vakken.add(v);
+		}
 	}
 
 

@@ -1,3 +1,8 @@
+function maakDropDowns(){
+    maakVakkenDropdown();
+    maakDocentenDropdown();
+}
+
 function maakToetsenDropdown(){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {

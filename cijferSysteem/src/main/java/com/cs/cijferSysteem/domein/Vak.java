@@ -27,25 +27,21 @@ public class Vak {
 	private List<Toets> toetsen;
 
 
-
 	public void voegToetsToe(Toets t){
 		toetsen.add(t);
 	}
 
 
-	public List<Docent> getDocenten(Docent d) {
-		return docenten;
-	}
 
-	public List<Toets> getToetsen() {
+	public List<Toets> geefToetsen() {
 		return toetsen;
 	}
 
-	public List<Docent> getDocenten() {
+	public List<Docent> geefDocenten() {
 		return docenten;
 	}
 
-	public List<Klas> getKlassen() {
+	public List<Klas> geefKlassen() {
 		return klassen;
 	}
 

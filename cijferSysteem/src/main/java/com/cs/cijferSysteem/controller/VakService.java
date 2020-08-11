@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.cs.cijferSysteem.domein.Vak;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 @Transactional
 public class VakService {

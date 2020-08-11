@@ -28,17 +28,22 @@ public class Leerling {
 	@OneToMany
 	private List<ToetsCijfer> cijfers;
 	
+
 	public void voegCijferToe(ToetsCijfer tc) {
 		cijfers.add(tc);
 	}
 	
-	public List<ToetsCijfer> getCijfers() {
+
+
+
+	public List<ToetsCijfer> geefCijfers() {
 		return cijfers;
 	}
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -46,6 +51,7 @@ public class Leerling {
 	public LocalDate getGeboorteDatum() {
 		return geboorteDatum;
 	}
+
 	public void setGeboorteDatum(LocalDate geboorteDatum) {
 		this.geboorteDatum = geboorteDatum;
 	}

@@ -20,8 +20,6 @@ import java.util.Optional;
 public class ToetsEndpoint {
 
 
-
-
     @Autowired
     ToetsService ts;
 
@@ -36,7 +34,7 @@ public class ToetsEndpoint {
 
 
     @PostMapping("/api/maakToets")
-    public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto){
+    public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto) {
         Toets toets = new Toets();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
@@ -54,7 +52,8 @@ public class ToetsEndpoint {
 
 
     @GetMapping("/toets/{id}")
-    public Optional<Toets> getLeerlingById(@PathVariable("id") Long id){
+    public Optional<Toets> getLeerlingById(@PathVariable("id") Long id) {
         System.out.println("id = " + id);
         return ts.toonToets(id);
     }
+}

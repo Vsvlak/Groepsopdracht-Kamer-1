@@ -45,7 +45,7 @@ public class LeerlingEndpoint {
 	
 	@GetMapping("/cijfersVanLeerling/{id}")
 	public List<ToetsCijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
-		return ls.toonLeerling(id).get().getCijfers();
+		return ls.toonLeerling(id).get().geefCijfers();
 	}
 }
 

@@ -1,11 +1,11 @@
 package com.cs.cijferSysteem.domein;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,6 +18,7 @@ public class Toets {
     private Long id;
     private LocalDate datum;
     private LocalTime tijd;
+
 
     @OneToMany
 	private List<ToetsCijfer> cijfers;

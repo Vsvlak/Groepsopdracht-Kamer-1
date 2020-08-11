@@ -1,13 +1,10 @@
 package com.cs.cijferSysteem.controller;
 
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cs.cijferSysteem.domein.Vak;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -26,5 +23,10 @@ public class VakService {
 	
 	public Optional<Vak> getVakById(Long id) {
 		return vr.findById(id);
+	}
+
+	@Transactional(readOnly = false)
+	public void update(Vak v) {
+		vr.save(v);
 	}
 }

@@ -43,11 +43,13 @@ function laatToetsenZien() {
 }
 
     function maakToetsAan(){
+        var docentId = document.getElementById("kiesdocent").value;
+        docentId = docentId.split(".")[0];
         var datum = document.getElementById("datumInput").value;
         var vak = document.getElementById("kiesvak").value;
         vak = vak.split(".")[0];
         var tijd = document.getElementById("tijdInput").value;
-        var toets = '{"datum":"'+datum+'","tijd":"'+tijd+'","vakId":"'+vak+'"}';
+        var toets = '{"docentId":"'+docentId+'","datum":"'+datum+'","tijd":"'+tijd+'","vakId":"'+vak+'"}';
         postData(toets);
     }
 

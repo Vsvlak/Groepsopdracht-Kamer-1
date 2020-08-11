@@ -3,13 +3,20 @@ package com.cs.cijferSysteem.dto;
 
 public class CreateToetsDto {
 
-
+    private Long docentId;
     private String datum;
     private Long vakId;
     private String tijd;
 
 
 
+    public Long getDocentId() {
+        return docentId;
+    }
+
+    public void setDocentId(Long docentId) {
+        this.docentId = docentId;
+    }
 
     public void setDatum(String datum) {
         this.datum = datum;

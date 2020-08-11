@@ -2,11 +2,7 @@ package com.cs.cijferSysteem.domein;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Docent {
@@ -15,15 +11,20 @@ public class Docent {
 	private Long id;
 	private String achternaam;
 	private String voornaam;
-
 	@ManyToMany
 	private List<Vak> vakken;
+	@OneToMany
+	private List<Toets> toetsen;
 
-	public void voegVakToe(Vak v) {
-		vakken.add(v);
+
+	public List<Toets> geefToetsen(){
+		return toetsen;
 	}
 
 
+	public void voegToetsToe(Toets t){
+		toetsen.add(t);
+	}
 
 	public List<Vak> geefVakken() {
 		return vakken;

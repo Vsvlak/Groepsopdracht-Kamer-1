@@ -1,7 +1,8 @@
-function maakToetsenDropdown(){
+function maakVakkenDropdown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
+            console.log("maakDropdown " + this.responseText);
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
                 document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
@@ -12,11 +13,8 @@ function maakToetsenDropdown(){
     xhr.send();
 }
 
-
-
 function laatToetsenZien() {
     document.getElementById("tabel").innerHTML = "";
-
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
@@ -37,19 +35,19 @@ function laatToetsenZien() {
     xhr.send();
 }
 
-    function maakToetsAan(){
-        var datum = document.getElementById("datumInput").value;
-        var vak = document.getElementById("kiesvak").value;
-        vak = vak.split(".")[0];
-        var tijd = document.getElementById("tijdInput").value;
-        var toets = '{"datum":"'+datum+'","tijd":"'+tijd+'","vakId":"'+vak+'"}';
-        postData(toets);
-    }
+function maakToetsAan() {
+    var datum = document.getElementById("datumInput").value;
+    var vak = document.getElementById("kiesvak").value;
+    vak = vak.split(".")[0];
+    var tijd = document.getElementById("tijdInput").value;
+    var toets = '{"datum":"' + datum + '","tijd":"' + tijd + '","vakId":"' + vak + '"}';
+    postData(toets);
+}
 
-    function postData(toets){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(toets);
-    }
+function postData(toets) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(toets);
+}
 

@@ -27,7 +27,7 @@ public class Toets {
     	cijfers.add(tc);
     }
     
-    public List<ToetsCijfer> getCijfers() {
+    public List<ToetsCijfer> geefCijfers() {
 		return cijfers;
 	}
 

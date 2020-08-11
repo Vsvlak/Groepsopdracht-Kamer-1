@@ -24,7 +24,7 @@ public class VakEndpoint {
 	public Iterable<Vak> toonVakkenOverzicht(){
 		return vs.laatVakZien();
 	}
-	
+
 	@PostMapping("/api/maakVak")
 	public void maakVak(@RequestBody Vak v) {
 		vs.maakVak(v);
@@ -37,7 +37,7 @@ public class VakEndpoint {
 
 	@GetMapping("/toetsenVanVak/{vakId}")
 	public List<Toets> toonToetsenVanVak(@PathVariable("vakId") Long id){
-		return vs.getVakById(id).get().getToetsen();
+		return vs.getVakById(id).get().geefToetsen();
 	}
 }
 

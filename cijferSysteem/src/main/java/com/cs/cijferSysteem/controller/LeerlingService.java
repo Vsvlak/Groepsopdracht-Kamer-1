@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -27,5 +28,9 @@ public class LeerlingService {
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
+	
+//	public List<Leerling> search(String voornaam){
+//		return lr.findByVoornaam(voornaam);
+//	}
 	
 }

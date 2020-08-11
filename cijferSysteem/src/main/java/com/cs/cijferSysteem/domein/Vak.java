@@ -30,6 +30,8 @@ public class Vak {
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;
 	}
+	
+	
 	public void setDocenten(List<Docent> docenten) {
 		this.docenten = docenten;
 	}

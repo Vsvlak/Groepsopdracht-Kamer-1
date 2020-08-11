@@ -11,16 +11,16 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Vak {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String naam;
 
-	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy = "vakken", cascade = { CascadeType.ALL })
 	private List<Docent> docenten;
 
-	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy = "vakkenpakket", cascade = { CascadeType.ALL })
 	private List<Klas> klassen;
 
 	@OneToMany
@@ -33,6 +33,7 @@ public class Vak {
 	public List<Docent> getDocenten(Docent d) {
 		return docenten;
 	}
+
 
 	public List<Toets> getToetsen() {
 		return toetsen;
@@ -50,6 +51,7 @@ public class Vak {
 		this.klassen = klassen;
 	}
 
+
 	public Long getId() {
 		return id;
 	}
@@ -64,5 +66,20 @@ public class Vak {
 
 	public void setNaam(String naam) {
 		this.naam = naam;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && ((Vak) obj).naam.equals(this.naam);
+//		if (obj == null) {
+//			return false;
+//		}
+//		if (obj instanceof Vak) {
+//			return ((Vak) obj).getNaam().equals(this.naam);
+//
+//		} else {
+//			return false;
+//		}
+	}
+
 }

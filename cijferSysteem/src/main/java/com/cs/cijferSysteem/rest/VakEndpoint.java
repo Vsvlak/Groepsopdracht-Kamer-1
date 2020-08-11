@@ -22,13 +22,7 @@ public class VakEndpoint {
 	
 	@GetMapping("/vakkenOverzicht")
 	public Iterable<Vak> toonVakkenOverzicht(){
-		System.out.println("Vakken overzicht getoond");
-		return vs.laatVakkenZien();
-	}
-
-	@GetMapping("/toetsenVanVak/{id}")
-	public List<Toets> toonToetsenVanVak(@PathVariable("id") Long id){
-		return vs.getVakById(id).get().getToetsen();
+		return vs.laatVakZien();
 	}
 	
 	@PostMapping("/api/maakVak")

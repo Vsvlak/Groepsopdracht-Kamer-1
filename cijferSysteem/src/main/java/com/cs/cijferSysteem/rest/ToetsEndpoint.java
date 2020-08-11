@@ -19,9 +19,6 @@ import java.util.Optional;
 @RestController
 public class ToetsEndpoint {
 
-
-
-
     @Autowired
     ToetsService ts;
 
@@ -33,7 +30,6 @@ public class ToetsEndpoint {
     public Iterable<Toets> geefOverzichtLeerling() {
         return ts.laatToetsZien();
     }
-
 
     @PostMapping("/api/maakToets")
     public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto){
@@ -58,3 +54,4 @@ public class ToetsEndpoint {
         System.out.println("id = " + id);
         return ts.toonToets(id);
     }
+}

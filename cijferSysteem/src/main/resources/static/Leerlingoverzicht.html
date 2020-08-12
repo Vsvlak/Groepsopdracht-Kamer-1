@@ -41,20 +41,17 @@
 
     <table border=2 id=tabel></table>
 
-
-    <button data-modal-target="#modal">Open Modal</button>
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <div class="title">Maak een nieuwe leerling aan</div>
-        <button data-close-button class="close-button">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
-        <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
-        <div class="modal-text"> Geboortedatum DD/MM/YYYY<input type="text" id="geboortedatumInput"
-            class="modal-textInput"></div>
-        <button data-create-button class="create-button" onclick=maakLeerlingAan()>Maak leerling aan</button>
-      </div>
+  <button data-modal-target="#modal">Open Modal</button>
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="title">Maak een nieuwe leerling aan</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
+      <div class="modal-text"> Geboortedatum DD/MM/YYYY<input type="text" id="geboortedatumInput" class="modal-textInput"></div>
+      <button data-create-button class="create-button" onclick=maakLeerlingAan()>Maak leerling aan</button>
     </div>
     <div id="overlay"></div>
 

@@ -1,27 +1,35 @@
 package com.cs.cijferSysteem.domein;
 
 import java.util.List;
-
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.UniqueConstraint;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Docent {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String achternaam;
 	private String voornaam;
-
 	@ManyToMany
 	@JsonIgnore
 	private List<Vak> vakken;
+	@OneToMany
+	private List<Toets> toetsen;
+
+
+	public void voegToetsToe(Toets t){
+		toetsen.add(t);
+	}
+
+
 
 	public void voegVakToe(Vak v) { 
 		if(!vakken.contains(v)) {

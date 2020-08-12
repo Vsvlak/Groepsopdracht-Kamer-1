@@ -1,5 +1,5 @@
 function laatLeerlingenTabelZien() {
-    document.getElementById("leerlingOproep").innerHTML = "";
+    document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
@@ -18,7 +18,7 @@ function laatLeerlingenTabelZien() {
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
             }
-            document.getElementById("tabel").innerHTML += "<tr><td><input type=button value='+Leerling' onclick= ></td></tr>";
+            document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Leerling</button>";
         }
     }
     xhr.open("GET", "http://localhost:8082/leerlingOverzicht", true);
@@ -29,7 +29,8 @@ function maakLeerlingAan() {
     var voornaamInput = document.getElementById("voornaamInput").value;
     var achternaamInput = document.getElementById("achternaamInput").value;
     var geboortedatumInput = document.getElementById("geboortedatumInput").value;
-    var leerling = '{"voornaam":"' + voornaamInput + '","achternaam":"' + achternaamInput + '","geboortedatum":"' + geboortedatumInput + '"}';
+    var leerlingnrInput = document.getElementById("leerlingnrInput").value;
+    var leerling = '{"voornaam":"' + voornaamInput + '","achternaam":"' + achternaamInput + '","geboortedatum":"' + geboortedatumInput + '","leerlingnummer":"' + leerlingnrInput+ '"}';
     postData(leerling);
 }
 

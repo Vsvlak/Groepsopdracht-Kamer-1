@@ -5,8 +5,17 @@ public class CreateLeerlingDto {
     String voornaam;
     String achternaam;
     String geboortedatum;
+    String leerlingnummer;
 
-    public String getVoornaam() {
+    public String getLeerlingnummer() {
+		return leerlingnummer;
+	}
+
+	public void setLeerlingnummer(String leerlingnummer) {
+		this.leerlingnummer = leerlingnummer;
+	}
+
+	public String getVoornaam() {
         return voornaam;
     }
 

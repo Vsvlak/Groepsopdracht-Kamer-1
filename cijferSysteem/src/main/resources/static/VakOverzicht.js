@@ -13,6 +13,7 @@ function laatVakkenZien() {
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
             }
+            document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Vak</button>";
         }
 
     }

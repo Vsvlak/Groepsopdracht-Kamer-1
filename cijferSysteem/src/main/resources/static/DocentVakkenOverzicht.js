@@ -4,7 +4,7 @@ function maakDropDowns(){
 }
 
 function toonVakken(docentid){
-    docentid = docentid.split(" ")[0];
+    docentid = docentid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -23,8 +23,8 @@ function toonVakken(docentid){
 function voegVakkenToe(){
     var vakid = document.getElementById("kiesvak").value;
     var docentid = document.getElementById("kiesdocent").value;
-    docentid = docentid.split(" ")[0];
-    vakid = vakid.split(" ")[0];
+    docentid = docentid.split(".")[0];
+    vakid = vakid.split(".")[0];
     alert(docentid + "   " +  vakid);
 
     var vakdocent = {"docentid":docentid, "vakid":vakid};
@@ -45,6 +45,6 @@ function getVakById(id){
         }
     }
 
-    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+id); // /hier stond vaken
+    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+id);
     xhr.send();
 }

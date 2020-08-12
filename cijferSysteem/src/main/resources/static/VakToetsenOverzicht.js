@@ -9,7 +9,6 @@ function getToetsById(id){
     xhr.send();
 }
 
-
 function toonToetsen(vakid){
     vakid = vakid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";

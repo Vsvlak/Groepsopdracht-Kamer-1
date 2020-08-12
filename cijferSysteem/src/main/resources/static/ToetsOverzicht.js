@@ -1,6 +1,7 @@
 function maakDropDowns(){
     maakVakkenDropdown();
     maakDocentenDropdown();
+    laatToetsenZien();
 }
 
 function laatToetsenZien() {
@@ -19,6 +20,7 @@ function laatToetsenZien() {
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
             }
+            document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Toets</button>";
         }
     }
     xhr.open("GET", "http://localhost:8082/toetsOverzicht", true);

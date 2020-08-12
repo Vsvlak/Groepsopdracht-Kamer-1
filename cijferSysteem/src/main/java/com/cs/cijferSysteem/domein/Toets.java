@@ -1,14 +1,14 @@
 package com.cs.cijferSysteem.domein;
 
 
+
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,9 +19,10 @@ public class Toets {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    /*@ManyToOne
+    private Docent docent;*/
     private LocalDate datum;
     private LocalTime tijd;
-
 
     @OneToMany
 	@JsonIgnore
@@ -30,7 +31,18 @@ public class Toets {
     public void voegCijferToe(ToetsCijfer tc) {
     	cijfers.add(tc);
     }
-    
+
+
+
+   /* public Docent getDocent() {
+        return docent;
+    }
+
+    public void setDocent(Docent docent) {
+        this.docent = docent;
+    }*/
+
+
     public List<ToetsCijfer> getCijfers() {
 		return cijfers;
 	}

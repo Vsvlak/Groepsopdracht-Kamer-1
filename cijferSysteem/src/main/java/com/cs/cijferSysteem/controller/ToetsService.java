@@ -1,7 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
 
-import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,8 @@ public class ToetsService {
     ToetsRepository tr;
 
 
-    public void save(Toets toets){
-        tr.save(toets);
+    public Toets save(Toets toets){
+        return tr.save(toets);
     }
 
     public Iterable<Toets> laatToetsZien(){

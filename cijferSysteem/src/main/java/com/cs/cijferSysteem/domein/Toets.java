@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -21,13 +24,14 @@ public class Toets {
 
 
     @OneToMany
+	@JsonIgnore
 	private List<ToetsCijfer> cijfers;
 
     public void voegCijferToe(ToetsCijfer tc) {
     	cijfers.add(tc);
     }
     
-    public List<ToetsCijfer> geefCijfers() {
+    public List<ToetsCijfer> getCijfers() {
 		return cijfers;
 	}
 

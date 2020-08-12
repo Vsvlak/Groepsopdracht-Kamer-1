@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Docent {
 	@Id
@@ -18,6 +20,7 @@ public class Docent {
 	private String voornaam;
 
 	@ManyToMany
+	@JsonIgnore
 	private List<Vak> vakken;
 
 	public void voegVakToe(Vak v) { 
@@ -26,7 +29,7 @@ public class Docent {
 		}
 	}
 
-	public List<Vak> geefVakken() {
+	public List<Vak> getVakken() {
 		return vakken;
 	}
 

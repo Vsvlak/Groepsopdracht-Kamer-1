@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Leerling {
 
@@ -23,9 +25,11 @@ public class Leerling {
 	private LocalDate geboorteDatum;
 
 	@ManyToMany(mappedBy = "leerlingen", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Klas> klassen;
 	
 	@OneToMany
+	@JsonIgnore
 	private List<ToetsCijfer> cijfers;
 	
 
@@ -33,7 +37,7 @@ public class Leerling {
 		cijfers.add(tc);
 	}
 	
-	public List<ToetsCijfer> geefCijfers() {
+	public List<ToetsCijfer> getCijfers() {
 		return cijfers;
 	}
 

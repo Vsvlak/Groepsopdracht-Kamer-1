@@ -13,8 +13,6 @@ public class ToetsCijfer {
 	private Long id;
 	private float cijfer;
 
-
-
 	public Long getId() {
 		return id;
 	}

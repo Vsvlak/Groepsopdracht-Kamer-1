@@ -38,7 +38,7 @@ public class DocentEndpoint {
 	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
 		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();
 		Vak v = vs.toonVakById(docentVakkenDto.getVakid()).get();
-		d.geefVakken().add(v);
+		d.getVakken().add(v);
 		ds.update(d);
 
 	}
@@ -50,7 +50,7 @@ public class DocentEndpoint {
 	
 	@GetMapping("/vakkenVanDocent/{id}")
 	public List<Vak> getVakvanDocent(@PathVariable("id")Long id){ 
-		return ds.toonDocentById(id).get().geefVakken();
+		return ds.toonDocentById(id).get().getVakken();
 	}
 	
 

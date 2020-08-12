@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Vak {
 
@@ -18,27 +20,30 @@ public class Vak {
 	private String naam;
 
 	@ManyToMany(mappedBy = "vakken", cascade = { CascadeType.ALL })
+	@JsonIgnore
 	private List<Docent> docenten;
 
 	@ManyToMany(mappedBy = "vakkenpakket", cascade = { CascadeType.ALL })
+	@JsonIgnore
 	private List<Klas> klassen;
 
 	@OneToMany
+	@JsonIgnore
 	private List<Toets> toetsen;
 
 	public void voegToetsToe(Toets t){
 		toetsen.add(t);
 	}
 
-	public List<Toets> geefToetsen() {
+	public List<Toets> getToetsen() {
 		return toetsen;
 	}
 
-	public List<Docent> geefDocenten() {
+	public List<Docent> getDocenten() {
 		return docenten;
 	}
 
-	public List<Klas> geefKlassen() {
+	public List<Klas> getKlassen() {
 		return klassen;
 	}
 

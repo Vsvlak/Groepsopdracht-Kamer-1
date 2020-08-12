@@ -37,7 +37,7 @@ public class VakEndpoint {
 
 	@GetMapping("/toetsenVanVak/{vakId}")
 	public List<Toets> toonToetsenVanVak(@PathVariable("vakId") Long id){
-		return vs.getVakById(id).get().geefToetsen();
+		return vs.getVakById(id).get().getToetsen();
 	}
 }
 

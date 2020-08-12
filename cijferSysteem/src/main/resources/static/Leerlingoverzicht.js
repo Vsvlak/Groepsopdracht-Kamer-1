@@ -5,7 +5,7 @@ function laatLeerlingenTabelZien() {
         if (xhr.readyState == 3) {
             var alleinfo = JSON.parse(this.responseText);
 
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Studentnr.</b></td><td></td></tr>"
+            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Leerlingnr.</b></td><td></td></tr>"
 
             for (var x = 0; x < alleinfo.length; x++) {
                 document.getElementById("tabel").innerHTML += "<tr>" +

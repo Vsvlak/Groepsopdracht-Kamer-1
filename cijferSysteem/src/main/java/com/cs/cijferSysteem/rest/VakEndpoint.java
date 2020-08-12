@@ -24,7 +24,7 @@ public class VakEndpoint {
 	public Iterable<Vak> toonVakkenOverzicht(){
 		return vs.laatVakZien();
 	}
-	
+
 	@PostMapping("/api/maakVak")
 	public void maakVak(@RequestBody Vak v) {
 		vs.maakVak(v);

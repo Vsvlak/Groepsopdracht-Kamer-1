@@ -29,7 +29,12 @@ public class LeerlingService {
 		return lr.findById(id);
 	}
 	
+//	public List<Leerling> search(String voornaam){
+//		return lr.findByVoornaam(voornaam);
+//	}
+	
 //	public List<Leerling> search(int start, int end){
 //		return lr.findByLeerlingNummerBetween(start, end);
 //	}
+
 }

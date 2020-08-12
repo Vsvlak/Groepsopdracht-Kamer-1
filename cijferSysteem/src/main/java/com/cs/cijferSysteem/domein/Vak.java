@@ -1,9 +1,6 @@
 package com.cs.cijferSysteem.domein;
 
 import java.util.List;
-
-import java.util.Optional;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Vak {
@@ -21,23 +20,20 @@ public class Vak {
 	private String naam;
 
 	@ManyToMany(mappedBy = "vakken", cascade = { CascadeType.ALL })
+	@JsonIgnore
 	private List<Docent> docenten;
 
 	@ManyToMany(mappedBy = "vakkenpakket", cascade = { CascadeType.ALL })
+	@JsonIgnore
 	private List<Klas> klassen;
 
 	@OneToMany
+	@JsonIgnore
 	private List<Toets> toetsen;
-
 
 	public void voegToetsToe(Toets t){
 		toetsen.add(t);
 	}
-
-	public List<Docent> getDocenten(Docent d) {
-		return docenten;
-	}
-
 
 	public List<Toets> getToetsen() {
 		return toetsen;
@@ -50,11 +46,6 @@ public class Vak {
 	public List<Klas> getKlassen() {
 		return klassen;
 	}
-
-	public void setKlassen(List<Klas> klassen) {
-		this.klassen = klassen;
-	}
-
 
 	public Long getId() {
 		return id;

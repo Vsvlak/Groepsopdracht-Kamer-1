@@ -1,8 +1,10 @@
 package com.cs.cijferSysteem.rest;
 
 
+import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.ToetsService;
 import com.cs.cijferSysteem.controller.VakService;
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
@@ -18,15 +20,14 @@ import java.util.Optional;
 
 @RestController
 public class ToetsEndpoint {
-
-
-
-
     @Autowired
     ToetsService ts;
 
     @Autowired
     VakService vs;
+
+    @Autowired
+    DocentService ds;
 
 
     @GetMapping("/toetsOverzicht")
@@ -34,28 +35,26 @@ public class ToetsEndpoint {
         return ts.laatToetsZien();
     }
 
-
     @PostMapping("/api/maakToets")
-    public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto){
+    public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto) {
         Toets toets = new Toets();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
         DateTimeFormatter formatterTijd = DateTimeFormatter.ofPattern("HH:MM");
         toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
+        toets = this.ts.save(toets);
         Vak v = vs.getVakById(createToetsDto.getVakId()).get();
         v.voegToetsToe(toets);
         vs.update(v);
-        this.ts.save(toets);
-
-        System.out.println(toets.getDatum());
-        //System.out.println(toets.getVakId());
-        System.out.println(toets.getTijd());
+        Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
+        d.voegToetsToe(toets);
+        ds.update(d);
     }
 
 
     @GetMapping("/toets/{id}")
-    public Optional<Toets> getLeerlingById(@PathVariable("id") Long id){
+    public Optional<Toets> getLeerlingById(@PathVariable("id") Long id) {
         System.out.println("id = " + id);
         return ts.toonToets(id);
     }
-} 
+}

@@ -39,13 +39,14 @@ function maakVakkenDropdown(){
     xhr.open("GET", "http://localhost:8082/vakkenOverzicht", true);
     xhr.send();
 }
-function maakDocentenDropDown(){
+
+function maakDocentenDropdown(){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
-                document.getElementById("kiesdocent").innerHTML += "<option>" + info[x].id + ". " + info[x].voornaam + "</option>";
+                document.getElementById("kiesdocent").innerHTML += "<option>" + info[x].id + ". " + info[x].achternaam + "</option>";
             }
         }
     }

@@ -7,9 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.cs.cijferSysteem.domein.Leerling;
 
 public interface LeerlingRepository extends CrudRepository <Leerling, Long>{
+	//List<Leerling> findByVoornaam(String voornaam);
 
-	List <Leerling> findByLeerlingNummerBetween(int start, int end);
-	
-	
-	
+	List <Leerling> findByLeerlingNummerBetween(int start, int end);	
 }

@@ -24,11 +24,6 @@ public class VakEndpoint {
 	public Iterable<Vak> toonVakkenOverzicht(){
 		return vs.laatVakZien();
 	}
-
-	@GetMapping("/toetsenVanVak/{id}")
-	public List<Toets> toonToetsenVanVak(@PathVariable("id") Long id){
-		return vs.getVakById(id).get().getToetsen();
-	}
 	
 	@PostMapping("/api/maakVak")
 	public void maakVak(@RequestBody Vak v) {

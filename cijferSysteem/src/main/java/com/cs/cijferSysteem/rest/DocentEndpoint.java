@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.DocentService;
+
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
-
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentVakkenDto;
 
@@ -24,6 +24,7 @@ public class DocentEndpoint {
 	DocentService ds;
 	@Autowired
 	VakService vs;
+
 
 	@GetMapping("/docentOverzicht")
 	public Iterable<Docent> geefOverzichtDocent() {
@@ -52,7 +53,6 @@ public class DocentEndpoint {
 	public List<Vak> getVakvanDocent(@PathVariable("id")Long id){ 
 		return ds.toonDocentById(id).get().getVakken();
 	}
-	
 
 }
 

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Klas {
@@ -21,7 +22,8 @@ public class Klas {
 	
 	@ManyToMany
 	private List<Vak> vakkenpakket;
-
+	
+	
 	public void voegLeerlingToe(Leerling l) {
 		leerlingen.add(l);
 	}
@@ -53,4 +55,7 @@ public class Klas {
 	public List<Vak> getVakken(){
 		return vakkenpakket;
 	}
+
+
+	
 }

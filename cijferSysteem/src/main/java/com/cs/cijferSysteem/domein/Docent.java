@@ -11,6 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Docent {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -26,7 +27,6 @@ public class Docent {
 
 	public void voegVakToe(Vak v) { 
 		if(!vakken.contains(v)) {
-		
 		vakken.add(v);
 		}
 	}

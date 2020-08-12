@@ -12,9 +12,9 @@ function laatDocentenTabelZien(vakid) {
 
             for (var x = 0; x < alleinfo.length; x++) {
                 document.getElementById("tabel").innerHTML += "<tr>" +
-                    "<td id=voornaamPass>" + alleinfo[x].voornaam + "</td>" +
+                    "<td id=voornaamPass"+[x]+">" + alleinfo[x].voornaam + "</td>" +
                     "<td>" + alleinfo[x].achternaam + "</td>" +
-                     "<td id=idPass>"+alleinfo[x].id+"</td>"+ 
+                     "<td id=idPass"+x+">"+alleinfo[x].id+"</td>"+ 
                     "<td><img src='EditButton.png' class='editB' id=editButton"+ x + " style='height:20px;width20px;' Onclick= editDocent("+ x + ")></td>" +
                     "</tr>";
 
@@ -41,14 +41,17 @@ function editDocent(x){
    // console.log("HOE ALLEEN VOORNAAM? " + y.getElementById("voornaamPass"));
 
 
-    // var w = document.getElementById("voornaamPass")."alleinfo" + [x] + ".voornaam") ;
 
-    console.log("SELECTEREN DOCENT BIJ VOORNAAM:  waarde w = " + w + " ---- waarde x = " + x);
+   var w = document.getElementById("voornaamPass"+x).innerHTML;
+   var w2 = document.getElementById("idPass"+x).innerHTML;
 
 
+    console.log("SELECTEREN DOCENT BIJ VOORNAAM: " + w + " ---- bij waarde x = " + x);
+    console.log("SELECTEREN VAN DOCENT BIJ ID:  " + w2);
 
-    // var w = document.getElementById("alleinfo"+ [x] + ".id");
-    // console.log("SELECTEREN VAN DOCENT MET ID:  " + w);
+
+    var docent = document.getElementById("voornaamPass1").innerHTML = "Karel"; // zo editten!! maar dan input getten en naar database posten!
+   // postData(docent); hiervoor een nieuw endpoint maken!
 
 }
 

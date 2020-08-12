@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.VakService;
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Vak;
@@ -33,6 +35,11 @@ public class KlasEndpoint {
 		return ks.laatKlasZien();
 	}
 	
+	// hieronder check
+	@GetMapping("/klassen/{id}")
+	public Optional<Klas> getKlasById(@PathVariable("id")Long id){ 
+		return ks.getKlasById(id);
+	}
 	@GetMapping("/leerlingenInKlas/{id}")
 	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("id") Long id){
 		return ks.getKlasById(id).get().getLeerlingen();

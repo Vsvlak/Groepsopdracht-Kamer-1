@@ -1,10 +1,13 @@
 package com.cs.cijferSysteem.domein;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,7 +22,9 @@ public class Toets {
     private LocalDate datum;
     private LocalTime tijd;
 
+
     @OneToMany
+	@JsonIgnore
 	private List<ToetsCijfer> cijfers;
 
     public void voegCijferToe(ToetsCijfer tc) {

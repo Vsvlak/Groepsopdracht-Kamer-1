@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KlassenOverzicht</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <link href="Docentoverzicht.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
-    <script defer src="KlasVakOverzicht.js"></script>
+    <script defer src="DocentVakkenOverzicht.js"></script>
     <script defer src="dropDowns.js"></script>
 </head>
 
@@ -27,22 +27,27 @@
     </div>
 
     <div id="main" class="main">
+
         <hr>
         <hr>
-        <h1>VAKKENOVERZICHT VAN EEN KLAS</h1>
-        <p> hier kun je zien welke vakken een klas volgt en vakken toevoegen aan het vakkenpakket</p>
+        <h1>DOCENTEN AAN VAKKEN KOPPELEN</h1>
+        <p> docentenzaken</p>
         <hr>
         <hr>
-        <label>Selecteer een klas</label>
-        <select id="kiesklas" onchange=toonVakken(this.value)></select>
+        <label>Selecteer een docent</label>
+        <select id="kiesdocent" onchange=toonVakken(this.value)></select>
         <br><br>
 
         <label>Vak</label>
         <select id="kiesvak"></select>
-        <input type=button value="Voeg toe" onclick=voegVakToe()>
+        <input type=button value="Voeg toe" onclick=voegVakkenToe()>
         <br><br>
 
-        <table id="tabel" border=5></table>
+        <table id="tabel" border=5>
+            <tr>
+                <td>test</td>
+            </tr>
+        </table>
 
 
         <div id="overlay"></div>

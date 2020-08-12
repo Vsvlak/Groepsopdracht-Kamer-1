@@ -5,7 +5,7 @@ public class CreateToetsDto {
 
 
     private String datum;
-    private String vak;
+    private Long vakId;
     private String tijd;
 
 
@@ -27,13 +27,12 @@ public class CreateToetsDto {
         return datum;
     }
 
-
-    public String getVak() {
-        return vak;
+    public Long getVakId() {
+        return vakId;
     }
 
-    public void setVak(String vak) {
-        this.vak = vak;
+    public void setVakId(Long vakId) {
+        this.vakId = vakId;
     }
 }
 

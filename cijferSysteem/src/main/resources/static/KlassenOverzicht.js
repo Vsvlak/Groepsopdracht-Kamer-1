@@ -39,4 +39,3 @@ function postData(klas) {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(klas);
 }
-

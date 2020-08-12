@@ -30,7 +30,7 @@ public class KlasEndpoint {
 	
 	@GetMapping("/klassenOverzicht")
 	public Iterable<Klas> toonKlassenOverzicht(){
-		return ks.laatKlassenZien();
+		return ks.laatKlasZien();
 	}
 	
 	@GetMapping("/leerlingenInKlas/{id}")

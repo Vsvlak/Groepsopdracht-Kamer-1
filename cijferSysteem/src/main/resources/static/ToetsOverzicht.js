@@ -1,6 +1,10 @@
+function maakDropDowns(){
+    maakVakkenDropdown();
+    maakDocentenDropdown();
+}
+
 function laatToetsenZien() {
     document.getElementById("tabel").innerHTML = "";
-
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
@@ -16,24 +20,24 @@ function laatToetsenZien() {
                     "</tr>";
             }
         }
-
     }
     xhr.open("GET", "http://localhost:8082/toetsOverzicht", true);
     xhr.send();
 }
 
-    function maakToetsAan(){
-        var datum = document.getElementById("datumInput").value;
-        var vak = document.getElementById("vakInput").value;
-        var tijd = document.getElementById("tijdInput").value;
-        var toets = '{"datum":"'+datum+'","tijd":"'+tijd+'","vak":"'+vak+'"}';
-        postData(toets);
-    }
+function maakToetsAan() {
+    var datum = document.getElementById("datumInput").value;
+    var vak = document.getElementById("kiesvak").value;
+    vak = vak.split(".")[0];
+    var tijd = document.getElementById("tijdInput").value;
+    var toets = '{"datum":"' + datum + '","tijd":"' + tijd + '","vakId":"' + vak + '"}';
+    postData(toets);
+}
 
-    function postData(toets){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(toets);
-    }
+function postData(toets) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(toets);
+}
 

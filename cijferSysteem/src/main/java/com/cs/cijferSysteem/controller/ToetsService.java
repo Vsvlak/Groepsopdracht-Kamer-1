@@ -18,8 +18,8 @@ public class ToetsService {
     ToetsRepository tr;
 
 
-    public void save(Toets toets){
-        tr.save(toets);
+    public Toets save(Toets toets){
+        return tr.save(toets);
     }
 
     public Iterable<Toets> laatToetsZien(){

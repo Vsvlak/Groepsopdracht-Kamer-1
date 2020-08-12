@@ -18,7 +18,7 @@ function laatLeerlingenTabelZien() {
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
             }
-            document.getElementById("tabel").innerHTML += "<tr><td><input type=button value='+Leerling' onclick= ></td></tr>";
+            document.getElementById("tabel").innerHTML += "<button data-modal-target='#modal'>+ Leerling</button>";
         }
     }
     xhr.open("GET", "http://localhost:8082/leerlingOverzicht", true);

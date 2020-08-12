@@ -17,11 +17,6 @@ public class Docent {
 	private List<Toets> toetsen;
 
 
-	public List<Toets> geefToetsen(){
-		return toetsen;
-	}
-
-
 	public void voegToetsToe(Toets t){
 		toetsen.add(t);
 	}

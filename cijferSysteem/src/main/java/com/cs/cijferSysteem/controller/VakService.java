@@ -18,10 +18,17 @@ public class VakService {
 		vr.save(v);
 	}
 	
-	public Iterable<Vak> laatVakkenZien(){
+	
+	public Iterable<Vak> laatVakZien(){
 		return vr.findAll();
 	}
 	
+	/// hieronder dubbele method; nog 1 van maken ; oorzaak merge
+	public Optional<Vak> toonVakById(Long id){
+	return vr.findById(id);
+	
+	}
+
 	public Optional<Vak> getVakById(Long id) {
 		return vr.findById(id);
 	}

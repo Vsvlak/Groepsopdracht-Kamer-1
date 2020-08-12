@@ -45,7 +45,18 @@ public class LeerlingEndpoint {
 	
 	@GetMapping("/cijfersVanLeerling/{id}")
 	public List<ToetsCijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
-		return ls.toonLeerling(id).get().geefCijfers();
+		return ls.toonLeerling(id).get().getCijfers();
 	}
+	
+//	@GetMapping("/leerlingOverzicht/{voornaam}")
+//	public List<Leerling> search(@PathVariable("voornaam") String voornaam) {
+//		return ls.search(voornaam);
+
+//	@GetMapping("/leerlingOverzicht/{start}/{end}")
+//	public List<Leerling> search(@PathVariable("start") int start, @PathVariable("end") int end){ 
+//		return ls.search(start, end);
+//		
+
+//	}
 }
 

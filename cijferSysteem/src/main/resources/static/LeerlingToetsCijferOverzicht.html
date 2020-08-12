@@ -6,22 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KlassenOverzicht</title>
     <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <link href="Menu.css" rel="stylesheet">
     <script defer src="LeerlingToetsCijferOverzicht.js"></script>
+    <script defer src="dropDowns.js"></script>
 </head>
 
 <body onload=maakLeerlingenDropdown()>
-    <hr>
-    <hr>
-    <h1>CIJFEROVERZICHT VAN EEN LEERLING</h1>
-    <hr>
-    <hr>
-    <label>Selecteer een leerling</label>
-    <select id="kiesleerling" onchange=toonCijfers(this.value)></select>
-    <br><br>
 
-    <table id="tabel" border=5></table>
+    <div id="menu" class="sidenav">
+        <a href="KlassenOverzicht.html">Klassen</a>
+        <a href="Leerlingoverzicht.html">Leerlingen</a>
+        <a href="Docentoverzicht.html">Docenten</a>
+        <a href="ToetsOverzicht.html">Toetsen</a>
+        <a href="VakOverzicht.html">Vakken</a>
+        <a href="VakToetsenOverzicht.html">Toetsen per vak</a>
+        <a href="LeerlingToetsCijferOverzicht.html">Toetscijfers van een leerling</a>
+        <a href="KlasVakOverzicht.html">Vakkenpakket per klas</a>
+        <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
+        <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
+    </div>
 
-    <div id="overlay"></div>
+    <div id="main" class="main">
+        <hr>
+        <hr>
+        <h1>CIJFEROVERZICHT VAN EEN LEERLING</h1>
+        <hr>
+        <hr>
+        <label>Selecteer een leerling</label>
+        <select id="kiesleerling" onchange=toonCijfers(this.value)></select>
+        <br><br>
+
+        <table id="tabel" border=5></table>
+
+        <div id="overlay"></div>
+    </div>
 </body>
 
 </html>

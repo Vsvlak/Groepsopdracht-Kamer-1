@@ -3,25 +3,8 @@ function maakDropDowns(){
     maakDocentenDropdown();
 }
 
-function maakToetsenDropdown(){
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
-            }
-        }
-    }
-    xhr.open("GET", "http://localhost:8082/vakkenOverzicht", true);
-    xhr.send();
-}
-
-
-
 function laatToetsenZien() {
     document.getElementById("tabel").innerHTML = "";
-
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
@@ -53,10 +36,10 @@ function laatToetsenZien() {
         postData(toets);
     }
 
-    function postData(toets){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(toets);
-    }
+function postData(toets) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8082/api/maakToets", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(toets);
+}
 

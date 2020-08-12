@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToetsToevoegenAanVak</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <title>KlassenOverzicht</title>
+    <link href="Docentoverzicht.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
-    <script defer src="VakToetsenOverzicht.js"></script>
+    <script defer src="DocentVakkenOverzicht.js"></script>
     <script defer src="dropDowns.js"></script>
 </head>
 
-<body onload=maakVakkenDropdown()>
+<body onload=maakDropDowns()>
 
     <div id="menu" class="sidenav">
         <a href="KlassenOverzicht.html">Klassen</a>
@@ -27,14 +27,20 @@
     </div>
 
     <div id="main" class="main">
+
         <hr>
         <hr>
-        <h1>TOETSENOVERZICHT PER VAK</h1>
-        <p> hier kun je zien welke toetsen er zijn (geweest) voor dit vak</p>
+        <h1>DOCENTEN AAN VAKKEN KOPPELEN</h1>
+        <p> docentenzaken</p>
         <hr>
         <hr>
-        <label>Selecteer een vak</label>
-        <select id="kiesvak" onchange=toonToetsen(this.value)></select>
+        <label>Selecteer een docent</label>
+        <select id="kiesdocent" onchange=toonVakken(this.value)></select>
+        <br><br>
+
+        <label>Vak</label>
+        <select id="kiesvak"></select>
+        <input type=button value="Voeg toe" onclick=voegVakkenToe()>
         <br><br>
 
         <table id="tabel" border=5>
@@ -42,6 +48,8 @@
                 <td>test</td>
             </tr>
         </table>
+
+
         <div id="overlay"></div>
     </div>
 </body>

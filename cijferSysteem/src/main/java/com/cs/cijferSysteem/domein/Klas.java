@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Klas {
 	@Id
@@ -16,9 +18,11 @@ public class Klas {
 	private String niveau;
 
 	@ManyToMany
+	@JsonIgnore
 	private List<Leerling> leerlingen;
 
 	@ManyToMany
+	@JsonIgnore
 	private List<Vak> vakkenpakket;
 
 	public void voegLeerlingToe(Leerling l) {
@@ -28,8 +32,6 @@ public class Klas {
 	public void voegVakToe(Vak v) {
 		vakkenpakket.add(v);
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -55,11 +57,11 @@ public class Klas {
 		this.niveau = niveau;
 	}
 
-	public List<Leerling> geefLeerlingen() {
+	public List<Leerling> getLeerlingen() {
 		return leerlingen;
 	}
 
-	public List<Vak> geefVakken(){
+	public List<Vak> getVakken(){
 		return vakkenpakket;
 	}
 }

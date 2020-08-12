@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -28,4 +29,12 @@ public class LeerlingService {
 		return lr.findById(id);
 	}
 	
+//	public List<Leerling> search(String voornaam){
+//		return lr.findByVoornaam(voornaam);
+//	}
+	
+//	public List<Leerling> search(int start, int end){
+//		return lr.findByLeerlingNummerBetween(start, end);
+//	}
+
 }

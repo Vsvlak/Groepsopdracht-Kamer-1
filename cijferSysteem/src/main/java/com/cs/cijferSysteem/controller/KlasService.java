@@ -20,7 +20,7 @@ public class KlasService {
 		kr.save(k);
 	}
 
-	public Iterable<Klas> laatKlassenZien(){
+	public Iterable<Klas> laatKlasZien(){
 		return kr.findAll();
 	}
 	

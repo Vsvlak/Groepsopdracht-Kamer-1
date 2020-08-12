@@ -52,7 +52,7 @@ public class DocentEndpoint {
 	public List<Vak> getVakvanDocent(@PathVariable("id")Long id){ 
 		return ds.toonDocentById(id).get().getVakken();
 	}
-	
+
 
 }
 

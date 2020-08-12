@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cs.cijferSysteem.domein.Docent;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
-
 
 @Service
 @Transactional
@@ -25,11 +23,9 @@ public class DocentService {
 		dr.save(docent);
 	}
 
-
 	public Optional<Docent> toonDocentById(Long id) {
 		return dr.findById(id);
 	}
-
 
 	public Iterable<Docent> laatDocentZien() {
 		return dr.findAll();

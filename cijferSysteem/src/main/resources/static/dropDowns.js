@@ -53,3 +53,19 @@ function maakDocentenDropdown(){
     xhr.open("GET", "http://localhost:8082/docentOverzicht", true);
     xhr.send();
 }
+
+function maakVakkenDropdownVoorDocent(){
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 3) {
+            var info = JSON.parse(this.responseText);
+            for (var x = 0; x < info.length; x++) {
+                document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+            }
+        }
+    }
+    var docentId = document.getElementById("kiesdocent").value;
+    docentId = docentId.split(".")[0];
+    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+docentId, true);
+    xhr.send();
+}

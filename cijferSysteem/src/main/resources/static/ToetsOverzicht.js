@@ -1,5 +1,5 @@
 function maakDropDowns(){
-    maakVakkenDropdown();
+    maakVakkenDropdownVoorDocent();
     maakDocentenDropdown();
 }
 

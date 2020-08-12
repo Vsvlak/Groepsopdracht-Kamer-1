@@ -6,8 +6,8 @@
   <!-- <script src="moment.js"></script> -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="Docentoverzicht.css" rel="stylesheet">
+  <title>Docentenoverzicht en toevoegen van docent</title>
+  <link href="Opmaak.css" rel="stylesheet">
   <link href="Menu.css" rel="stylesheet">
   <script defer src="Docentoverzicht.js"></script>
   <script defer src="modal.js"></script>
@@ -39,9 +39,10 @@
     <hr>
     <hr>
     <table border=2 id=tabel></table>
+
     <button data-modal-target="#modal">Maak nieuwe docent aan</button>
     <div class="modal" id="modal">
-      <div class="title">
+      <div class="modal-header">
         <div class="title">Maak nieuwe docent aan</div>
         <button data-close-button class="close-button">&times;</button>
       </div>
@@ -49,7 +50,6 @@
         <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
         <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
         <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
-        <div class="modal-text"> Vakken <input type="text" id="vakkenInput" class="modal-textInput"></div>
       </div>
       <button data-create-button class="create-button" onclick=maakDocentAan()>Maak docent aan</button>
     </div>

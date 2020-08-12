@@ -11,7 +11,7 @@
     <script defer src="modal.js"></script>
 </head>
 
-<body>
+<body onload=laatVakkenZien()>
 
     <div id="menu" class="sidenav">
         <a href="KlassenOverzicht.html">Klassen</a>
@@ -32,13 +32,9 @@
         <h1>WELKOM IN HET VAKKENOVERZICHT</h1>
         <p> hier kun je vakken bekijken en aanmaken </p>
         <hr>
-        <hr>
-        <input type=button value="Toon alle vakken" onclick=laatVakkenZien()>
-        <hr>
-        <hr>
+         <hr>
         <table border=2 id=tabel></table>
 
-        <button data-modal-target="#modal">Maak een nieuw vak aan</button>
         <div class="modal" id="modal">
             <div class="modal-header">
                 <div class="title">Maak een nieuw vak aan</div>

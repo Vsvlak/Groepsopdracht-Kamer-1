@@ -11,7 +11,7 @@
     <script defer src="modal.js"></script>
 </head>
 
-<body>
+<body onload=laatKlassenZien()>
 
     <div id="menu" class="sidenav">
         <a href="KlassenOverzicht.html">Klassen</a>
@@ -33,12 +33,8 @@
         <p> hier kun je klassen bekijken en aanmaken </p>
         <hr>
         <hr>
-        <input type=button value="Toon alle klassen" onclick=laatKlassenZien()>
-        <hr>
-        <hr>
         <table border=2 id=tabel></table>
 
-        <button data-modal-target="#modal">Maak een nieuwe klas aan</button>
         <div class="modal" id="modal">
             <div class="modal-header">
                 <div class="title">Maak een nieuwe klas aan</div>

@@ -14,7 +14,7 @@
 </head>
 
 
-<body>
+<body onload=laatDocentenTabelZien()>
   <div id="menu" class="sidenav">
     <a href="KlassenOverzicht.html">Klassen</a>
     <a href="Leerlingoverzicht.html">Leerlingen</a>
@@ -35,12 +35,8 @@
     <p> hier kun je docenten bekijken, aanpassen en toevoegen </p>
     <hr>
     <hr>
-    <input type=button value="toon docenten" onclick=laatDocentenTabelZien()>
-    <hr>
-    <hr>
     <table border=2 id=tabel></table>
 
-    <button data-modal-target="#modal">Maak nieuwe docent aan</button>
     <div class="modal" id="modal">
       <div class="modal-header">
         <div class="title">Maak nieuwe docent aan</div>

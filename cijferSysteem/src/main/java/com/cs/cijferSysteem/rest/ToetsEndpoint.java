@@ -2,16 +2,17 @@ package com.cs.cijferSysteem.rest;
 
 import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.KlasService;
+import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.ToetsService;
 import com.cs.cijferSysteem.controller.VakService;
+import com.cs.cijferSysteem.domein.Cijfer;
 import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
-import com.cs.cijferSysteem.domein.LeerlingCijfersVanToetsIds;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CreateToetsDto;
-import com.cs.cijferSysteem.dto.DocentCijferOverzichtDto;
+import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +28,14 @@ import java.util.Optional;
 public class ToetsEndpoint {
     @Autowired
     ToetsService ts;
-
     @Autowired
     VakService vs;
-
     @Autowired
     DocentService ds;
-    
     @Autowired
     KlasService ks;
-
+    @Autowired
+    LeerlingService ls;
 
     @GetMapping("/toetsOverzicht")
     public Iterable<Toets> geefOverzichtLeerling() {
@@ -65,10 +64,9 @@ public class ToetsEndpoint {
         ds.update(d);
     }
 
-    @GetMapping("/toets/{leerlingid}")
-    public Optional<Toets> getLeerlingById(@PathVariable("leerlingid") Long id) {
-        System.out.println("id = " + id);
-        return ts.toonToets(id);
+    @GetMapping("/toets/{toetsid}")
+    public Optional<Toets> getToetsById(@PathVariable("toetsid") Long toetsid) {
+        return ts.toonToets(toetsid);
     }
     
     @GetMapping("toonToetsenVan/{docentid}/{vakid}")
@@ -77,17 +75,38 @@ public class ToetsEndpoint {
     }
     
     @GetMapping("toonToetsenVan/{docentid}/{vakid}/{klasid}")
-    public DocentCijferOverzichtDto docentCijferOverzicht(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
-    	DocentCijferOverzichtDto dco = new DocentCijferOverzichtDto();
-    	List<LeerlingCijfersVanToetsIds> list = new ArrayList<LeerlingCijfersVanToetsIds>();
-    	Klas k = ks.getKlasById(klasid).get();
-    	List<Leerling> leerlingen = k.getLeerlingen();
+    public List<LeerlingCijfersVanDocentVakDto> leeringCijfersVanDocentVak(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
+    	List<Leerling> leerlingen = ks.getKlasById(klasid).get().getLeerlingen();
     	Iterable<Toets> toetsen = ts.toonToetsenVan(docentid, vakid);
+    	
+    	//Deze lijst wordt returned
+    	List<LeerlingCijfersVanDocentVakDto> list = new ArrayList<>();
+
     	for(Leerling l : leerlingen) {
-    		list.add(new LeerlingCijfersVanToetsIds(l, toetsen));
-    	}
-    	dco.setList(list);
-    	System.out.println(dco + " " + dco.getList().size());
-    	return dco;
+    		//In lijst 'cijfers' worden de cijfers van leerling l voor 'toetsen' opgeslagen
+    		List<Float> cijfers = new ArrayList<>();
+    		for(Toets t:  toetsen) {
+        		//Haal alle cijfers op van deze toets
+    			List<Cijfer> toetscijfers = t.getCijfers();
+    			boolean gevonden = false;
+    			for(Cijfer c : toetscijfers) {
+    				//Zoek welk cijfer van de huidige leerling l is
+    				if(c.getLeerling().getId() == l.getId()) {
+    					cijfers.add(c.getCijfer());
+    					gevonden = true;
+    					break;
+    				}
+    			}
+    			if(!gevonden) {
+    				//Registreer voor elke toets wel een cijfer, ter voorkoming van verschuiving
+    				cijfers.add(null);
+    			}
+    		}
+    		LeerlingCijfersVanDocentVakDto dto = new LeerlingCijfersVanDocentVakDto();
+        	dto.setCijfers(cijfers);
+        	dto.setLeerlingnaam(l.getVoornaam() + " " + l.getAchternaam());
+        	list.add(dto);
+    	}    	
+    	return list;
     }    
 }

@@ -11,7 +11,10 @@ function toonLeerlingen(klasid){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            //var info = JSON.parse(this.responseText);
+            var info = this.responseText;
+            console.log(info);
             for (var x = 0; x < info.length; x++) {
                 document.getElementById("tabel").innerHTML += 
                 "<tr><td>" + info[x].voornaam + "</td>" +

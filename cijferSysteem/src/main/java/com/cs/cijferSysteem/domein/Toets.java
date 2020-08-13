@@ -25,23 +25,39 @@ public class Toets {
     @OneToMany
 	@JsonIgnore
 	private List<Cijfer> cijfers;
+    
+    @ManyToOne
+    @JsonIgnore
+    private Vak vak;
+    @ManyToOne
+    @JsonIgnore
+    private Docent docent;
 
     public void voegCijferToe(Cijfer tc) {
     	cijfers.add(tc);
     }
 
+    public Vak getVak() {
+		return vak;
+	}
 
+	public void setVak(Vak vak) {
+		this.vak = vak;
+	}
 
-   /* public Docent getDocent() {
-        return docent;
-    }
+	public Docent getDocent() {
+		return docent;
+	}
 
-    public void setDocent(Docent docent) {
-        this.docent = docent;
-    }*/
+	public void setDocent(Docent docent) {
+		this.docent = docent;
+	}
 
+	public void setCijfers(List<Cijfer> cijfers) {
+		this.cijfers = cijfers;
+	}
 
-    public List<Cijfer> getCijfers() {
+	public List<Cijfer> getCijfers() {
 		return cijfers;
 	}
 

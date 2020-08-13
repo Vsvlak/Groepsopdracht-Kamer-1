@@ -17,8 +17,6 @@ public class Toets {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    /*@ManyToOne
-    private Docent docent;*/
     private LocalDate datum;
     private LocalTime tijd;
 

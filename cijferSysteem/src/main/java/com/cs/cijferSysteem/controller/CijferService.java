@@ -10,10 +10,10 @@ import com.cs.cijferSysteem.domein.Cijfer;
 
 @Service
 @Transactional
-public class ToetsCijferService {
+public class CijferService {
 	
 	@Autowired
-	ToetsCijferRepository tcr;
+	CijferRepository tcr;
 	
 	public void save(Cijfer tc) {
 		tcr.save(tc);

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.cs.cijferSysteem.domein.Cijfer;
 
-public interface ToetsCijferRepository extends CrudRepository <Cijfer, Long> {
+public interface CijferRepository extends CrudRepository <Cijfer, Long> {
 
 }

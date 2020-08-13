@@ -2,20 +2,28 @@ package com.cs.cijferSysteem.rest;
 
 
 import com.cs.cijferSysteem.controller.DocentService;
+import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.ToetsService;
 import com.cs.cijferSysteem.controller.VakService;
+import com.cs.cijferSysteem.domein.Cijfer;
 import com.cs.cijferSysteem.domein.Docent;
+import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.domein.LeerlingCijfersVanToetsIds;
 import com.cs.cijferSysteem.domein.Toets;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import com.cs.cijferSysteem.dto.CreateToetsDto;
+import com.cs.cijferSysteem.dto.DocentCijferOverzichtDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +36,9 @@ public class ToetsEndpoint {
 
     @Autowired
     DocentService ds;
+    
+    @Autowired
+    KlasService ks;
 
 
     @GetMapping("/toetsOverzicht")
@@ -57,10 +68,34 @@ public class ToetsEndpoint {
         ds.update(d);
     }
 
-
-    @GetMapping("/toets/{id}")
-    public Optional<Toets> getLeerlingById(@PathVariable("id") Long id) {
+    @GetMapping("/toets/{leerlingid}")
+    public Optional<Toets> getLeerlingById(@PathVariable("leerlingid") Long id) {
         System.out.println("id = " + id);
         return ts.toonToets(id);
     }
+    
+    @GetMapping("toonToetsenVan/{docentid}/{vakid}")
+    public Iterable<Toets> toetsenVanId(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid){
+    	return ts.toonToetsenVan(docentid, vakid);
+    }
+    
+    @GetMapping("toonToetsenVan/{docentid}/{vakid}/{klasid}")
+    public DocentCijferOverzichtDto docentCijferOverzicht(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
+    	DocentCijferOverzichtDto dco = new DocentCijferOverzichtDto();
+    	List<LeerlingCijfersVanToetsIds> list = new ArrayList<>();
+    	Klas k = ks.getKlasById(klasid).get();
+    	List<Leerling> leerlingen = k.getLeerlingen();
+    	Iterable<Toets> toetsen = ts.toonToetsenVan(docentid, vakid);
+    	for(Leerling l : leerlingen) {
+    		LeerlingCijfersVanToetsIds lc = new LeerlingCijfersVanToetsIds(l, toetsen);
+    		dco.getList().add(lc);
+    	}
+    	return dco;
+    }
+    
+    
+    
+    
+    
+    
 }

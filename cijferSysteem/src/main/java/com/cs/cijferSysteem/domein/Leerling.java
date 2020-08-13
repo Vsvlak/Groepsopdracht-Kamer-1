@@ -32,7 +32,6 @@ public class Leerling {
 	@JsonIgnore
 	private List<Cijfer> cijfers;
 	
-
 	public void voegCijferToe(Cijfer tc) {
 		cijfers.add(tc);
 	}

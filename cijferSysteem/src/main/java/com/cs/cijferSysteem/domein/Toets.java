@@ -1,7 +1,5 @@
 package com.cs.cijferSysteem.domein;
 
-
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,9 +24,9 @@ public class Toets {
 
     @OneToMany
 	@JsonIgnore
-	private List<ToetsCijfer> cijfers;
+	private List<Cijfer> cijfers;
 
-    public void voegCijferToe(ToetsCijfer tc) {
+    public void voegCijferToe(Cijfer tc) {
     	cijfers.add(tc);
     }
 
@@ -43,7 +41,7 @@ public class Toets {
     }*/
 
 
-    public List<ToetsCijfer> getCijfers() {
+    public List<Cijfer> getCijfers() {
 		return cijfers;
 	}
 

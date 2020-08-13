@@ -30,14 +30,14 @@ public class Leerling {
 	
 	@OneToMany
 	@JsonIgnore
-	private List<ToetsCijfer> cijfers;
+	private List<Cijfer> cijfers;
 	
 
-	public void voegCijferToe(ToetsCijfer tc) {
+	public void voegCijferToe(Cijfer tc) {
 		cijfers.add(tc);
 	}
 	
-	public List<ToetsCijfer> getCijfers() {
+	public List<Cijfer> getCijfers() {
 		return cijfers;
 	}
 

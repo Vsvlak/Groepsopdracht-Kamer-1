@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,10 +21,16 @@ public class Toets {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    /*@ManyToOne
-    private Docent docent;*/
     private LocalDate datum;
     private LocalTime tijd;
+
+    @ManyToOne
+    @JsonIgnore
+    private Vak vak;
+
+    @ManyToOne
+    @JsonIgnore
+    private Docent docent;
 
     @OneToMany
 	@JsonIgnore
@@ -32,15 +40,6 @@ public class Toets {
     	cijfers.add(tc);
     }
 
-
-
-   /* public Docent getDocent() {
-        return docent;
-    }
-
-    public void setDocent(Docent docent) {
-        this.docent = docent;
-    }*/
 
 
     public List<ToetsCijfer> getCijfers() {
@@ -69,5 +68,21 @@ public class Toets {
 
     public void setDatum(LocalDate datum) {
         this.datum = datum;
+    }
+
+    public Vak getVak() {
+        return vak;
+    }
+
+    public void setVak(Vak vak) {
+        this.vak = vak;
+    }
+
+    public Docent getDocent() {
+        return docent;
+    }
+
+    public void setDocent(Docent docent) {
+        this.docent = docent;
     }
 }

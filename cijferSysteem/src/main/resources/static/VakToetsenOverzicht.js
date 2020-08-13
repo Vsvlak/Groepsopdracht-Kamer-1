@@ -16,11 +16,15 @@ function toonToetsen(vakid){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("tabel").innerHTML += 
-                "<tr><td>" + info[x].datum + "</td>" +
-                "<td>" + info[x].tijd + "</td></tr>";
+            if (this.responseText.length > 0){
+                var info = JSON.parse(this.responseText);
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("tabel").innerHTML += 
+                    "<tr><td>" + info[x].datum + "</td>" +
+                    "<td>" + info[x].tijd + "</td></tr>";
+                }
+            } else {
+                document.getElementById("tabel").innerHTML += "<tr><td> Er staan nog geen toetsen ingepland voor het geselecteerde vak </td></tr>";
             }
         }
     }

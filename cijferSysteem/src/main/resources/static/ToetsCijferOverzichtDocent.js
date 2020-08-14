@@ -1,7 +1,15 @@
 function maakDropdowns(){
     maakDocentenDropdown();
-    maakVakkenDropdown();
-    maakKlassenDropDown();
+}
+
+function wisselDocent(){
+    maakVakkenDropdownVoorDocent();
+    maakCijferOverzicht();
+}
+
+function wisselVak(){
+    maakKlassenOverzichtVoorDocentEnVak();
+    maakCijferOverzicht();
 }
 
 function maakCijferOverzicht(){

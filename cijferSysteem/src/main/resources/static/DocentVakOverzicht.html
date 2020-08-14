@@ -3,18 +3,19 @@
 
 <head>
 
-  <!-- <script src="moment.js"></script> -->
+  <script src="moment.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docentenoverzicht en toevoegen van docent</title>
+  <title>LeerlingOverzicht en voeg leerling toe</title>
   <link href="Opmaak.css" rel="stylesheet">
   <link href="Menu.css" rel="stylesheet">
-  <script defer src="Docentoverzicht.js"></script>
+  <script defer src="DocentVakOverzicht.js"></script>
   <script defer src="modal.js"></script>
+
 </head>
 
+<body onload=laatDocentVakTabelZien()>
 
-<body onload=laatDocentenTabelZien()>
   <div id="menu" class="sidenav">
     <a href="KlassenOverzicht.html">Klassen</a>
     <a href="Leerlingoverzicht.html">Leerlingen</a>
@@ -33,26 +34,31 @@
   <div id="main" class="main">
     <hr>
     <hr>
-    <h1>WELKOM IN HET DOCENTOVERZICHT</h1>
-    <p> hier kun je docenten bekijken, aanpassen en toevoegen </p>
+    <h1>WELKOM IN HET DOCENTVAK OVERZICHT</h1>
+    <p> hier kun je bekijken welke vakken klassen volgen en van welke docent </p>
     <hr>
     <hr>
+
     <table border=2 id=tabel></table>
 
     <div class="modal" id="modal">
       <div class="modal-header">
-        <div class="title">Maak nieuwe docent aan</div>
+        <div class="title">Maak een nieuwe leerling aan</div>
         <button data-close-button class="close-button">&times;</button>
       </div>
       <div class="modal-body">
         <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
         <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
-        <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
+        <div class="modal-text"> Geboortedatum DD/MM/YYYY<input type="text" id="geboortedatumInput"
+            class="modal-textInput"></div>
+        <div class="modal-text"> Leerlingnummer <input type="text" id="leerlingnrInput" class="modal-textInput"></div>
+        <button data-create-button class="create-button" onclick=maakDocentVakAan()>Maak leerling aan</button>
       </div>
-      <button data-create-button class="create-button" onclick=maakDocentAan()>Maak docent aan</button>
     </div>
+  </div>
     <div id="overlay"></div>
   </div>
+
 </body>
 
 </html>

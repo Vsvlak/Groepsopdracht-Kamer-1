@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KlassenOverzicht</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <link href="Opmaak.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
     <script defer src="ToetsCijferOverzichtDocent.js"></script>
     <script defer src="dropDowns.js"></script>
@@ -25,6 +25,7 @@
         <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
         <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
         <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
+        <a href="DocentVakOverzicht.html">DocentVak overzicht</a>
     </div>
 
     <div id="main" class="main">
@@ -34,11 +35,11 @@
         <hr>
         <hr>
         <label>Selecteer een docent</label>
-        <select id="kiesdocent"></select><br><br>
+        <select id="kiesdocent" onchange=wisselDocent()></select><br><br>
         <label>Selecteer een vak</label>
-        <select id="kiesvak"></select>
+        <select id="kiesvak" onchange=wisselVak()></select><br><br>
         <label>Selecteer een klas</label>
-        <select id="kiesklas" onchange=maakCijferOverzicht()></select>
+        <select id="kiesklas"></select>
         <br><br>
 
         <table id="tabel" border=5></table>

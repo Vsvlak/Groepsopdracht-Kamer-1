@@ -61,6 +61,7 @@ function maakDocentenDropdown(){
 }
 
 function maakVakkenDropdownVoorDocent(){
+    console.log("maak vakken dropdown voor docent")
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {

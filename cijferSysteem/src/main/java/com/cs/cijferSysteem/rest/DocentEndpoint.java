@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
-
+import com.cs.cijferSysteem.domein.DocentVak;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentVakkenDto;
 
@@ -29,11 +30,13 @@ public class DocentEndpoint {
 	public Iterable<Docent> geefOverzichtDocent() {
 		return ds.laatDocentZien();
 	}
+	
 	@PostMapping("api/maakDocent")
 	public void maakDocent(@RequestBody Docent docent) { 
 		ds.maakDocent(docent);
 	}
 	
+	//Voegt vak toe aan docent
 	@PostMapping("/api/maakDocentAanVak")
 	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
 		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();
@@ -43,16 +46,19 @@ public class DocentEndpoint {
 
 	}
 	
+	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
+	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody DocentVak dv) {
+		ds.toonDocentById(docentid).get().voegDocentVakToe(dv);
+	}
+	
 	@GetMapping("/docent/{id}")
 	public Optional<Docent> getDocentById(@PathVariable("id")Long id){ 
 		return ds.toonDocentById(id);
 	}
 	
-	@GetMapping("/vakkenVanDocent/{id}")
-	public List<Vak> getVakvanDocent(@PathVariable("id")Long id){ 
-		return ds.toonDocentById(id).get().getVakken();
+	@GetMapping("/vakkenVanDocent/{docentid}")
+	public List<Vak> getVakvanDocent(@PathVariable("docentid")Long docentid){ 
+		return ds.getDocentById(docentid).get().getVakken();
 	}
-
-
 }
 

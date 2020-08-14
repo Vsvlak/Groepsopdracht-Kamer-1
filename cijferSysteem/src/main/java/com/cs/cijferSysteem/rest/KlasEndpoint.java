@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.VakService;
+import com.cs.cijferSysteem.domein.DocentVak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Vak;
@@ -58,13 +60,19 @@ public class KlasEndpoint {
 		}
 	}
 	
-	@PostMapping("/api/voegVakToe")
-	public void voegVakToe(@RequestBody KlasVakDto klasVakDto) {
-		Klas k = ks.getKlasById(klasVakDto.getKlasid()).get();
-		Vak v = vs.getVakById(klasVakDto.getVakid()).get();
-		if(!k.getVakken().contains(v)) {
-			k.getVakken().add(v);
-			ks.update(k);
-		}
+//	//Voegt een vak toe aan het vakkenpakket van een klas
+//	@PostMapping("/api/voegVakToe")
+//	public void voegVakToe(@RequestBody KlasVakDto klasVakDto) {
+//		Klas k = ks.getKlasById(klasVakDto.getKlasid()).get();
+//		Vak v = vs.getVakById(klasVakDto.getVakid()).get();
+//		if(!k.getVakken().contains(v)) {
+//			k.getVakken().add(v);
+//			ks.update(k);
+//		}
+//	}
+	
+	@PostMapping("/api/voegDocentVakToe/{klasid}")
+	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVak docentVak) {
+		ks.getKlasById(klasid).get().voegDocentVakToe(docentVak);
 	}
 }

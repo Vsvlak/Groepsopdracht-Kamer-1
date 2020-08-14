@@ -11,6 +11,9 @@ function getToetsById(id){
 
 
 function toonToetsen(vakid){
+    if (vakid == "-----"){
+        document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";
+    } else{
     vakid = vakid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
@@ -30,4 +33,5 @@ function toonToetsen(vakid){
     }
     xhr.open("GET", "http://localhost:8082/toetsenVanVak/"+vakid, true);
     xhr.send();
+}
 }

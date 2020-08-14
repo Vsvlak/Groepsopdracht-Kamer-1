@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KlassenOverzicht</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <title>Cijferoverzicht per leerling</title>
+    <link href="Opmaak.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
     <script defer src="LeerlingToetsCijferOverzicht.js"></script>
     <script defer src="dropDowns.js"></script>
@@ -30,14 +30,16 @@
         <hr>
         <hr>
         <h1>CIJFEROVERZICHT VAN EEN LEERLING</h1>
+        <p> hier kunt u zien welke cijfers een leerling heeft gehaald</p>
         <hr>
         <hr>
         <label>Selecteer een leerling</label>
         <select id="kiesleerling" onchange=toonCijfers(this.value)></select>
         <br><br>
 
-        <table id="tabel" border=5></table>
-
+        <table id="tabel" border=5>
+            <tr><td>Selecteer eerst een leerling</td></tr>
+        </table>
         <div id="overlay"></div>
     </div>
 </body>

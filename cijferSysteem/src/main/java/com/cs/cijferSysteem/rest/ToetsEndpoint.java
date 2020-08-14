@@ -12,7 +12,6 @@ import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import com.cs.cijferSysteem.dto.CreateToetsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -42,11 +41,21 @@ public class ToetsEndpoint {
         toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
         DateTimeFormatter formatterTijd = DateTimeFormatter.ofPattern("HH:MM");
         toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
+
+        Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
+
         toets = this.ts.save(toets);
         Vak v = vs.getVakById(createToetsDto.getVakId()).get();
+
+        toets.setDocent(d);
+        toets.setVak(v);
+        toets = ts.save(toets);
+
         v.voegToetsToe(toets);
         vs.update(v);
+
         Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
+
         d.voegToetsToe(toets);
         ds.update(d);
     }

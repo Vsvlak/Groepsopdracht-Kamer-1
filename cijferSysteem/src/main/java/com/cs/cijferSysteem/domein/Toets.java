@@ -37,22 +37,6 @@ public class Toets {
     	cijfers.add(tc);
     }
 
-    public Vak getVak() {
-		return vak;
-	}
-
-	public void setVak(Vak vak) {
-		this.vak = vak;
-	}
-
-	public Docent getDocent() {
-		return docent;
-	}
-
-	public void setDocent(Docent docent) {
-		this.docent = docent;
-	}
-
 	public void setCijfers(List<Cijfer> cijfers) {
 		this.cijfers = cijfers;
 	}

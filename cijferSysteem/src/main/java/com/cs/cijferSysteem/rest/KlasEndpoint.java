@@ -35,13 +35,15 @@ public class KlasEndpoint {
 		return ks.laatKlasZien();
 	}
 	
+
 	// hieronder check
 	@GetMapping("/klassen/{id}")
 	public Optional<Klas> getKlasById(@PathVariable("id")Long id){ 
 		return ks.getKlasById(id);
 	}
-	@GetMapping("/leerlingenInKlas/{id}")
-	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("id") Long id){
+
+	@GetMapping("/leerlingenInKlas/{klasid}")
+	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("klasid") Long id){
 		return ks.getKlasById(id).get().getLeerlingen();
 	}
 	

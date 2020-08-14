@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cijferoverzicht per leerling</title>
-    <link href="Opmaak.css" rel="stylesheet">
+    <title>KlassenOverzicht</title>
+    <link href="Leerlingoverzicht.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
-    <script defer src="LeerlingToetsCijferOverzicht.js"></script>
+    <script defer src="ToetsCijferOverzichtDocent.js"></script>
     <script defer src="dropDowns.js"></script>
 </head>
 
-<body onload=maakLeerlingenDropdown()>
+<body onload=maakDropdowns()>
 
     <div id="menu" class="sidenav">
         <a href="KlassenOverzicht.html">Klassen</a>
@@ -29,17 +29,19 @@
     <div id="main" class="main">
         <hr>
         <hr>
-        <h1>CIJFEROVERZICHT VAN EEN LEERLING</h1>
-        <p> hier kunt u zien welke cijfers een leerling heeft gehaald</p>
+        <h1>CIJFEROVERZICHT VOOR EEN DOCENT</h1>
         <hr>
         <hr>
-        <label>Selecteer een leerling</label>
-        <select id="kiesleerling" onchange=toonCijfers(this.value)></select>
+        <label>Selecteer een docent</label>
+        <select id="kiesdocent"></select><br><br>
+        <label>Selecteer een vak</label>
+        <select id="kiesvak"></select>
+        <label>Selecteer een klas</label>
+        <select id="kiesklas" onchange=maakCijferOverzicht()></select>
         <br><br>
 
-        <table id="tabel" border=5>
-            <tr><td>Selecteer eerst een leerling</td></tr>
-        </table>
+        <table id="tabel" border=5></table>
+
         <div id="overlay"></div>
     </div>
 </body>

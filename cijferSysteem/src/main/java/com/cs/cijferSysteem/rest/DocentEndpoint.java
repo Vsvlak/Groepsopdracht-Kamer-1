@@ -59,5 +59,6 @@ public class DocentEndpoint {
 		return ds.toonDocentById(id).get().getVakken();
 	}
 
+
 }
 

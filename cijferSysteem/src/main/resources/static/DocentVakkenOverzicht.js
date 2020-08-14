@@ -9,10 +9,14 @@ function toonVakken(docentid){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("tabel").innerHTML += 
-                "<tr><td>" + info[x].naam + "</td>";
+            if (this.responseText.length > 0){
+                var info = JSON.parse(this.responseText);
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("tabel").innerHTML += 
+                    "<tr><td>" + info[x].naam + "</td>";
+                }
+            } else{
+                document.getElementById("tabel").innerHTML += "<tr><td> Deze docent geeft nog geen vakken </td></tr>";
             }
         }
     }

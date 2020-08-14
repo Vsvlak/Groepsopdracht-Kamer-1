@@ -3,7 +3,8 @@ function maakDropDowns(){
     maakVakkenDropdown();
 }
 
-function toonVakken(docentid){
+function toonVakken(){
+    docentid = document.getElementById("kiesdocent").value;
     docentid = docentid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
@@ -24,31 +25,21 @@ function toonVakken(docentid){
     xhr.send();
 }
 
-function voegVakkenToe(){
-    var vakid = document.getElementById("kiesvak").value;
-    var docentid = document.getElementById("kiesdocent").value;
-    docentid = docentid.split(".")[0];
-    vakid = vakid.split(".")[0];
-    alert(docentid + "   " +  vakid);
-
-    var vakdocent = {"docentid":docentid, "vakid":vakid};
-    var json = JSON.stringify(vakdocent);
-    console.log(vakid + " " + docentid);
-   
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:8082/api/maakDocentAanVak" , true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(json);
+function maakDocentVakAan() {
+    var docentid = document.getElementById("kiesdocent").value.split(".")[0];
+    var vakid = document.getElementById("kiesvak").value.split(".")[0];
+    var docentvak = '{"docentid":"'+docentid+'","vakid":"'+vakid+'"}';
+    postData(docentvak);
 }
 
-function getVakById(id){
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 3) {
-            return this.responseText;
+function postData(docentvak){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {    
+        if (xhttp.readyState == 4) {
+            toonVakken();
         }
-    }
-
-    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+id);
-    xhr.send();
+    };
+    xhttp.open("POST", "http://localhost:8082/maakDocentVak", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(docentvak);
 }

@@ -1,12 +1,11 @@
 package com.cs.cijferSysteem.domein;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +19,7 @@ public class Vak {
 	private String naam;
 	
 	@OneToMany
+	@JsonIgnore
 	private List<DocentVak> docentvakken;
 
 	@OneToMany
@@ -34,7 +34,14 @@ public class Vak {
 //	@JsonIgnore
 //	private List<Klas> klassen;
 
-
+	public List<Docent> getDocenten() {
+		List<Docent> docenten = new ArrayList<>();
+		for(DocentVak dv : docentvakken) {
+			docenten.add(dv.getDocent());
+		}
+		return docenten;
+	}	
+	
 	public void voegToetsToe(Toets t){
 		toetsen.add(t);
 	}

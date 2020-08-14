@@ -25,7 +25,6 @@
         <a href="KlasLeerlingOverzicht.html">Leerlingen per klas</a>
         <a href="DocentVakkenOverzicht.html">Vakken per docent</a>
         <a href="ToetsCijferOverzichtDocent.html">Cijferoverzicht voor docent</a>
-        <a href="DocentVakOverzicht.html">DocentVak overzicht</a>
     </div>
 
     <div id="main" class="main">
@@ -40,7 +39,9 @@
         <br><br>
 
         <label>Vak</label>
-        <select id="kiesvak"></select>
+        <select id="kiesvak" onchange=maakDocentenDropdownVoorVak()></select><br><br>
+        <label>Docent</label>
+        <select id="kiesdocent"></select><br><br>
         <input type=button value="Voeg toe" onclick=voegVakToe()>
         <br><br>
 

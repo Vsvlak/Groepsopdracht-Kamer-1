@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class DocentVakService {
 	
 	public Iterable<DocentVak> laatDocentVakkenZien(){
 		return dvr.findAll();
+	}
+	
+	public DocentVak getByDocentIdAndVakId(Long docentid, Long vakid){
+		return dvr.findByDocentIdAndVakId(docentid, vakid);
 	}
 }

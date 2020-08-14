@@ -27,6 +27,10 @@ public class DocentVak {
 	@JsonIgnore
 	private List<Klas> klassen;
 	
+	public void voegKlasToe(Klas k) {
+		klassen.add(k);
+	}
+	
 	public List<Klas> getKlas() {
 		return klassen;
 	}
@@ -50,5 +54,9 @@ public class DocentVak {
 	}
 	public void setDocent(Docent docent) {
 		this.docent = docent;
-	}	
+	}
+	
+	public String toString() {
+		return "id: " + id + " vakid: " + vak.getId() + " docentid: " + docent.getId();
+	}
 }

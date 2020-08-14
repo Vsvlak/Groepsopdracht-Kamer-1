@@ -16,7 +16,9 @@ import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.DocentVak;
 import com.cs.cijferSysteem.domein.Vak;
+import com.cs.cijferSysteem.dto.DocentDto;
 import com.cs.cijferSysteem.dto.DocentVakkenDto;
+import com.cs.cijferSysteem.dto.VakDto;
 
 
 @RestController
@@ -26,24 +28,24 @@ public class DocentEndpoint {
 	@Autowired
 	VakService vs;
 
+	//Verander naar DocentDto
 	@GetMapping("/docentOverzicht")
-	public Iterable<Docent> geefOverzichtDocent() {
-		return ds.laatDocentZien();
+	public List<DocentDto> geefOverzichtDocent() {
+		Iterable<Docent> docenten = ds.laatDocentZien();
+		List<DocentDto> docentdtos = new ArrayList<>();
+		for(Docent d : docenten) {
+			DocentDto dto = new DocentDto();
+			dto.setAchternaam(d.getAchternaam());
+			dto.setId(d.getId());
+			dto.setVoornaam(d.getVoornaam());
+			docentdtos.add(dto);
+		}
+		return docentdtos;
 	}
 	
 	@PostMapping("api/maakDocent")
 	public void maakDocent(@RequestBody Docent docent) { 
 		ds.maakDocent(docent);
-	}
-	
-	//Voegt vak toe aan docent
-	@PostMapping("/api/maakDocentAanVak")
-	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
-		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();
-		Vak v = vs.toonVakById(docentVakkenDto.getVakid()).get();
-		d.getVakken().add(v);
-		ds.update(d);
-
 	}
 	
 	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
@@ -57,8 +59,32 @@ public class DocentEndpoint {
 	}
 	
 	@GetMapping("/vakkenVanDocent/{docentid}")
-	public List<Vak> getVakvanDocent(@PathVariable("docentid")Long docentid){ 
-		return ds.getDocentById(docentid).get().getVakken();
+	public List<VakDto> getVakvanDocent(@PathVariable("docentid")Long docentid){ 
+		List<Vak> vakken = ds.getDocentById(docentid).get().getVakken();
+		List<VakDto> vakdtos = new ArrayList<>();
+		for(Vak v : vakken) {
+			VakDto dto = new VakDto();
+			dto.setId(v.getId());
+			dto.setNaam(v.getNaam());
+			vakdtos.add(dto);
+		}
+		return vakdtos;
 	}
+	
+	@GetMapping("/docentenVanVak/{vakid}")
+	public List<DocentDto> getDocentenVanVak(@PathVariable("vakid") Long vakid){ 
+		
+		List<Docent> docenten = vs.getVakById(vakid).get().getDocenten();
+		List<DocentDto> docentdtos = new ArrayList<>();
+		for(Docent d : docenten) {
+			DocentDto dto = new DocentDto();
+			dto.setId(d.getId());
+			dto.setAchternaam(d.getAchternaam());
+			dto.setVoornaam(d.getVoornaam());
+			docentdtos.add(dto);
+		}
+		return docentdtos;
+	}
+	
 }
 

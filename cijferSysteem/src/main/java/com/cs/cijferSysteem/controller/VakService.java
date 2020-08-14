@@ -23,7 +23,7 @@ public class VakService {
 		return vr.findAll();
 	}
 	
-	/// hieronder dubbele method; nog 1 van maken ; oorzaak merge
+	// hieronder dubbele method; nog 1 van maken ; oorzaak merge
 	public Optional<Vak> toonVakById(Long id){
 	return vr.findById(id);
 	

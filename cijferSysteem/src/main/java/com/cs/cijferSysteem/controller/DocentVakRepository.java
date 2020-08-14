@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.cs.cijferSysteem.domein.DocentVak;
 
 public interface DocentVakRepository extends CrudRepository<DocentVak, Long> {
-
+	DocentVak findByDocentIdAndVakId(Long docentid, Long vakid);
 }

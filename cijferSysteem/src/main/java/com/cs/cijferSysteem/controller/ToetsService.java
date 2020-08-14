@@ -12,12 +12,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ToetsService {
-
-
-
-    @Autowired
+    
+	@Autowired
     ToetsRepository tr;
-
 
     public Toets save(Toets toets){
         return tr.save(toets);
@@ -31,4 +28,7 @@ public class ToetsService {
         return tr.findById(id);
     }
 
+    public Iterable<Toets> toonToetsenVan(Long docentid, Long vakId){
+    	return tr.findByDocentIdAndVakId(docentid, vakId);
+    }   
 }

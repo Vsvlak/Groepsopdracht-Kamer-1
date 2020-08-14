@@ -33,8 +33,8 @@ public class KlasEndpoint {
 		return ks.laatKlasZien();
 	}
 	
-	@GetMapping("/leerlingenInKlas/{id}")
-	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("id") Long id){
+	@GetMapping("/leerlingenInKlas/{klasid}")
+	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("klasid") Long id){
 		return ks.getKlasById(id).get().getLeerlingen();
 	}
 	

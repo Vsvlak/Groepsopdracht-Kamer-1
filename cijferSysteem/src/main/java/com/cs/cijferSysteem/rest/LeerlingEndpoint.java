@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.domein.Leerling;
-import com.cs.cijferSysteem.domein.ToetsCijfer;
+import com.cs.cijferSysteem.domein.Cijfer;
 
 @RestController
 public class LeerlingEndpoint {
@@ -45,7 +45,7 @@ public class LeerlingEndpoint {
 	}
 	
 	@GetMapping("/cijfersVanLeerling/{id}")
-	public List<ToetsCijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
+	public List<Cijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
 		return ls.toonLeerling(id).get().getCijfers();
 	}
 	

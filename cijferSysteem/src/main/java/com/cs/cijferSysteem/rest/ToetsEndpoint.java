@@ -16,7 +16,6 @@ import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

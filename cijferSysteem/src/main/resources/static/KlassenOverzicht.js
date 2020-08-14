@@ -4,17 +4,21 @@ function laatKlassenZien() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Naam</b></td><td><b>Niveau</b></td></tr>"
+            try{
+                var info = JSON.parse(this.responseText);
+                document.getElementById("tabel").innerHTML += "<tr><td><b>Naam</b></td><td><b>Niveau</b></td></tr>"
 
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("tabel").innerHTML += "<tr>" +
-                    "<td>" + info[x].naam + "</td>" +
-                    "<td>" + info[x].niveau + "</td>" +
-                    "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
-                    "</tr>";
-            }
-            document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Klas</button>";
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("tabel").innerHTML += "<tr>" +
+                        "<td>" + info[x].naam + "</td>" +
+                        "<td>" + info[x].niveau + "</td>" +
+                        "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
+                        "</tr>";
+                }
+            } catch(err){
+                document.getElementById("tabel").innerHTML += "<tr><td> Er staan nog geen klassen in het klassenoverzicht </td></tr>";
+            }    
+        document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Klas</button>";
         }
 
     }

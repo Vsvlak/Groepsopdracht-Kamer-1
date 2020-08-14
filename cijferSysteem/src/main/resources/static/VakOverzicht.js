@@ -4,14 +4,18 @@ function laatVakkenZien() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            var info = JSON.parse(this.responseText);
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Naam</b></td></tr>"
+            try{
+                var info = JSON.parse(this.responseText);
+                document.getElementById("tabel").innerHTML += "<tr><td><b>Naam</b></td></tr>"
 
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("tabel").innerHTML += "<tr>" +
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("tabel").innerHTML += "<tr>" +
                     "<td>" + info[x].naam + "</td>" +
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
+                }
+            } catch(err){
+                document.getElementById("tabel").innerHTML += "<tr><td> Er staan nog geen vakken in het vakkenoverzicht </td></tr>";
             }
             document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Vak</button>";
         }

@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.controller;
 
 
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Toets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -20,18 +21,19 @@ public class Toets {
     private LocalDate datum;
     private LocalTime tijd;
 
-    @OneToMany
-	@JsonIgnore
-	private List<Cijfer> cijfers;
-    
     @ManyToOne
     @JsonIgnore
     private Vak vak;
+
     @ManyToOne
     @JsonIgnore
     private Docent docent;
 
-    public void voegCijferToe(Cijfer tc) {
+    @OneToMany
+  	@JsonIgnore
+	  private List<Cijfer> cijfers;
+    
+   public void voegCijferToe(Cijfer tc) {
     	cijfers.add(tc);
     }
 
@@ -81,5 +83,21 @@ public class Toets {
 
     public void setDatum(LocalDate datum) {
         this.datum = datum;
+    }
+
+    public Vak getVak() {
+        return vak;
+    }
+
+    public void setVak(Vak vak) {
+        this.vak = vak;
+    }
+
+    public Docent getDocent() {
+        return docent;
+    }
+
+    public void setDocent(Docent docent) {
+        this.docent = docent;
     }
 }

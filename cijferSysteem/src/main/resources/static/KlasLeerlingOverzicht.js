@@ -11,15 +11,16 @@ function toonLeerlingen(klasid){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
-            console.log(this.responseText);
-            //var info = JSON.parse(this.responseText);
-            var info = this.responseText;
-            console.log(info);
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("tabel").innerHTML += 
-                "<tr><td>" + info[x].voornaam + "</td>" +
-                "<td>" + info[x].achternaam + "</td>" +
-                "<td>" + info[x].geboorteDatum + "</td>";
+            if (this.responseText.length > 0){
+                var info = JSON.parse(this.responseText);
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("tabel").innerHTML += 
+                    "<tr><td>" + info[x].voornaam + "</td>" +
+                    "<td>" + info[x].achternaam + "</td>" +
+                    "<td>" + info[x].geboorteDatum + "</td>";
+                }
+            } else{
+                document.getElementById("tabel").innerHTML += "<tr><td> In deze klas zitten nog geen leerlingen </td></tr>";
             }
         }
     }

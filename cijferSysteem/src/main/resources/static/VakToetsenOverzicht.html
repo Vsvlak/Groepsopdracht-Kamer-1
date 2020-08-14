@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToetsToevoegenAanVak</title>
-    <link href="Leerlingoverzicht.css" rel="stylesheet">
+    <title>Overzicht toetsen per vak</title>
+    <link href="Opmaak.css" rel="stylesheet">
     <link href="Menu.css" rel="stylesheet">
     <script defer src="VakToetsenOverzicht.js"></script>
     <script defer src="dropDowns.js"></script>
@@ -30,14 +30,16 @@
         <hr>
         <hr>
         <h1>TOETSENOVERZICHT PER VAK</h1>
-        <p> hier kun je zien welke toetsen er zijn (geweest) voor dit vak</p>
+        <p> hier kunt u zien welke toetsen er zijn (geweest) voor dit vak</p>
         <hr>
         <hr>
         <label>Selecteer een vak</label>
         <select id="kiesvak" onchange=toonToetsen(this.value)></select>
         <br><br>
 
-        <table id="tabel" border=5></table>
+        <table id="tabel" border=5>
+            <tr><td>Selecteer eerst een vak</td></tr>
+        </table>
         <div id="overlay"></div>
     </div>
 </body>

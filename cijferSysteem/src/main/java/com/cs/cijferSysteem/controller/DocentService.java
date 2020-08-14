@@ -25,11 +25,9 @@ public class DocentService {
 		dr.save(docent);
 	}
 
-
 	public Optional<Docent> toonDocentById(Long id) {
 		return dr.findById(id);
 	}
-
 
 	public Iterable<Docent> laatDocentZien() {
 		return dr.findAll();

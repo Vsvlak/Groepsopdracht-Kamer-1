@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -33,14 +32,13 @@ public class Toets {
     private Docent docent;
 
     @OneToMany
-	@JsonIgnore
-	private List<ToetsCijfer> cijfers;
+	  @JsonIgnore
+	  private List<ToetsCijfer> cijfers;
 
+  
     public void voegCijferToe(ToetsCijfer tc) {
     	cijfers.add(tc);
     }
-
-
 
     public List<ToetsCijfer> getCijfers() {
 		return cijfers;

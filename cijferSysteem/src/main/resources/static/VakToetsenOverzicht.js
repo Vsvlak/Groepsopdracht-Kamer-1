@@ -9,7 +9,6 @@ function getToetsById(id){
     xhr.send();
 }
 
-
 function toonToetsen(vakid){
     if (vakid == "-----"){
         document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";

@@ -43,6 +43,8 @@ public class ToetsEndpoint {
         toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
 
         Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
+
+        toets = this.ts.save(toets);
         Vak v = vs.getVakById(createToetsDto.getVakId()).get();
 
         toets.setDocent(d);
@@ -51,6 +53,8 @@ public class ToetsEndpoint {
 
         v.voegToetsToe(toets);
         vs.update(v);
+
+        Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
 
         d.voegToetsToe(toets);
         ds.update(d);

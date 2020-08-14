@@ -7,15 +7,12 @@ function laatDocentenTabelZien(vakid) {
         if (xhr.readyState == 3) {
             try{
                 var alleinfo = JSON.parse(this.responseText);
-
-                document.getElementById("tabel").innerHTML += "<tr><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>id</b></td></tr>"
-
-
-                for (var x = 0; x < alleinfo.length; x++) {
-                    document.getElementById("tabel").innerHTML += "<tr>" +
+            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.<b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td></tr>"
+            for (var x = 0; x < alleinfo.length; x++) {
+                document.getElementById("tabel").innerHTML += "<tr>" +
+                    "<td id=idPass>"+alleinfo[x].id+"</td>"+ 
                     "<td id=voornaamPass>" + alleinfo[x].voornaam + "</td>" +
                     "<td>" + alleinfo[x].achternaam + "</td>" +
-                     "<td id=idPass>"+alleinfo[x].id+"</td>"+ 
                     "<td><img src='EditButton.png' class='editB' id=editButton"+ x + " style='height:20px;width20px;' Onclick= editDocent("+ x + ")></td>" +
                     "</tr>";                
                 }

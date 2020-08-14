@@ -35,6 +35,11 @@ public class DocentEndpoint {
 		ds.maakDocent(docent);
 	}
 	
+	@PostMapping("api/editDocent/{id}")
+	public void updateDocent(@RequestBody Docent docent) { 
+		ds.update(docent);
+	}
+	
 	@PostMapping("/api/maakDocentAanVak")
 	public void maakDocent(@RequestBody DocentVakkenDto docentVakkenDto) { 
 		Docent d = ds.toonDocentById(docentVakkenDto.getDocentid()).get();

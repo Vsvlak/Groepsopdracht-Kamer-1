@@ -46,12 +46,30 @@
         <div class="modal-text"> Voornaam <input type="text" id="voornaamInput" class="modal-textInput"></div>
         <div class="modal-text"> Achternaam <input type="text" id="achternaamInput" class="modal-textInput"></div>
         <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
-        <div class="modal-text"> Vakken <input type="text" id="vakkenInput" class="modal-textInput"></div>
+        <!-- <div class="modal-text"> Vakken <input type="text" id="vakkenInput" class="modal-textInput"></div> -->
       </div>
       <button data-create-button class="create-button" onclick=maakDocentAan()>Maak docent aan</button>
     </div>
     <div id="overlay"></div>
   </div>
+
+
+  <div class="modal" id="editModal">
+    <div class="title">
+      <div class="title">Edit docent</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Id <input type="text" id="idEdit" class="modal-textInput"> id uneditable maken</div>
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamEdit" class="modal-textInput"></div>
+      <!-- /// inputtype hieronder selectie(s?) van vakkendatabase -->
+      <!-- <div class="modal-text"> Vakken <input type="text" id="vakkenInput" class="modal-textInput"></div> -->
+    </div>
+    <button data-create-button class="create-button" onclick=postEditData()>Edit Docent</button>
+  </div>
+  <div id="overlay"></div>
+</div>
 </body>
 
 </html>

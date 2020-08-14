@@ -42,11 +42,16 @@ public class ToetsEndpoint {
         toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
         DateTimeFormatter formatterTijd = DateTimeFormatter.ofPattern("HH:MM");
         toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
+        
         toets = this.ts.save(toets);
         Vak v = vs.getVakById(createToetsDto.getVakId()).get();
         v.voegToetsToe(toets);
         vs.update(v);
         Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
+        
+        v.voegToetsToe(toets);
+        vs.update(v);
+        
         d.voegToetsToe(toets);
         ds.update(d);
     }

@@ -49,6 +49,18 @@ public class LeerlingEndpoint {
 		return ls.toonLeerling(id).get().getCijfers();
 	}
 	
+	///////////!!!!
+//	ENDPOINT VOOR LEERLINGCIJFERPER VAK (toetsVakCijfer nodig.)
+//	@GetMapping("LeerlingVakkenToetsenCijfersOverzicht/{id}")
+//	public List<ToetsCijferPerVak> toonLeerlingVakkenToetsCijfer(@PathVariable("id") Long id){ 
+//		return ls.toonLeerling(id).get().getCijfersPerVak();
+//	}
+	
+	
+	
+	
+	
+	//oud voorbeeld:
 //	@GetMapping("/leerlingOverzicht/{voornaam}")
 //	public List<Leerling> search(@PathVariable("voornaam") String voornaam) {
 //		return ls.search(voornaam);

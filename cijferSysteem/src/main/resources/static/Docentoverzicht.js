@@ -63,6 +63,11 @@ function maakDocentAan() {
 
 function postData(docent) {
     var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {    
+        if (xhttp.readyState == 4) {
+            laatDocentenTabelZien();
+        }
+    };
     xhttp.open("POST", "http://localhost:8082/api/maakDocent", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(docent);

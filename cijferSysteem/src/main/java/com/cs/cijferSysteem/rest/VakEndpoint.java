@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Vak;
+import com.cs.cijferSysteem.dto.VakDto;
 
 @RestController
 public class VakEndpoint {
@@ -21,8 +23,16 @@ public class VakEndpoint {
 	VakService vs;
 	
 	@GetMapping("/vakkenOverzicht")
-	public Iterable<Vak> toonVakkenOverzicht(){
-		return vs.laatVakZien();
+	public List<VakDto> toonVakkenOverzicht(){
+		List<VakDto> vakdtos = new ArrayList<>();
+		Iterable<Vak> vakken = vs.laatVakZien();
+		for(Vak v : vakken) {
+			VakDto dto = new VakDto();
+			dto.setId(v.getId());
+			dto.setNaam(v.getNaam());
+			vakdtos.add(dto);
+		}
+		return vakdtos;
 	}
 
 	@PostMapping("/api/maakVak")

@@ -4,24 +4,27 @@ function maakDropDowns(){
 }
 
 function toonVakken(docentid){
-    docentid = docentid.split(".")[0];
-    document.getElementById("tabel").innerHTML = "";
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 3) {
-            if (this.responseText.length > 0){
-                var info = JSON.parse(this.responseText);
-                for (var x = 0; x < info.length; x++) {
-                    document.getElementById("tabel").innerHTML += 
-                    "<tr><td>" + info[x].naam + "</td>";
+    if (docentid == "-----"){
+        document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";
+    } else{docentid = docentid.split(".")[0];
+        document.getElementById("tabel").innerHTML = "";
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 3) {
+                if (this.responseText.length > 0){
+                    var info = JSON.parse(this.responseText);
+                    for (var x = 0; x < info.length; x++) {
+                        document.getElementById("tabel").innerHTML += 
+                        "<tr><td>" + info[x].naam + "</td>";
+                    }
+                } else{
+                    document.getElementById("tabel").innerHTML += "<tr><td> Deze docent geeft nog geen vakken </td></tr>";
                 }
-            } else{
-                document.getElementById("tabel").innerHTML += "<tr><td> Deze docent geeft nog geen vakken </td></tr>";
             }
         }
+        xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+docentid, true);
+        xhr.send();
     }
-    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+docentid, true);
-    xhr.send();
 }
 
 function voegVakkenToe(){

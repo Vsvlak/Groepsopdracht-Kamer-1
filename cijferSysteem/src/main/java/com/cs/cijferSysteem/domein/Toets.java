@@ -85,19 +85,4 @@ public class Toets {
         this.datum = datum;
     }
 
-    public Vak getVak() {
-        return vak;
-    }
-
-    public void setVak(Vak vak) {
-        this.vak = vak;
-    }
-
-    public Docent getDocent() {
-        return docent;
-    }
-
-    public void setDocent(Docent docent) {
-        this.docent = docent;
-    }
 }

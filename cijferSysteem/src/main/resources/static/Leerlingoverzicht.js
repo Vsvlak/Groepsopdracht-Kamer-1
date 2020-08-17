@@ -6,7 +6,7 @@ function laatLeerlingenTabelZien() {
             try{
                 var alleinfo = JSON.parse(this.responseText);
 
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Leerlingnr.</b></td><td></td></tr>"
+                document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Leerlingnr.</b></td><td></td></tr>"
 
                 for (var x = 0; x < alleinfo.length; x++) {
                     document.getElementById("tabel").innerHTML += "<tr>" +
@@ -36,6 +36,8 @@ function maakLeerlingAan() {
     var leerlingnrInput = document.getElementById("leerlingnrInput").value;
     var leerling = '{"voornaam":"' + voornaamInput + '","achternaam":"' + achternaamInput + '","geboortedatum":"' + geboortedatumInput + '","leerlingnummer":"' + leerlingnrInput+ '"}';
     postData(leerling);
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 }
 
 function postData(leerling) {
@@ -44,7 +46,7 @@ function postData(leerling) {
         if (xhttp.readyState == 4) {
             laatLeerlingenTabelZien();
         }
-    };
+    }
     xhttp.open("POST", "http://localhost:8082/api/maakLeerling", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(leerling);

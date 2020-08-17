@@ -29,10 +29,17 @@ function laatVakkenZien() {
         var naam = document.getElementById("naamInput").value;
         var vak = '{"naam":"'+naam+'"}';
         postData(vak);
+        modal.classList.remove('active');
+        overlay.classList.remove('active');
     }
 
     function postData(vak){
         var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {    
+            if (xhttp.readyState == 4) {
+                laatVakkenZien();
+            }
+        }
         xhttp.open("POST", "http://localhost:8082/api/maakVak", true);
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(vak);

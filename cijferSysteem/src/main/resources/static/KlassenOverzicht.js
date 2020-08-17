@@ -31,6 +31,8 @@ function maakKlasAan() {
     var niveau = document.getElementById("niveauInput").value;
     var klas = '{"naam":"' + naam + '","niveau":"' + niveau + '"}';
     postData(klas);
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 }
 
 function postData(klas) {
@@ -39,7 +41,7 @@ function postData(klas) {
         if (xhttp.readyState == 4) {
             laatKlassenZien();
         }
-    };
+    }
     xhttp.open("POST", "http://localhost:8082/api/maakKlas", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(klas);

@@ -40,6 +40,11 @@ function voegLeerlingToe(){
     var json = JSON.stringify(leerlingklas);
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:8082/api/voegLeerlingToe", true);
+    xhttp.onreadystatechange = function () {    
+        if (xhttp.readyState == 4) {
+            toonLeerlingen();
+        }
+    };
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(json);
     //TODO: Auto refresh van leerlingen lijst toevoegen

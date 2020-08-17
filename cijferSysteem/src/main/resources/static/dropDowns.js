@@ -1,4 +1,4 @@
-function maakKlassenDropDown(){
+function maakKlassenDropDown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
@@ -17,13 +17,13 @@ function maakKlassenDropDown(){
     xhr.send();
 }
 
-function maakLeerlingenDropdown(){
+function maakLeerlingenDropdown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
             var sel = document.getElementById('kiesleerling');
             var opt = document.createElement('option');
-            opt.appendChild( document.createTextNode('-----') );
+            opt.appendChild(document.createTextNode('-----'));
             sel.appendChild(opt);
 
             var info = JSON.parse(this.responseText);
@@ -36,13 +36,13 @@ function maakLeerlingenDropdown(){
     xhr.send();
 }
 
-function maakVakkenDropdown(){
+function maakVakkenDropdown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
             var sel = document.getElementById('kiesvak');
             var opt = document.createElement('option');
-            opt.appendChild( document.createTextNode('-----') );
+            opt.appendChild(document.createTextNode('-----'));
             sel.appendChild(opt);
 
             var info = JSON.parse(this.responseText);
@@ -55,13 +55,13 @@ function maakVakkenDropdown(){
     xhr.send();
 }
 
-function maakDocentenDropdown(){
+function maakDocentenDropdown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
             var sel = document.getElementById('kiesdocent');
             var opt = document.createElement('option');
-            opt.appendChild( document.createTextNode('-----') );
+            opt.appendChild(document.createTextNode('-----'));
             sel.appendChild(opt);
 
             var info = JSON.parse(this.responseText);
@@ -71,17 +71,21 @@ function maakDocentenDropdown(){
         }
     }
     xhr.open("GET", "http://localhost:8082/docentOverzicht", true);
-        xhr.send();
+    xhr.send();
 }
 
-function maakVakkenDropdownVoorDocent(){
+function maakVakkenDropdownVoorDocent() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
             var select = document.getElementById("kiesvak");
+            var opt = document.createElement('option');
+            opt.appendChild(document.createTextNode('-----'));
+            select.appendChild(opt);
+
             var length = select.options.length;
-            for (i= length-1; i>=0; i--){
-                select.options[i]=null;
+            for (i = length - 1; i > 0; i--) {
+                select.options[i] = null;
             }
             try{
                 var info = JSON.parse(this.responseText);
@@ -95,6 +99,76 @@ function maakVakkenDropdownVoorDocent(){
     }
     var docentId = document.getElementById("kiesdocent").value;
     docentId = docentId.split(".")[0];
-    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/"+docentId, true);
+    xhr.open("GET", "http://localhost:8082/vakkenVanDocent/" + docentId, true);
     xhr.send();
+}
+
+function maakDocentenDropdownVoorVak() {
+    if (document.getElementById("kiesvak").value != '-----') {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 3) {
+                var select = document.getElementById("kiesdocent");
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode('-----'));
+                select.appendChild(opt);
+
+                var length = select.options.length;
+                for (i = length - 1; i > 0; i--) {
+                    select.options[i] = null;
+                }
+                try {
+                    var info = JSON.parse(this.responseText);
+                    for (var x = 0; x < info.length; x++) {
+                        document.getElementById("kiesdocent").innerHTML += "<option>" + info[x].id + ". " + info[x].achternaam + "</option>";
+                    }
+                } catch (err) { }
+            }
+        }
+        var vakId = document.getElementById("kiesvak").value.split(".")[0];
+        xhr.open("GET", "http://localhost:8082/docentenVanVak/" + vakId, true);
+        xhr.send();
+    } else {
+        var select = document.getElementById("kiesdocent");
+        var length = select.options.length;
+        for (i = length - 1; i > 0; i--) {
+            select.options[i] = null;
+        }
+    }
+}
+
+function maakKlassenDropDownVoorDocentVak(){
+    if (document.getElementById("kiesvak").value != '-----') {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 3) {
+                var select = document.getElementById("kiesklas");
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode('-----'));
+                select.appendChild(opt);
+
+                var length = select.options.length;
+                for (i = length - 1; i > 0; i--) {
+                    select.options[i] = null;
+                }
+                try {
+                    var info = JSON.parse(this.responseText);
+                    for (var x = 0; x < info.length; x++) {
+                        document.getElementById("kiesklas").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+                    }
+                } catch (err) { }
+            }
+        }
+        var docentid = document.getElementById("kiesdocent").value.split(".")[0];
+        var vakid = document.getElementById("kiesvak").value.split(".")[0];
+        console.log(vakid);
+        xhr.open("GET", "http://localhost:8082/klassenVanDocentVak/" + docentid +"/"+ vakid, true);
+        xhr.send();  
+    } else {
+        var select = document.getElementById("kiesdocent");
+        var length = select.options.length;
+        for (i = length - 1; i > 0; i--) {
+            select.options[i] = null;
+        }
+    }
 }

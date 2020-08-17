@@ -29,8 +29,8 @@ function laatVakkenZien() {
         var naam = document.getElementById("naamInput").value;
         var vak = '{"naam":"'+naam+'"}';
         postData(vak);
-        modal.classList.remove('active');
-        overlay.classList.remove('active');
+        modal.classList.remove('active')
+        overlay.classList.remove('active')
     }
 
     function postData(vak){

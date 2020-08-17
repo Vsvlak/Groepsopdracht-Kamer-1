@@ -32,6 +32,8 @@ function maakKlasAan() {
     var niveau = document.getElementById("niveauInput").value;
     var klas = '{"naam":"' + naam + '","niveau":"' + niveau + '"}';
     postData(klas);
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
 }
 
 function postData(klas) {

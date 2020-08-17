@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,15 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.VakService;
+
 import com.cs.cijferSysteem.domein.Docent;
+
+import com.cs.cijferSysteem.domein.DocentVak;
+
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Vak;
+import com.cs.cijferSysteem.dto.DocentVakDto;
+import com.cs.cijferSysteem.dto.KlasDto;
 import com.cs.cijferSysteem.dto.KlasLeerlingDto;
 import com.cs.cijferSysteem.dto.KlasVakDto;
+import com.cs.cijferSysteem.dto.VakDto;
 
 @RestController
 public class KlasEndpoint {
@@ -29,10 +38,21 @@ public class KlasEndpoint {
 	LeerlingService ls;	
 	@Autowired
 	VakService vs;	
+	@Autowired
+	DocentVakService dvs;	
 	
 	@GetMapping("/klassenOverzicht")
-	public Iterable<Klas> toonKlassenOverzicht(){
-		return ks.laatKlasZien();
+	public List<KlasDto> toonKlassenOverzicht(){
+		Iterable<Klas> klassen = ks.laatKlasZien();
+		List<KlasDto> klassendtos = new ArrayList<>();
+		for(Klas k : klassen) {
+			KlasDto dto = new KlasDto();
+			dto.setId(k.getId());
+			dto.setNaam(k.getNaam());
+			dto.setNiveau(k.getNiveau());
+			klassendtos.add(dto);
+		}
+		return klassendtos;
 	}
 	
 
@@ -48,8 +68,19 @@ public class KlasEndpoint {
 	}
 	
 	@GetMapping("/vakkenVanKlas/{id}")
-	public List<Vak> toonVakkenVanKlas(@PathVariable("id") Long id){
-		return ks.getKlasById(id).get().getVakken();
+	public List<DocentVakDto> toonVakkenVanKlas(@PathVariable("id") Long id){
+		List<DocentVakDto> docentvakdtos = new ArrayList<>();
+		Iterable<DocentVak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
+		for(DocentVak v : docentvakken) {
+			DocentVakDto dto = new DocentVakDto();
+			dto.setId(v.getId());
+			dto.setDocentAchternaam(v.getDocent().getAchternaam());
+			dto.setDocentid(v.getDocent().getId());
+			dto.setVakid(v.getVak().getId());
+			dto.setVaknaam(v.getVak().getNaam());
+			docentvakdtos.add(dto);
+		}
+		return docentvakdtos;
 	}
 	
 	@PostMapping("/api/maakKlas")
@@ -70,15 +101,18 @@ public class KlasEndpoint {
 			k.getLeerlingen().add(l);
 			ks.update(k);
 		}
+		//Moet de klas niet ook aan de leerling worden toegevoegd, #dubbelzichtige relaties
 	}
 	
-	@PostMapping("/api/voegVakToe")
-	public void voegVakToe(@RequestBody KlasVakDto klasVakDto) {
-		Klas k = ks.getKlasById(klasVakDto.getKlasid()).get();
-		Vak v = vs.getVakById(klasVakDto.getVakid()).get();
-		if(!k.getVakken().contains(v)) {
-			k.getVakken().add(v);
+	@PostMapping("/api/voegDocentVakToe/{klasid}")
+	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVakDto dto) {
+		DocentVak dv = dvs.getByDocentIdAndVakId(dto.getDocentid(), dto.getVakid());
+		Klas k = ks.getKlasById(klasid).get();
+		if(!k.getDocentvakken().contains(dv)) {
+			k.voegDocentVakToe(dv);
+			dv.voegKlasToe(k);
 			ks.update(k);
+			dvs.save(dv);
 		}
 	}
 }

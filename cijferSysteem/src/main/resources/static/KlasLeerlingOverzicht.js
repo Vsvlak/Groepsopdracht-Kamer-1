@@ -4,8 +4,9 @@ function maakDropDowns(){
     //TODO: Toon leerlingenlijst van geselecteerde klas
 }
 
-function toonLeerlingen(klasid){
+function toonLeerlingen(){
     //TODO: Error oplossen wanneer leerlingen lijst nog leeg is
+    var klasid = document.getElementById("kiesklas").value;
     klasid = klasid.split(".")[0];
     document.getElementById("tabel").innerHTML = "";
     let xhr = new XMLHttpRequest();
@@ -37,6 +38,11 @@ function voegLeerlingToe(){
     var json = JSON.stringify(leerlingklas);
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:8082/api/voegLeerlingToe", true);
+    xhttp.onreadystatechange = function () {    
+        if (xhttp.readyState == 4) {
+            toonLeerlingen();
+        }
+    };
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(json);
     //TODO: Auto refresh van leerlingen lijst toevoegen

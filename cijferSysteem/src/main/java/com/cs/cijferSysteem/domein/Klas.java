@@ -1,6 +1,9 @@
 package com.cs.cijferSysteem.domein;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,25 +25,42 @@ public class Klas {
 	@JsonIgnore
 	private List<Leerling> leerlingen;
 
+
 	@ManyToMany
 	@JsonIgnore
 	private List<Vak> vakkenpakket;
 	
 	
+	@ManyToMany(mappedBy = "klassen", cascade = CascadeType.ALL)
+	private List<DocentVak> docentvakken;
+
+	
+	public void voegDocentVakToe(DocentVak dv) {
+		docentvakken.add(dv);
+	}
+	
+	public List<DocentVak> getDocentvakken() {
+		return docentvakken;
+	}
+
+	public void setDocentvakken(List<DocentVak> docentvakken) {
+		this.docentvakken = docentvakken;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setLeerlingen(List<Leerling> leerlingen) {
+		this.leerlingen = leerlingen;
+	}
+
 	public void voegLeerlingToe(Leerling l) {
 		leerlingen.add(l);
 	}
 
-	public void voegVakToe(Vak v) {
-		vakkenpakket.add(v);
-	}
-
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getNaam() {
@@ -64,7 +84,11 @@ public class Klas {
 	}
 
 	public List<Vak> getVakken(){
-		return vakkenpakket;
+		List<Vak> vakken = new ArrayList<>();
+		for(DocentVak dv : docentvakken) {
+			vakken.add(dv.getVak());
+		}
+		return vakken;
 	}
 
 

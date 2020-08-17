@@ -37,6 +37,8 @@ function maakLeerlingAan() {
     var leerlingnrInput = document.getElementById("leerlingnrInput").value;
     var leerling = '{"voornaam":"' + voornaamInput + '","achternaam":"' + achternaamInput + '","geboortedatum":"' + geboortedatumInput + '","leerlingnummer":"' + leerlingnrInput+ '"}';
     postData(leerling);
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
 }
 
 function postData(leerling) {

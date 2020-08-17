@@ -7,7 +7,8 @@ public class CreateLeerlingDto {
     String geboortedatum;
     String leerlingnummer;
 
-    public String getLeerlingnummer() {
+
+	public String getLeerlingnummer() {
 		return leerlingnummer;
 	}
 

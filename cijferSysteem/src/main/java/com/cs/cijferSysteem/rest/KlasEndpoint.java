@@ -57,6 +57,11 @@ public class KlasEndpoint {
 		ks.update(k);
 	}
 	
+	@PostMapping("api/editKlas/{id}")
+	public void updateKlas(@RequestBody Klas klas) { 
+		ks.update(klas);
+	}
+	
 	@PostMapping("/api/voegLeerlingToe")
 	public void voegLeerlingToe(@RequestBody KlasLeerlingDto klasLeerlingDto) {
 		Klas k = ks.getKlasById(klasLeerlingDto.getKlasid()).get();

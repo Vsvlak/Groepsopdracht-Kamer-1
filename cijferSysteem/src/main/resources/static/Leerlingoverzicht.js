@@ -11,12 +11,12 @@ function laatLeerlingenTabelZien() {
                 for (var x = 0; x < alleinfo.length; x++) {
                     document.getElementById("tabel").innerHTML += "<tr>" +
 
-                    "<td>" + alleinfo[x].id + "</td>" + //IK DENK DAT WE DEZE REGEL WEG MOETEN LATEN. ID IS NUTTELOOS OM TE LATEN ZIEN AAN EEN DOCENT
-                    "<td>" + alleinfo[x].voornaam + "</td>" +
-                    "<td>" + alleinfo[x].achternaam + "</td>" +
-                    "<td>" + moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY') + "</td>" +
-                    "<td>" + alleinfo[x].leerlingNummer + "</td>" +
-                    "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
+                    "<td id=idPass"+[x]+">" + alleinfo[x].id + "</td>" + //IK DENK DAT WE DEZE REGEL WEG MOETEN LATEN. ID IS NUTTELOOS OM TE LATEN ZIEN AAN EEN DOCENT
+                    "<td id=voornaamPass"+[x]+">" + alleinfo[x].voornaam + "</td>" +
+                    "<td id=achternaamPass"+[x]+">" + alleinfo[x].achternaam + "</td>" +
+                    "<td id=geboortedatumPass"+[x]+">" + moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY') + "</td>" +
+                    "<td id=leerlingnummerPass"+[x]+">" + alleinfo[x].leerlingNummer + "</td>" +
+                    "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;' Onclick= editLeerling("+ x + ")></td>" +
                     "</tr>";
                 }
             } catch(err){
@@ -28,6 +28,7 @@ function laatLeerlingenTabelZien() {
     xhr.open("GET", "http://localhost:8082/leerlingOverzicht", true);
     xhr.send();
 }
+
 
 function maakLeerlingAan() {
     var voornaamInput = document.getElementById("voornaamInput").value;

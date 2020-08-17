@@ -20,6 +20,7 @@ public class LeerlingService {
 	public void save(Leerling leerling){
 		lr.save(leerling);
 	}
+	
 
 	public Iterable<Leerling> laatLeerlingZien(){
 		return lr.findAll();
@@ -28,6 +29,7 @@ public class LeerlingService {
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
+
 	
 //	public List<Leerling> search(String voornaam){
 //		return lr.findByVoornaam(voornaam);

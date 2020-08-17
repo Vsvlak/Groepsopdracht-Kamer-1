@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Cijfer;
+import com.cs.cijferSysteem.domein.Docent;
 
 @RestController
 public class LeerlingEndpoint {
@@ -42,6 +43,17 @@ public class LeerlingEndpoint {
 	@GetMapping("/leerling/{id}")
 	public Optional<Leerling> getLeerlingById(@PathVariable("id") Long id){
 		return ls.toonLeerling(id);
+	}
+	
+	@PostMapping("api/editLeerling/{id}")
+	public void update(@RequestBody CreateLeerlingDto createLeerlingDto, @PathVariable("id") Long id) { 
+		Leerling leerling = getLeerlingById(id).get();
+		leerling.setVoornaam(createLeerlingDto.getVoornaam());
+		leerling.setAchternaam(createLeerlingDto.getAchternaam());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
+		leerling.setLeerlingNummer(Integer.valueOf(createLeerlingDto.getLeerlingnummer()));
+		this.ls.save(leerling);
 	}
 	
 	@GetMapping("/cijfersVanLeerling/{id}")

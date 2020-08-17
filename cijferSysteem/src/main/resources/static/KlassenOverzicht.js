@@ -10,9 +10,10 @@ function laatKlassenZien() {
 
                 for (var x = 0; x < info.length; x++) {
                     document.getElementById("tabel").innerHTML += "<tr>" +
-                        "<td>" + info[x].naam + "</td>" +
-                        "<td>" + info[x].niveau + "</td>" +
-                        "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
+                        "<td id=idPass"+[x]+">" + info[x].id + "</td>" +
+                        "<td id=naamPass"+[x]+">" + info[x].naam + "</td>" +
+                        "<td id=niveauPass"+[x]+">" + info[x].niveau + "</td>" +
+                        "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;' Onclick= editKlas("+ x + ")></td>" +
                         "</tr>";
                 }
             } catch(err){

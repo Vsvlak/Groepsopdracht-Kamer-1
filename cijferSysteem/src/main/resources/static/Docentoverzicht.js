@@ -30,55 +30,7 @@ function laatDocentenTabelZien() {
     xhr.send();
 
 }
-function editDocent(x){ 
-    openModal(document.getElementById("editModal"));
 
-   console.log("tijd om te editten in rij : " + x);
-
-    var y = document.getElementById("tabel").rows[x+1].innerHTML; // plus 1, zodat hij de tabeltitels skipt
-    console.log("DOCENT SELECTED:   " + y);
-
-
-   var w = document.getElementById("voornaamPass"+x).innerHTML;
-   var w2 = document.getElementById("idPass"+x).innerHTML;
-   var w3 = document.getElementById("achternaamPass"+x).innerHTML;
-
-
-
-    console.log("SELECTEREN DOCENT BIJ VOORNAAM: " + w + " ---- bij waarde x = " + x);
-    console.log("SELECTEREN VAN DOCENT BIJ ID:  " + w2);
-    console.log("SELECTEREN VAN DOCENT BIJ ACHTERNAAM:  " + w3);
-
-   // var x = document.getElementById("voornaamPass"+ x).innerHTML = "APPEL"; // zo editten!! met de hand
-
-    //w4 = document.getElementById("idEdit").innerHTML;
-    document.getElementById("idEdit").value = w2;
-    document.getElementById("voornaamEdit").value = w;
-    document.getElementById("achternaamEdit").value = w3;
-
-    console.log(" HIERRR " + w2);
-
-
-}
-
-function postEditData() {
-   // console.log("HIER MOET DOCENT ID STAAN: " + idDocent);
-   var idEdit =  document.getElementById("idEdit").value;
-   var voornaamEdit =  document.getElementById("voornaamEdit").value;
-   var achternaamEdit =  document.getElementById("achternaamEdit").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:8082/api/editDocent/"+  idEdit, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-
-    var docentEdit = '{"voornaam":"' + voornaamEdit + '","achternaam":"' + achternaamEdit +'","id":"' + idEdit +'"}';
-    xhttp.send(docentEdit);
-
-    editModal.classList.remove('active');
-    overlay.classList.remove('active');
-    
-
-}
 
 
 function maakDocentAan() {

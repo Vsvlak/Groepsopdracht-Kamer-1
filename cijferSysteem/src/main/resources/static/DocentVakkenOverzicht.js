@@ -6,7 +6,9 @@ function maakDropDowns(){
 function toonVakken(docentid){
     if (docentid == "-----"){
         document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";
-    } else{docentid = docentid.split(".")[0];
+    } else{
+        var docentid = document.getElementById("kiesdocent").value;
+        docentid = docentid.split(".")[0];
         document.getElementById("tabel").innerHTML = "";
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {

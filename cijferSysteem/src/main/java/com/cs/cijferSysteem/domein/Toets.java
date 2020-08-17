@@ -68,4 +68,11 @@ public class Toets {
         this.datum = datum;
     }
 
+    public void setVak(Vak vak) {
+        this.vak = vak;
+    }
+
+    public void setDocent(Docent docent) {
+        this.docent = docent;
+    }
 }

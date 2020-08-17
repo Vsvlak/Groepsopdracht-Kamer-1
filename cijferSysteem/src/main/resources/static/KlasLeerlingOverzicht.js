@@ -8,6 +8,7 @@ function toonLeerlingen(klasid){
     if (klasid == "-----"){
         document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";
     } else{
+        var klasid = document.getElementById("kiesklas").value;
         klasid = klasid.split(".")[0];
         document.getElementById("tabel").innerHTML = "";
         let xhr = new XMLHttpRequest();

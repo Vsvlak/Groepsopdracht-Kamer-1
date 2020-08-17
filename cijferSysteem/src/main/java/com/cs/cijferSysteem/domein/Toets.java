@@ -1,7 +1,5 @@
 package com.cs.cijferSysteem.domein;
 
-
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -32,15 +29,18 @@ public class Toets {
     private Docent docent;
 
     @OneToMany
-	  @JsonIgnore
-	  private List<ToetsCijfer> cijfers;
-
-  
-    public void voegCijferToe(ToetsCijfer tc) {
+  	@JsonIgnore
+	  private List<Cijfer> cijfers;
+    
+   public void voegCijferToe(Cijfer tc) {
     	cijfers.add(tc);
     }
 
-    public List<ToetsCijfer> getCijfers() {
+	public void setCijfers(List<Cijfer> cijfers) {
+		this.cijfers = cijfers;
+	}
+
+	public List<Cijfer> getCijfers() {
 		return cijfers;
 	}
 

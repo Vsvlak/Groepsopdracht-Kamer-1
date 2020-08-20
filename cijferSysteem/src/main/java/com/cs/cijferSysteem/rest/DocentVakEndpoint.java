@@ -49,10 +49,10 @@ public class DocentVakEndpoint {
 		vs.update(v);
 	}
 	
-	@GetMapping("/klassenVanDocentVak/{docentid}/{vakid}")
+	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
 	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
 		System.out.println("docent " + docentid + " vak " + vakid);
-		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlas();
+		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlassen();
 		System.out.println(klassen.size());
 		List<KlasDto> klassendtos = new ArrayList<>();
 		for(Klas k : klassen) {
@@ -64,4 +64,20 @@ public class DocentVakEndpoint {
 		}
 		return klassendtos;
 	}
+	
+	//TODO: klassenVanDocentEnVak
+	@GetMapping("/klassenVanDocentVak/{docentvakid}}")
+	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
+		List<Klas> klassen = dvs.getDocentVakById(docentvakid).get().getKlassen();
+		List<KlasDto> klassendtos = new ArrayList<>();
+		for(Klas k : klassen) {
+			KlasDto dto = new KlasDto();
+			dto.setId(k.getId());
+			dto.setNaam(k.getNaam());
+			dto.setNiveau(k.getNiveau());
+			klassendtos.add(dto);
+		}
+		return klassendtos;
+	}
+	
 }

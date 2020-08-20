@@ -4,12 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import java.util.List;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class DocentVak {
@@ -17,26 +13,22 @@ public class DocentVak {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@ManyToOne
-	@JsonIgnore
 	private Vak vak;
 	@ManyToOne
-	@JsonIgnore
 	private Docent docent;
 	
 	@ManyToMany
-	@JsonIgnore
 	private List<Klas> klassen;
+	@OneToMany
+	private List<Toets> toetsen;
 	
 	public void voegKlasToe(Klas k) {
 		klassen.add(k);
 	}
+	public void voegToetsToe(Toets t) {
+		toetsen.add(t);
+	}
 	
-	public List<Klas> getKlas() {
-		return klassen;
-	}
-	public void setKlas(List<Klas> klassen) {
-		this.klassen = klassen;
-	}
 	public long getId() {
 		return id;
 	}
@@ -58,5 +50,21 @@ public class DocentVak {
 	
 	public String toString() {
 		return "id: " + id + " vakid: " + vak.getId() + " docentid: " + docent.getId();
+	}
+
+	public List<Klas> getKlassen() {
+		return klassen;
+	}
+
+	public void setKlassen(List<Klas> klassen) {
+		this.klassen = klassen;
+	}
+
+	public List<Toets> getToetsen() {
+		return toetsen;
+	}
+
+	public void setToetsen(List<Toets> toetsen) {
+		this.toetsen = toetsen;
 	}
 }

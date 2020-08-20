@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Klas {
@@ -21,12 +20,13 @@ public class Klas {
 	private String niveau;
 
 	@ManyToMany
-	@JsonIgnore
 	private List<Leerling> leerlingen;
 
 	@ManyToMany(mappedBy = "klassen", cascade = CascadeType.ALL)
 	private List<DocentVak> docentvakken;
 
+	@OneToMany
+	private Toets toets;
 	
 	public void voegDocentVakToe(DocentVak dv) {
 		docentvakken.add(dv);
@@ -51,10 +51,6 @@ public class Klas {
 	public void voegLeerlingToe(Leerling l) {
 		leerlingen.add(l);
 	}
-
-//	public void voegVakToe(Vak v) {
-//		vakkenpakket.add(v);
-//	}
 
 	public Long getId() {
 		return id;
@@ -90,5 +86,22 @@ public class Klas {
 			vakken.add(dv.getVak());
 		}
 		return vakken;
+	}
+	
+	public List<Docent> getDocenten(){
+		List<Docent> docenten = new ArrayList<>();
+		for(DocentVak dv : docentvakken) {
+			//TODO: Dubbele docenten niet toevoegen?
+			docenten.add(dv.getDocent());
+		}
+		return docenten;
+	}
+
+	public Toets getToets() {
+		return toets;
+	}
+
+	public void setToets(Toets toets) {
+		this.toets = toets;
 	}
 }

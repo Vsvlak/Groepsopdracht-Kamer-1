@@ -154,7 +154,7 @@ function maakKlassenDropDownVoorDocentVak(){
         var docentid = document.getElementById("kiesdocent").value.split(".")[0];
         var vakid = document.getElementById("kiesvak").value.split(".")[0];
         console.log(vakid);
-        xhr.open("GET", "http://localhost:8082/klassenVanDocentVak/" + docentid +"/"+ vakid, true);
+        xhr.open("GET", "http://localhost:8082/klassenVanDocentEnVak/" + docentid +"/"+ vakid, true);
         xhr.send();  
     } else {
         var select = document.getElementById("kiesdocent");

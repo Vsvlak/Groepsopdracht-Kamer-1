@@ -1,16 +1,15 @@
 package com.cs.cijferSysteem.rest;
 
 import com.cs.cijferSysteem.controller.DocentService;
+import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.ToetsService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Cijfer;
-import com.cs.cijferSysteem.domein.Docent;
-import com.cs.cijferSysteem.domein.Klas;
+import com.cs.cijferSysteem.domein.DocentVak;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
-import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CreateToetsDto;
 import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
@@ -35,6 +34,8 @@ public class ToetsEndpoint {
     KlasService ks;
     @Autowired
     LeerlingService ls;
+    @Autowired
+    DocentVakService dvs;
 
     @GetMapping("/toetsOverzicht")
     public Iterable<Toets> geefOverzichtLeerling() {
@@ -43,24 +44,19 @@ public class ToetsEndpoint {
 
     @PostMapping("/api/maakToets")
     public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto) {
+    	//TODO: Voeg klas toe bij aanmaken toets
         Toets toets = new Toets();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
         DateTimeFormatter formatterTijd = DateTimeFormatter.ofPattern("HH:MM");
         toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
         
-        Docent d = ds.getDocentById(createToetsDto.getDocentId()).get();
-        Vak v = vs.getVakById(createToetsDto.getVakId()).get();
-   
-        toets.setDocent(d);
-        toets.setVak(v);
+        DocentVak dv = dvs.getByDocentIdAndVakId(createToetsDto.getDocentId(), createToetsDto.getVakId());
+        toets.setDocentvak(dv);
         toets = ts.save(toets);
         
-        v.voegToetsToe(toets);
-        vs.update(v);
-        
-        d.voegToetsToe(toets);
-        ds.update(d);
+        dv.voegToetsToe(toets);
+        dvs.save(dv);
     }
 
     @GetMapping("/toets/{toetsid}")
@@ -73,7 +69,11 @@ public class ToetsEndpoint {
     	return ts.toonToetsenVan(docentid, vakid);
     }
     
+	//TODO: toetsenVanDocent
+	//TODO: toetsenVanVak
+    
     @GetMapping("toonToetsenVan/{docentid}/{vakid}/{klasid}")
+    //TODO: Kan deze methode makkelijker nu er een koppeling is tussen Toets en Klas?
     public List<LeerlingCijfersVanDocentVakDto> leeringCijfersVanDocentVak(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
     	List<Leerling> leerlingen = ks.getKlasById(klasid).get().getLeerlingen();
     	Iterable<Toets> toetsen = ts.toonToetsenVan(docentid, vakid);

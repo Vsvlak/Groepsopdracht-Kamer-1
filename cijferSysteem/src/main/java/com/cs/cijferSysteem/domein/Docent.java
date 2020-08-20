@@ -18,25 +18,25 @@ public class Docent {
 	private String voornaam;
 
 	@OneToMany
-	private List<DocentVak> docentvakken;
+	private List<Docentvak> docentvakken;
 
-	public void voegDocentVakToe(DocentVak dv) {
+	public void voegDocentVakToe(Docentvak dv) {
 		docentvakken.add(dv);
 	}
 
 	public List<Vak> getVakken() {
 		List<Vak> vakken = new ArrayList<>();
-		for(DocentVak dv : docentvakken) {
+		for(Docentvak dv : docentvakken) {
 			vakken.add(dv.getVak());
 		}
 		return vakken;
 	}
 
-	public List<DocentVak> getDocentvakken() {
+	public List<Docentvak> getDocentvakken() {
 		return docentvakken;
 	}
 
-	public void setDocentvakken(List<DocentVak> docentvakken) {
+	public void setDocentvakken(List<Docentvak> docentvakken) {
 		this.docentvakken = docentvakken;
 	}
 

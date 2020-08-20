@@ -14,7 +14,7 @@ import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
-import com.cs.cijferSysteem.domein.DocentVak;
+import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentVakDto;
@@ -30,13 +30,13 @@ public class DocentVakEndpoint {
 	VakService vs;
 	
 	@GetMapping("/docentVakOverzicht")
-	public Iterable<DocentVak> geefDocentVakOverzicht(){
+	public Iterable<Docentvak> geefDocentVakOverzicht(){
 		return dvs.laatDocentVakkenZien();
 	}
 	
 	@PostMapping("/maakDocentVak")
 	public void maakDocentVak(@RequestBody DocentVakDto dto) {
-		DocentVak dv = new DocentVak();
+		Docentvak dv = new Docentvak();
 		Docent d = ds.getDocentById(dto.getDocentid()).get();
 		Vak v = vs.getVakById(dto.getVakid()).get();
 		dv.setDocent(d);
@@ -65,7 +65,6 @@ public class DocentVakEndpoint {
 		return klassendtos;
 	}
 	
-	//TODO: klassenVanDocentEnVak
 	@GetMapping("/klassenVanDocentVak/{docentvakid}}")
 	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
 		List<Klas> klassen = dvs.getDocentVakById(docentvakid).get().getKlassen();

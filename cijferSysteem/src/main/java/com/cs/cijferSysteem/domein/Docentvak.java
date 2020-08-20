@@ -8,7 +8,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class DocentVak {
+public class Docentvak {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

@@ -17,25 +17,25 @@ public class Vak {
 	private String naam;
 	
 	@OneToMany
-	private List<DocentVak> docentvakken;
+	private List<Docentvak> docentvakken;
 
 	public List<Docent> getDocenten() {
 		List<Docent> docenten = new ArrayList<>();
-		for(DocentVak dv : docentvakken) {
+		for(Docentvak dv : docentvakken) {
 			docenten.add(dv.getDocent());
 		}
 		return docenten;
 	}	
 	
-	public void voegDocentVakToe(DocentVak dv) {
+	public void voegDocentVakToe(Docentvak dv) {
 		docentvakken.add(dv);
 	}
 
-	public List<DocentVak> getDocentvakken() {
+	public List<Docentvak> getDocentvakken() {
 		return docentvakken;
 	}
 
-	public void setDocentvakken(List<DocentVak> docentvakken) {
+	public void setDocentvakken(List<Docentvak> docentvakken) {
 		this.docentvakken = docentvakken;
 	}
 

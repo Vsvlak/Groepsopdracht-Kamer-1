@@ -23,20 +23,24 @@ public class Klas {
 	private List<Leerling> leerlingen;
 
 	@ManyToMany(mappedBy = "klassen", cascade = CascadeType.ALL)
-	private List<DocentVak> docentvakken;
+	private List<Docentvak> docentvakken;
 
 	@OneToMany
-	private Toets toets;
+	private List<Toets> toetsen;
 	
-	public void voegDocentVakToe(DocentVak dv) {
+	public void voegToetsToe(Toets t) {
+		toetsen.add(t);
+	}
+	
+	public void voegDocentVakToe(Docentvak dv) {
 		docentvakken.add(dv);
 	}
 	
-	public List<DocentVak> getDocentvakken() {
+	public List<Docentvak> getDocentvakken() {
 		return docentvakken;
 	}
 
-	public void setDocentvakken(List<DocentVak> docentvakken) {
+	public void setDocentvakken(List<Docentvak> docentvakken) {
 		this.docentvakken = docentvakken;
 	}
 
@@ -82,7 +86,7 @@ public class Klas {
 
 	public List<Vak> getVakken(){
 		List<Vak> vakken = new ArrayList<>();
-		for(DocentVak dv : docentvakken) {
+		for(Docentvak dv : docentvakken) {
 			vakken.add(dv.getVak());
 		}
 		return vakken;
@@ -90,18 +94,18 @@ public class Klas {
 	
 	public List<Docent> getDocenten(){
 		List<Docent> docenten = new ArrayList<>();
-		for(DocentVak dv : docentvakken) {
-			//TODO: Dubbele docenten niet toevoegen?
+		for(Docentvak dv : docentvakken) {
 			docenten.add(dv.getDocent());
 		}
 		return docenten;
 	}
 
-	public Toets getToets() {
-		return toets;
+	public List<Toets> getToets() {
+		return toetsen;
 	}
 
-	public void setToets(Toets toets) {
-		this.toets = toets;
+	public void setToets(List<Toets> toetsen) {
+		this.toetsen = toetsen;
 	}
+
 }

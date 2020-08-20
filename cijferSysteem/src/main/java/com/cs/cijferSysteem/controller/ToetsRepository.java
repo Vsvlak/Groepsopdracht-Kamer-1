@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ToetsRepository extends CrudRepository<Toets, Long> {
 
-	List<Toets> findByDocentIdAndVakId(long docentid, long vakid);
-	List<Toets> findByCijfersId(long toetsid);
+	List<Toets> findByCijfersId(Long toetsid);
+	List<Toets> findByDocentvakId(Long docentvakid);
+	List<Toets> findByKlasId(Long klasid);
+	List<Toets> findByDocentvakIdAndKlasId(Long docentvakid, Long klasid);
 }

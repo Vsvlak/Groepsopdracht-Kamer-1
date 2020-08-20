@@ -14,7 +14,7 @@ import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.VakService;
-import com.cs.cijferSysteem.domein.DocentVak;
+import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Vak;
@@ -58,8 +58,8 @@ public class KlasEndpoint {
 	@GetMapping("/vakkenVanKlas/{id}")
 	public List<DocentVakDto> toonVakkenVanKlas(@PathVariable("id") Long id){
 		List<DocentVakDto> docentvakdtos = new ArrayList<>();
-		Iterable<DocentVak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
-		for(DocentVak v : docentvakken) {
+		Iterable<Docentvak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
+		for(Docentvak v : docentvakken) {
 			DocentVakDto dto = new DocentVakDto();
 			dto.setId(v.getId());
 			dto.setDocentAchternaam(v.getDocent().getAchternaam());
@@ -89,7 +89,7 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/voegDocentVakToe/{klasid}")
 	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVakDto dto) {
-		DocentVak dv = dvs.getByDocentIdAndVakId(dto.getDocentid(), dto.getVakid());
+		Docentvak dv = dvs.getByDocentIdAndVakId(dto.getDocentid(), dto.getVakid());
 		Klas k = ks.getKlasById(klasid).get();
 		if(!k.getDocentvakken().contains(dv)) {
 			k.voegDocentVakToe(dv);

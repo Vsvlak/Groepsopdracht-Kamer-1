@@ -23,7 +23,7 @@ public class Toets {
 	private Klas klas;
 
 	@ManyToOne
-	private DocentVak docentvak;
+	private Docentvak docentvak;
 
 	@OneToMany
 	private List<Cijfer> cijfers;
@@ -80,11 +80,11 @@ public class Toets {
 		this.klas = klas;
 	}
 
-	public DocentVak getDocentvak() {
+	public Docentvak getDocentvak() {
 		return docentvak;
 	}
 
-	public void setDocentvak(DocentVak docentvak) {
+	public void setDocentvak(Docentvak docentvak) {
 		this.docentvak = docentvak;
 	}
 }

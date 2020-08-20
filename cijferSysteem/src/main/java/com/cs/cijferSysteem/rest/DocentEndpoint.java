@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
-import com.cs.cijferSysteem.domein.DocentVak;
+import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentDto;
 import com.cs.cijferSysteem.dto.DocentVakkenDto;
@@ -49,7 +49,7 @@ public class DocentEndpoint {
 	}
 	
 	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
-	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody DocentVak dv) {
+	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody Docentvak dv) {
 		ds.toonDocentById(docentid).get().voegDocentVakToe(dv);
 	}
 	

@@ -24,6 +24,6 @@ function maakCijferOverzicht(){
             document.getElementById("tabel").innerHTML += htmlstring;
         }
     }
-    xhr.open("GET", "http://localhost:8082/toonToetsenVan/" + docentid + "/" + vakid + "/" + klasid, true);
+    xhr.open("GET", "http://localhost:8082/toonCijfersVan/" + docentid + "/" + vakid + "/" + klasid, true);
     xhr.send();
 }

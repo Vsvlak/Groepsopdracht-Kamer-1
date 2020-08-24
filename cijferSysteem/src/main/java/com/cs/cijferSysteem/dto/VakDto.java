@@ -4,6 +4,14 @@ public class VakDto {
 	Long id;
 	String naam;
 	
+	public VakDto() {};
+	
+	public VakDto(Long id, String naam) {
+		super();
+		this.id = id;
+		this.naam = naam;
+	}
+	
 	public Long getId() {
 		return id;
 	}

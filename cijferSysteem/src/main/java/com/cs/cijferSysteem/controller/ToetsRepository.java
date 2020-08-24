@@ -4,9 +4,9 @@ import com.cs.cijferSysteem.domein.Toets;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ToetsRepository extends CrudRepository<Toets, Long> {
+public interface ToetsRepository extends JpaRepository<Toets, Long> {
 
 	List<Toets> findByCijfersId(Long toetsid);
 	List<Toets> findByDocentvakId(Long docentvakid);

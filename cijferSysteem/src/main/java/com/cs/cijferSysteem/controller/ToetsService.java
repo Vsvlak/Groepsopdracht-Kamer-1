@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,7 +20,7 @@ public class ToetsService {
         return tr.save(toets);
     }
 
-    public Iterable<Toets> laatToetsZien(){
+    public List<Toets> laatToetsZien(){
         return tr.findAll();
     }
 
@@ -26,15 +28,15 @@ public class ToetsService {
         return tr.findById(id);
     }
     
-    public Iterable<Toets> findToetsByDocentvak(Long docentvakid){
+    public List<Toets> findToetsByDocentvak(Long docentvakid){
     	return tr.findByDocentvakId(docentvakid);
     }
     
-    public Iterable<Toets> findToetsByDocentvakAndKlas(Long docentvakid, Long klasid){
+    public List<Toets> findToetsByDocentvakAndKlas(Long docentvakid, Long klasid){
     	return tr.findByDocentvakIdAndKlasId(docentvakid, klasid);
     }
     
-    public Iterable<Toets> findToetsByKlas(Long klasid){
+    public List<Toets> findToetsByKlas(Long klasid){
     	return tr.findByKlasId(klasid);
     }
 

@@ -6,7 +6,7 @@ function laatLeerlingenTabelZien() {
             try{
                 var alleinfo = JSON.parse(this.responseText);
 
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Leerlingnr.</b></td><td></td></tr>"
+            document.getElementById("tabel").innerHTML += "<tr><td><b>Leerlingnr.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td></tr>"
 
                 for (var x = 0; x < alleinfo.length; x++) {
                     document.getElementById("tabel").innerHTML += "<tr>" +
@@ -15,7 +15,6 @@ function laatLeerlingenTabelZien() {
                     "<td>" + alleinfo[x].voornaam + "</td>" +
                     "<td>" + alleinfo[x].achternaam + "</td>" +
                     "<td>" + moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY') + "</td>" +
-                    "<td>" + alleinfo[x].leerlingNummer + "</td>" +
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
                     "</tr>";
                 }

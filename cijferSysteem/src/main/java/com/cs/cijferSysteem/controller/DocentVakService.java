@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class DocentVakService {
 		return dvr.findById(id);
 	}
 	
-	public Iterable<Docentvak> laatDocentVakkenZien(){
+	public List<Docentvak> laatDocentVakkenZien(){
 		return dvr.findAll();
 	}
 	
@@ -28,11 +29,11 @@ public class DocentVakService {
 		return dvr.findByDocentIdAndVakId(docentid, vakid);
 	}
 	
-	public Iterable<Docentvak> getByDocentId(Long docentid){
+	public List<Docentvak> getByDocentId(Long docentid){
 		return dvr.findByDocentId(docentid);
 	}
 	
-	public Iterable<Docentvak> getByVakId(Long vakid){
+	public List<Docentvak> getByVakId(Long vakid){
 		return dvr.findByVakId(vakid);
 	}
 }

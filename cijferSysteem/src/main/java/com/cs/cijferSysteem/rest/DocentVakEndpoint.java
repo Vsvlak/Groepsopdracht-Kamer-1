@@ -1,7 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +30,20 @@ public class DocentVakEndpoint {
 	VakService vs;
 	
 	@GetMapping("/docentVakOverzicht")
-	public Iterable<Docentvak> geefDocentVakOverzicht(){
-		return dvs.laatDocentVakkenZien();
+	public Stream<DocentVakDto> geefDocentVakOverzicht(){
+		return dvs.laatDocentVakkenZien().stream().map(dv -> new DocentVakDto(dv.getId(), dv.getDocent().getId(), dv.getVak().getId(), dv.getDocent().getAchternaam(), dv.getVak().getNaam()));
+	}
+	
+	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
+	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
+		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlassen();
+		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
+	}
+	
+	@GetMapping("/klassenVanDocentVak/{docentvakid}}")
+	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
+		List<Klas> klassen = dvs.getDocentVakById(docentvakid).get().getKlassen();
+		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@PostMapping("/maakDocentVak")
@@ -48,35 +60,4 @@ public class DocentVakEndpoint {
 		v.voegDocentVakToe(dv);
 		vs.update(v);
 	}
-	
-	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
-	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
-		System.out.println("docent " + docentid + " vak " + vakid);
-		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlassen();
-		System.out.println(klassen.size());
-		List<KlasDto> klassendtos = new ArrayList<>();
-		for(Klas k : klassen) {
-			KlasDto dto = new KlasDto();
-			dto.setId(k.getId());
-			dto.setNaam(k.getNaam());
-			dto.setNiveau(k.getNiveau());
-			klassendtos.add(dto);
-		}
-		return klassendtos;
-	}
-	
-	@GetMapping("/klassenVanDocentVak/{docentvakid}}")
-	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
-		List<Klas> klassen = dvs.getDocentVakById(docentvakid).get().getKlassen();
-		List<KlasDto> klassendtos = new ArrayList<>();
-		for(Klas k : klassen) {
-			KlasDto dto = new KlasDto();
-			dto.setId(k.getId());
-			dto.setNaam(k.getNaam());
-			dto.setNiveau(k.getNiveau());
-			klassendtos.add(dto);
-		}
-		return klassendtos;
-	}
-	
 }

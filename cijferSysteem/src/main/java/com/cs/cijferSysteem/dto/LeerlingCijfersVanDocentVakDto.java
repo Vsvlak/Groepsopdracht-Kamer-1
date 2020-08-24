@@ -6,6 +6,13 @@ public class LeerlingCijfersVanDocentVakDto {
 	String leerlingnaam;
 	List<Float> cijfers;
 	
+	public LeerlingCijfersVanDocentVakDto() {}
+	
+	public LeerlingCijfersVanDocentVakDto(String leerlingnaam, List<Float> cijfers) {
+		super();
+		this.leerlingnaam = leerlingnaam;
+		this.cijfers = cijfers;
+	}
 	public String getLeerlingnaam() {
 		return leerlingnaam;
 	}

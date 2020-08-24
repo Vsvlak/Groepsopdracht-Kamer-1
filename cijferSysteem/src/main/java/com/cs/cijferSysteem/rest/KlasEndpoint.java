@@ -1,7 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,10 @@ import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
-import com.cs.cijferSysteem.domein.Vak;
+import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import com.cs.cijferSysteem.dto.DocentVakDto;
 import com.cs.cijferSysteem.dto.KlasDto;
 import com.cs.cijferSysteem.dto.KlasLeerlingDto;
-import com.cs.cijferSysteem.dto.KlasVakDto;
-import com.cs.cijferSysteem.dto.VakDto;
 
 @RestController
 public class KlasEndpoint {
@@ -37,42 +35,25 @@ public class KlasEndpoint {
 	DocentVakService dvs;	
 	
 	@GetMapping("/klassenOverzicht")
-	public List<KlasDto> toonKlassenOverzicht(){
-		Iterable<Klas> klassen = ks.laatKlasZien();
-		List<KlasDto> klassendtos = new ArrayList<>();
-		for(Klas k : klassen) {
-			KlasDto dto = new KlasDto();
-			dto.setId(k.getId());
-			dto.setNaam(k.getNaam());
-			dto.setNiveau(k.getNiveau());
-			klassendtos.add(dto);
-		}
-		return klassendtos;
-	}
-	
-	@GetMapping("/leerlingenInKlas/{klasid}")
-	public List<Leerling> toonLeerlingenVanKlas(@PathVariable("klasid") Long id){
-		return ks.getKlasById(id).get().getLeerlingen();
+	public Stream<KlasDto> toonKlassenOverzicht(){
+		return ks.laatKlasZien().stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@GetMapping("/vakkenVanKlas/{id}")
-	public List<DocentVakDto> toonVakkenVanKlas(@PathVariable("id") Long id){
-		List<DocentVakDto> docentvakdtos = new ArrayList<>();
-		Iterable<Docentvak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
-		for(Docentvak v : docentvakken) {
-			DocentVakDto dto = new DocentVakDto();
-			dto.setId(v.getId());
-			dto.setDocentAchternaam(v.getDocent().getAchternaam());
-			dto.setDocentid(v.getDocent().getId());
-			dto.setVakid(v.getVak().getId());
-			dto.setVaknaam(v.getVak().getNaam());
-			docentvakdtos.add(dto);
-		}
-		return docentvakdtos;
+	public Stream<DocentVakDto> toonVakkenVanKlas(@PathVariable("id") Long id){
+		List<Docentvak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
+		return docentvakken.stream().map(d -> new DocentVakDto(d.getId(), d.getDocent().getId(), d.getVak().getId(), d.getDocent().getAchternaam(), d.getVak().getNaam()));
+	}
+	
+	@GetMapping("/leerlingenInKlas/{klasid}")
+	public Stream<CreateLeerlingDto> toonLeerlingenVanKlas(@PathVariable("klasid") Long klasid){
+		Klas k = ks.getKlasById(klasid).get();
+		return k.getLeerlingen().stream().map(l -> new CreateLeerlingDto(l.getId(), l.getVoornaam(), l.getAchternaam(), l.getGeboorteDatum().toString()));
 	}
 	
 	@PostMapping("/api/maakKlas")
 	public void maakVak(@RequestBody Klas k) {
+		System.out.println(k.getId());
 		ks.update(k);
 	}
 	
@@ -84,7 +65,8 @@ public class KlasEndpoint {
 			k.getLeerlingen().add(l);
 			ks.update(k);
 		}
-		//Moet de klas niet ook aan de leerling worden toegevoegd, #dubbelzichtige relaties
+		l.voegKlasToe(k);
+		ls.save(l);
 	}
 	
 	@PostMapping("/api/voegDocentVakToe/{klasid}")

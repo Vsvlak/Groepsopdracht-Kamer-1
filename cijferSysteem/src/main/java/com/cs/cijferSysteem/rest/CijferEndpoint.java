@@ -2,6 +2,7 @@ package com.cs.cijferSysteem.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import com.cs.cijferSysteem.domein.Cijfer;
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
+import com.cs.cijferSysteem.dto.CijferDto;
 import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
 @RestController
@@ -31,8 +33,8 @@ public class CijferEndpoint {
 	KlasService ks;
 	
     @GetMapping("/toetsCijferOverzicht")
-    public Iterable<Cijfer> geefOverzichtToetsCijfering() {
-        return tcs.laatToetsCijfersZien();
+    public Stream<CijferDto> geefOverzichtToetsCijfering() {
+        return tcs.laatToetsCijfersZien().stream().map(c -> new CijferDto(c.getId(), c.getCijfer()));
     }
     
     @GetMapping("toonCijfersVan/{docentid}/{vakid}/{klasid}")
@@ -65,9 +67,7 @@ public class CijferEndpoint {
     				cijfers.add(null);
     			}
     		}
-    		LeerlingCijfersVanDocentVakDto dto = new LeerlingCijfersVanDocentVakDto();
-        	dto.setCijfers(cijfers);
-        	dto.setLeerlingnaam(l.getVoornaam() + " " + l.getAchternaam());
+    		LeerlingCijfersVanDocentVakDto dto = new LeerlingCijfersVanDocentVakDto(l.getVoornaam() + " " + l.getAchternaam(), cijfers);
         	list.add(dto);
     	}    	
     	return list;

@@ -21,7 +21,7 @@ public class LeerlingService {
 		lr.save(leerling);
 	}
 
-	public Iterable<Leerling> laatLeerlingZien(){
+	public List<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
 	

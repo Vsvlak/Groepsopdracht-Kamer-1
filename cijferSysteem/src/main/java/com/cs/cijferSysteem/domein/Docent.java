@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Docent {
 
@@ -20,42 +18,25 @@ public class Docent {
 	private String voornaam;
 
 	@OneToMany
-	@JsonIgnore
-	private List<Toets> toetsen;
-	@OneToMany
-	@JsonIgnore
-	private List<DocentVak> docentvakken;
+	private List<Docentvak> docentvakken;
 
-
-	public void voegToetsToe(Toets t){
-		toetsen.add(t);
-	}
-	
-	public void voegDocentVakToe(DocentVak dv) {
+	public void voegDocentVakToe(Docentvak dv) {
 		docentvakken.add(dv);
 	}
 
 	public List<Vak> getVakken() {
 		List<Vak> vakken = new ArrayList<>();
-		for(DocentVak dv : docentvakken) {
+		for(Docentvak dv : docentvakken) {
 			vakken.add(dv.getVak());
 		}
 		return vakken;
 	}
 
-	public List<Toets> getToetsen() {
-		return toetsen;
-	}
-
-	public void setToetsen(List<Toets> toetsen) {
-		this.toetsen = toetsen;
-	}
-
-	public List<DocentVak> getDocentvakken() {
+	public List<Docentvak> getDocentvakken() {
 		return docentvakken;
 	}
 
-	public void setDocentvakken(List<DocentVak> docentvakken) {
+	public void setDocentvakken(List<Docentvak> docentvakken) {
 		this.docentvakken = docentvakken;
 	}
 

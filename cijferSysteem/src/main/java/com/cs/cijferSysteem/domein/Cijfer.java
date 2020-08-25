@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Cijfer {
 	
@@ -17,10 +15,8 @@ public class Cijfer {
 	private Float cijfer;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Leerling leerling;
 	@ManyToOne
-	@JsonIgnore
 	private Toets toets;
 
 	public Leerling getLeerling() {

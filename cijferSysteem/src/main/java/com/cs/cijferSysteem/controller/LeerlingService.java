@@ -22,21 +22,12 @@ public class LeerlingService {
 	}
 	
 
-	public Iterable<Leerling> laatLeerlingZien(){
+	public List<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
 	
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
-
-	
-//	public List<Leerling> search(String voornaam){
-//		return lr.findByVoornaam(voornaam);
-//	}
-	
-//	public List<Leerling> search(int start, int end){
-//		return lr.findByLeerlingNummerBetween(start, end);
-//	}
 
 }

@@ -7,6 +7,17 @@ public class DocentVakDto {
 	String docentAchternaam;
 	String vaknaam;
 	
+	public DocentVakDto() {};
+	
+	public DocentVakDto(Long id, Long docentid, Long vakid, String docentAchternaam, String vaknaam) {
+		super();
+		this.id = id;
+		this.docentid = docentid;
+		this.vakid = vakid;
+		this.docentAchternaam = docentAchternaam;
+		this.vaknaam = vaknaam;
+	}
+
 	public Long getId() {
 		return id;
 	}

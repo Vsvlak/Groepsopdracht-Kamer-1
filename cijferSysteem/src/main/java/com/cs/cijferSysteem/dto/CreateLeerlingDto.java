@@ -2,11 +2,30 @@ package com.cs.cijferSysteem.dto;
 
 public class CreateLeerlingDto {
 
+	Long id;
     String voornaam;
     String achternaam;
     String geboortedatum;
     String leerlingnummer;
 
+
+    public CreateLeerlingDto() {};
+    
+    public CreateLeerlingDto(Long id, String voornaam, String achternaam, String geboortedatum) {
+		super();
+		this.id = id;
+		this.voornaam = voornaam;
+		this.achternaam = achternaam;
+		this.geboortedatum = geboortedatum;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getLeerlingnummer() {
 		return leerlingnummer;

@@ -6,17 +6,25 @@ function laatLeerlingenTabelZien() {
             try{
                 var alleinfo = JSON.parse(this.responseText);
 
-            document.getElementById("tabel").innerHTML += "<tr><td><b>Id.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td><td><b>Leerlingnr.</b></td><td></td></tr>"
+            document.getElementById("tabel").innerHTML += "<tr><td><b>Leerlingnr.</b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td><td><b>Geboortedatum</b></td></tr>"
 
                 for (var x = 0; x < alleinfo.length; x++) {
                     document.getElementById("tabel").innerHTML += "<tr>" +
 
+<<<<<<< HEAD
                     "<td id=idPass"+[x]+">" + alleinfo[x].id + "</td>" + //IK DENK DAT WE DEZE REGEL WEG MOETEN LATEN. ID IS NUTTELOOS OM TE LATEN ZIEN AAN EEN DOCENT
                     "<td id=voornaamPass"+[x]+">" + alleinfo[x].voornaam + "</td>" +
                     "<td id=achternaamPass"+[x]+">" + alleinfo[x].achternaam + "</td>" +
                     "<td id=geboortedatumPass"+[x]+">" + moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY') + "</td>" +
                     "<td id=leerlingnummerPass"+[x]+">" + alleinfo[x].leerlingNummer + "</td>" +
                     "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;' Onclick= editLeerling("+ x + ")></td>" +
+=======
+                    "<td>" + alleinfo[x].id + "</td>" + //IK DENK DAT WE DEZE REGEL WEG MOETEN LATEN. ID IS NUTTELOOS OM TE LATEN ZIEN AAN EEN DOCENT
+                    "<td>" + alleinfo[x].voornaam + "</td>" +
+                    "<td>" + alleinfo[x].achternaam + "</td>" +
+                    "<td>" + moment(alleinfo[x].geboorteDatum).format('DD-MM-YYYY') + "</td>" +
+                    "<td><img src='EditButton.png' class='editB' id=editButton" + x + " style='height:20px;width20px;'></td>" +
+>>>>>>> Developer
                     "</tr>";
                 }
             } catch(err){

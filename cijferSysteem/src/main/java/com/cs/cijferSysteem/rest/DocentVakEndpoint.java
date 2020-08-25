@@ -1,7 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
-import com.cs.cijferSysteem.domein.DocentVak;
+import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentVakDto;
@@ -30,13 +30,25 @@ public class DocentVakEndpoint {
 	VakService vs;
 	
 	@GetMapping("/docentVakOverzicht")
-	public Iterable<DocentVak> geefDocentVakOverzicht(){
-		return dvs.laatDocentVakkenZien();
+	public Stream<DocentVakDto> geefDocentVakOverzicht(){
+		return dvs.laatDocentVakkenZien().stream().map(dv -> new DocentVakDto(dv.getId(), dv.getDocent().getId(), dv.getVak().getId(), dv.getDocent().getAchternaam(), dv.getVak().getNaam()));
+	}
+	
+	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
+	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
+		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlassen();
+		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
+	}
+	
+	@GetMapping("/klassenVanDocentVak/{docentvakid}}")
+	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentvakid") Long docentvakid){
+		List<Klas> klassen = dvs.getDocentVakById(docentvakid).get().getKlassen();
+		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@PostMapping("/maakDocentVak")
 	public void maakDocentVak(@RequestBody DocentVakDto dto) {
-		DocentVak dv = new DocentVak();
+		Docentvak dv = new Docentvak();
 		Docent d = ds.getDocentById(dto.getDocentid()).get();
 		Vak v = vs.getVakById(dto.getVakid()).get();
 		dv.setDocent(d);
@@ -47,21 +59,5 @@ public class DocentVakEndpoint {
 		ds.update(d);
 		v.voegDocentVakToe(dv);
 		vs.update(v);
-	}
-	
-	@GetMapping("/klassenVanDocentVak/{docentid}/{vakid}")
-	public List<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
-		System.out.println("docent " + docentid + " vak " + vakid);
-		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlas();
-		System.out.println(klassen.size());
-		List<KlasDto> klassendtos = new ArrayList<>();
-		for(Klas k : klassen) {
-			KlasDto dto = new KlasDto();
-			dto.setId(k.getId());
-			dto.setNaam(k.getNaam());
-			dto.setNiveau(k.getNiveau());
-			klassendtos.add(dto);
-		}
-		return klassendtos;
 	}
 }

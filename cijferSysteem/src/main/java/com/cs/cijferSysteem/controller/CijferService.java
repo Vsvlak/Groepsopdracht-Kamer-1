@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CijferService {
 		return tcr.findById(id);
 	}
 	
-	public Iterable<Cijfer> laatToetsCijfersZien(){
+	public List<Cijfer> laatToetsCijfersZien(){
 		return tcr.findAll();
 	}
 }

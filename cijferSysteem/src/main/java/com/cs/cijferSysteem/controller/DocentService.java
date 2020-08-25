@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cs.cijferSysteem.domein.Docent;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
-
 
 @Service
 @Transactional

@@ -47,7 +47,8 @@
                 <div class="modal-text"> Datum DD/MM/YYYY<input type="text" id="datumInput" class="modal-textInput">
                 </div>
                 <div class="modal-text"> Tijd HH:MM<input type="text" id="tijdInput" class="modal-textInput"></div>
-                <div class="modal-text"> Vak <select id="kiesvak" class="modal-textInput"></select></div>
+                <div class="modal-text"> Vak <select id="kiesvak" onchange=maakKlassenDropDownVoorDocentVak() class="modal-textInput"></select></div>
+                <div class="modal-text"> Klas <select id="kiesklas" class="modal-textInput"></select></div>
             </div>
             <button data-create-button class="create-button" onclick=maakToetsAan()>Maak toets aan</button>
         </div>

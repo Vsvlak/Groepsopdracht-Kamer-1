@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class KlasService {
 		kr.save(k);
 	}
 
-	public Iterable<Klas> laatKlasZien(){
+	public List<Klas> laatKlasZien(){
 		return kr.findAll();
 	}
 	

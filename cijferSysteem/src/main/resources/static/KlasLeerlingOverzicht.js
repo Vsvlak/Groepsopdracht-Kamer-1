@@ -18,7 +18,7 @@ function toonLeerlingen(){
                     document.getElementById("tabel").innerHTML += 
                     "<tr><td>" + info[x].voornaam + "</td>" +
                     "<td>" + info[x].achternaam + "</td>" +
-                    "<td>" + info[x].geboorteDatum + "</td>";
+                    "<td>" + info[x].geboortedatum + "</td>";
                 }
             } else{
                 document.getElementById("tabel").innerHTML += "<tr><td> In deze klas zitten nog geen leerlingen </td></tr>";

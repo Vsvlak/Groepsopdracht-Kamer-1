@@ -1,9 +1,15 @@
 package com.cs.cijferSysteem.controller;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+import java.util.Optional;
 
-import com.cs.cijferSysteem.domein.DocentVak;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DocentVakRepository extends CrudRepository<DocentVak, Long> {
-	DocentVak findByDocentIdAndVakId(Long docentid, Long vakid);
+import com.cs.cijferSysteem.domein.Docentvak;
+
+public interface DocentVakRepository extends JpaRepository<Docentvak, Long> {
+	Docentvak findByDocentIdAndVakId(Long docentid, Long vakid);
+	List<Docentvak> findByDocentId(Long docentid);
+	List<Docentvak> findByVakId(Long vakid);
+	Optional<Docentvak> findById(Long docentvakid);
 }

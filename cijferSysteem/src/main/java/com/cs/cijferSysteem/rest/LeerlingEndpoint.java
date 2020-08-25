@@ -2,9 +2,9 @@ package com.cs.cijferSysteem.rest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+import com.cs.cijferSysteem.dto.CijferDto;
 import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.domein.Leerling;
-import com.cs.cijferSysteem.domein.Cijfer;
 
 @RestController
 public class LeerlingEndpoint {
@@ -23,10 +22,20 @@ public class LeerlingEndpoint {
 	LeerlingService ls;
 
 	@GetMapping("/leerlingOverzicht")
-	public Iterable<Leerling> geefOverzichtLeerling() {
-		return ls.laatLeerlingZien();
+	public Stream<CreateLeerlingDto> geefOverzichtLeerling() {
+		return ls.laatLeerlingZien().stream().map(l -> new CreateLeerlingDto(l.getId(), l.getVoornaam(), l.getAchternaam(), l.getGeboorteDatum().toString()));
 	}
 
+	@GetMapping("/leerling/{id}")
+	public Optional<CreateLeerlingDto> getLeerlingById(@PathVariable("id") Long id){
+		return ls.toonLeerling(id).map(l -> new CreateLeerlingDto(l.getId(), l.getAchternaam(), l.getVoornaam(), l.getGeboorteDatum().toString()));
+	}
+	
+	@GetMapping("/cijfersVanLeerling/{id}")
+	public Stream<CijferDto> toonCijfersVanLeerling(@PathVariable("id") Long id){
+		return ls.toonLeerling(id).get().getCijfers().stream().map(c -> new CijferDto(c.getId(), c.getCijfer()));
+	}
+	
 	@PostMapping("/api/maakLeerling")
 	public void maakLeerlingAan(@RequestBody CreateLeerlingDto createLeerlingDto){
 		Leerling leerling = new Leerling();
@@ -38,15 +47,7 @@ public class LeerlingEndpoint {
 		this.ls.save(leerling);
 	}
 
-	@GetMapping("/leerling/{id}")
-	public Optional<Leerling> getLeerlingById(@PathVariable("id") Long id){
-		return ls.toonLeerling(id);
-	}
-	
-	@GetMapping("/cijfersVanLeerling/{id}")
-	public List<Cijfer> toonCijfersVanLeerling(@PathVariable("id") Long id){
-		return ls.toonLeerling(id).get().getCijfers();
-	}
+
 	
 //	@GetMapping("/leerlingOverzicht/{voornaam}")
 //	public List<Leerling> search(@PathVariable("voornaam") String voornaam) {
@@ -58,7 +59,6 @@ public class LeerlingEndpoint {
 //		
 
 //	}
-
 
 }
 

@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -14,27 +13,24 @@ import java.util.List;
 @Entity
 public class Toets {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private LocalDate datum;
-    private LocalTime tijd;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private LocalDate datum;
+	private LocalTime tijd;
 
-    @ManyToOne
-    @JsonIgnore
-    private Vak vak;
+	@ManyToOne
+	private Klas klas;
 
-    @ManyToOne
-    @JsonIgnore
-    private Docent docent;
+	@ManyToOne
+	private Docentvak docentvak;
 
-    @OneToMany
-  	@JsonIgnore
-	  private List<Cijfer> cijfers;
-    
-   public void voegCijferToe(Cijfer tc) {
-    	cijfers.add(tc);
-    }
+	@OneToMany
+	private List<Cijfer> cijfers;
+
+	public void voegCijferToe(Cijfer tc) {
+		cijfers.add(tc);
+	}
 
 	public void setCijfers(List<Cijfer> cijfers) {
 		this.cijfers = cijfers;
@@ -45,34 +41,50 @@ public class Toets {
 	}
 
 	public LocalTime getTijd() {
-        return tijd;
-    }
+		return tijd;
+	}
 
-    public void setTijd(LocalTime tijd) {
-        this.tijd = tijd;
-    }
+	public void setTijd(LocalTime tijd) {
+		this.tijd = tijd;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public LocalDate getDatum() {
-        return datum;
-    }
+	public LocalDate getDatum() {
+		return datum;
+	}
 
-    public void setDatum(LocalDate datum) {
-        this.datum = datum;
-    }
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
 
-    public void setVak(Vak vak) {
-        this.vak = vak;
-    }
+	public Vak getVak() {
+		return docentvak.getVak();
+	}
 
-    public void setDocent(Docent docent) {
-        this.docent = docent;
-    }
+	public Docent getDocent() {
+		return docentvak.getDocent();
+	}
+
+	public Klas getKlas() {
+		return klas;
+	}
+
+	public void setKlas(Klas klas) {
+		this.klas = klas;
+	}
+
+	public Docentvak getDocentvak() {
+		return docentvak;
+	}
+
+	public void setDocentvak(Docentvak docentvak) {
+		this.docentvak = docentvak;
+	}
 }

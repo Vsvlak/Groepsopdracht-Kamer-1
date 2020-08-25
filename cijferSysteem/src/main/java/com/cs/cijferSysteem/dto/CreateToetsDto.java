@@ -7,8 +7,7 @@ public class CreateToetsDto {
     private String datum;
     private Long vakId;
     private String tijd;
-
-
+    private Long klasId;
 
     public Long getDocentId() {
         return docentId;
@@ -41,5 +40,13 @@ public class CreateToetsDto {
     public void setVakId(Long vakId) {
         this.vakId = vakId;
     }
+
+	public Long getKlasId() {
+		return klasId;
+	}
+
+	public void setKlasId(Long klasId) {
+		this.klasId = klasId;
+	}
 }
 

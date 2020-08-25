@@ -5,7 +5,16 @@ public class DocentDto {
 	String achternaam;
 	String voornaam;
 	
-	public Long getId() {
+	public DocentDto() {}
+	
+	public DocentDto(Long id, String achternaam, String voornaam) {
+		super();
+		this.id = id;
+		this.achternaam = achternaam;
+		this.voornaam = voornaam;
+	}
+
+		public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

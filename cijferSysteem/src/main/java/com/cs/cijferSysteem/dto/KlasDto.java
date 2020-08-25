@@ -5,6 +5,14 @@ public class KlasDto {
 	String naam;
 	String niveau;
 	
+	public KlasDto(){};
+	
+	public KlasDto(Long id, String naam, String niveau) {
+		this.id = id;
+		this.naam = naam;
+		this.niveau = niveau;
+	}
+
 	public Long getId() {
 		return id;
 	}

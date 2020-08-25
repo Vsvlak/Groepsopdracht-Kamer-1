@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class DocentService {
 		return dr.findById(id);
 	}
 
-	public Iterable<Docent> laatDocentZien() {
+	public List<Docent> laatDocentZien() {
 		return dr.findAll();
 	}
 

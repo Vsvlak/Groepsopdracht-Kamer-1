@@ -3,6 +3,7 @@ package com.cs.cijferSysteem.rest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -104,6 +105,15 @@ public class DocentEndpoint {
 		}
 		return docentdtos;
 	}
+	
+	
+//	@GetMapping("/langsteAchternaamDocent")
+//	public String toonLangsteAchternaamDocent() { 
+//		List <Docent> docenten = ds.laatDocentZien();
+//		Stream <Docent> docentenStream  = docenten.stream().filter(d-> d.getAchternaam().contains("J"));
+//		Optional <String> langsteAchternaam = docentenStream.map(n -> n.getAchternaam()).max((l1,l2)-> new Integer(l1.length()).compareTo(l2.length()));
+//		return langsteAchternaam.get();
+//	}
 	
 }
 

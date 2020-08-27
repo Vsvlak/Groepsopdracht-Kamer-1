@@ -74,7 +74,7 @@ public class ToetsEndpoint {
     
     @GetMapping("toonToetsenVanKlas/{klasid}")
     public Stream<ToetsDto> toonToetsenVanKlas(@PathVariable("klasid") Long klasid){
-    	return ts.findToetsByKlas(klasid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString()));
+    	return ts.findToetsByKlas(klasid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getNaam(), t.getDocent().getAchternaam(), t.getKlas().getNaam()));
     }
     
     @GetMapping("toonToetsenVanDocentEnVak/{docentid}/{vakid}")

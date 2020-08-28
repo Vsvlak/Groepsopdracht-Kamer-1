@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class KlasEndpoint {
 	@GetMapping("/klassenOverzicht")
 	public Stream<KlasDto> toonKlassenOverzicht(){
 		return ks.laatKlasZien().stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
+	}
+	
+	@GetMapping("/klas/{klasid}")
+	public Optional<KlasDto> getKlasById(@PathVariable("klasid") Long klasid){
+		return ks.getKlasById(klasid).map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@GetMapping("/vakkenVanKlas/{id}")

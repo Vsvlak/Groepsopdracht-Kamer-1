@@ -79,5 +79,10 @@ public class Leerling {
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
 	}
+
+	public List<Klas> getKlassen() {
+		return klassen;
+	}
+	
 }
 

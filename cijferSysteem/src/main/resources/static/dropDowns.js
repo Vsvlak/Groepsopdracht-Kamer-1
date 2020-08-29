@@ -2,6 +2,11 @@ function maakKlassenDropDown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 3) {
+            var sel = document.getElementById('kiesklas');
+            var opt = document.createElement('option');
+            opt.appendChild( document.createTextNode('-----') );
+            sel.appendChild(opt);
+
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
                 document.getElementById("kiesklas").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
@@ -82,10 +87,13 @@ function maakVakkenDropdownVoorDocent() {
             for (i = length - 1; i > 0; i--) {
                 select.options[i] = null;
             }
-
-            var info = JSON.parse(this.responseText);
-            for (var x = 0; x < info.length; x++) {
-                document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+            try{
+                var info = JSON.parse(this.responseText);
+                for (var x = 0; x < info.length; x++) {
+                    document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+                }
+            }catch(e){
+                document.getElementById("kiesvak").innerHTML = "<option>-----</option>";
             }
         }
     }

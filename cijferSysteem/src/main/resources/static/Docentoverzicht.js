@@ -1,4 +1,4 @@
-function laatDocentenTabelZien(vakid) {
+function laatDocentenZien(vakid) {
 
     document.getElementById("tabel").innerHTML = "";
 
@@ -57,17 +57,17 @@ function maakDocentAan() {
     var achternaamInput = document.getElementById("achternaamInput").value;
     var docent = '{"voornaam":"' + voornaamInput + '","achternaam":"' + achternaamInput + '"}';
     postData(docent);
-    modal.classList.remove('active')
-    overlay.classList.remove('active')
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 }
 
 function postData(docent) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {    
         if (xhttp.readyState == 4) {
-            laatDocentenTabelZien();
+            laatDocentenZien();
         }
-    };
+    }
     xhttp.open("POST", "http://localhost:8082/api/maakDocent", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(docent);

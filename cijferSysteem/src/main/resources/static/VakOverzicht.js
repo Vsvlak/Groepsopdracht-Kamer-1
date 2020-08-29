@@ -39,7 +39,7 @@ function laatVakkenZien() {
             if (xhttp.readyState == 4) {
                 laatVakkenZien();
             }
-        };
+        }
         xhttp.open("POST", "http://localhost:8082/api/maakVak", true);
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(vak);

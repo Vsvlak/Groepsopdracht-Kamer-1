@@ -4,29 +4,31 @@ function maakDropDowns(){
 }
 
 function toonVakken(){
-    //TODO: Error oplossen wanneer vakken lijst nog leeg is
-    var klasid = document.getElementById("kiesklas").value;
-    klasid = klasid.split(".")[0];
-    document.getElementById("tabel").innerHTML = "";
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 3) {
-            if (this.responseText.length > 0){
-                var info = JSON.parse(this.responseText);
-                document.getElementById("tabel").innerHTML += "<tr><td><b>Vak</b></td><td><b>Docent</b></td></tr>"
-                for (var x = 0; x < info.length; x++) {
-                    //Updaten naar verwerken van DocentVakDto
-                    document.getElementById("tabel").innerHTML += 
-                    "<tr><td>" + info[x].vaknaam + "</td>" +
-                    "<td>" + info[x].docentAchternaam + "</td></tr>";
+    if (klasid == "-----"){
+        document.getElementById("tabel").innerHTML = "<tr><td> Selecteer een vak </td></tr>";
+    } else{
+        var klasid = document.getElementById("kiesklas").value;
+        klasid = klasid.split(".")[0];
+        document.getElementById("tabel").innerHTML = "";
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 3) {
+                if (this.responseText.length > 0){
+                    var info = JSON.parse(this.responseText);
+                    document.getElementById("tabel").innerHTML += "<tr><td><b>Vak</b></td><td><b>Docent</b></td></tr>"
+                    for (var x = 0; x < info.length; x++) {
+                        //Updaten naar verwerken van DocentVakDto
+                        document.getElementById("tabel").innerHTML += 
+                        "<tr><td>" + info[x].vaknaam + "</td>" +
+                        "<td>" + info[x].docentAchternaam + "</td></tr>";
+
+                    }
                 }
-            } else{
-                document.getElementById("tabel").innerHTML += "<tr><td> Deze klas volgt nog geen vakken </td></tr>";
             }
+            xhr.open("GET", "http://localhost:8082/vakkenVanKlas/"+klasid, true);
+            xhr.send();
         }
     }
-    xhr.open("GET", "http://localhost:8082/vakkenVanKlas/"+klasid, true);
-    xhr.send();
 }
 
 function voegVakToe(){

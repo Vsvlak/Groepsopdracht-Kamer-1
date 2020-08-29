@@ -45,7 +45,7 @@ function postData(leerling) {
         if (xhttp.readyState == 4) {
             laatLeerlingenTabelZien();
         }
-    };
+    }
     xhttp.open("POST", "http://localhost:8082/api/maakLeerling", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(leerling);

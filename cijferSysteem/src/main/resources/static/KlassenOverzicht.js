@@ -41,7 +41,7 @@ function postData(klas) {
         if (xhttp.readyState == 4) {
             laatKlassenZien();
         }
-    };
+    }
     xhttp.open("POST", "http://localhost:8082/api/maakKlas", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(klas);

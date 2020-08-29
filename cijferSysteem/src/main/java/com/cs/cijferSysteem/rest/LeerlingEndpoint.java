@@ -56,7 +56,7 @@ public class LeerlingEndpoint {
 	
 	@PostMapping("api/editLeerling/{id}")
 	public void update(@RequestBody CreateLeerlingDto createLeerlingDto, @PathVariable("id") Long id) { 
-		Leerling leerling = getLeerlingById(id).get();
+		Leerling leerling = ls.toonLeerling(id).get();
 		leerling.setVoornaam(createLeerlingDto.getVoornaam());
 		leerling.setAchternaam(createLeerlingDto.getAchternaam());
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

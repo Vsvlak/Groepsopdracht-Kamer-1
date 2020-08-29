@@ -1,9 +1,13 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
+<<<<<<< HEAD
 
 import java.util.Optional;
 
+=======
+import java.util.Optional;
+>>>>>>> Developer
 import java.util.stream.Stream;
 
 
@@ -50,10 +54,9 @@ public class KlasEndpoint {
 	}
 	
 
-	// hieronder check
-	@GetMapping("/klassen/{id}")
-	public Optional<Klas> getKlasById(@PathVariable("id")Long id){ 
-		return ks.getKlasById(id);
+	@GetMapping("/klas/{klasid}")
+	public Optional<KlasDto> getKlasById(@PathVariable("klasid") Long klasid){
+		return ks.getKlasById(klasid).map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 
 	@GetMapping("/vakkenVanKlas/{id}")

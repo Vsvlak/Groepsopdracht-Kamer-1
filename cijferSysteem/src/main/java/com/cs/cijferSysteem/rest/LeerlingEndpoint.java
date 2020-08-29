@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import com.cs.cijferSysteem.dto.CijferDto;
 import com.cs.cijferSysteem.dto.CreateLeerlingDto;
+import com.cs.cijferSysteem.dto.KlasDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,11 @@ public class LeerlingEndpoint {
 	@GetMapping("/cijfersVanLeerling/{id}")
 	public Stream<CijferDto> toonCijfersVanLeerling(@PathVariable("id") Long id){
 		return ls.toonLeerling(id).get().getCijfers().stream().map(c -> new CijferDto(c.getId(), c.getCijfer()));
+	}
+	
+	@GetMapping("/klassenVanLeerling/{leerlingid}")
+	public Stream<KlasDto> toonKlassenVanLeerling(@PathVariable("leerlingid")Long leerlingid){
+		return ls.toonLeerling(leerlingid).get().getKlassen().stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@PostMapping("/api/maakLeerling")

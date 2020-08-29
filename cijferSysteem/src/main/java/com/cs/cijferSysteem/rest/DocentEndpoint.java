@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -15,8 +16,10 @@ import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentDto;
+import com.cs.cijferSysteem.dto.KlasDto;
 import com.cs.cijferSysteem.dto.VakDto;
 
 @RestController
@@ -40,6 +43,13 @@ public class DocentEndpoint {
 	public Stream<VakDto> getVakvanDocent(@PathVariable("docentid")Long docentid){ 
 		List<Vak> vakken = ds.getDocentById(docentid).get().getVakken();
 		return vakken.stream().map(v -> new VakDto(v.getId(), v.getNaam()));
+	}
+	
+	@GetMapping("/klassenVanDocent/{docentid}")
+	public Stream<KlasDto> getKlassenVanDocent(@PathVariable("docentid")Long docentid){ 
+		List<Klas> klassen = new ArrayList<>();
+		ds.getDocentById(docentid).get().getDocentvakken().forEach(dv -> klassen.addAll(dv.getKlassen()));
+		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
 	@GetMapping("/docentenVanVak/{vakid}")

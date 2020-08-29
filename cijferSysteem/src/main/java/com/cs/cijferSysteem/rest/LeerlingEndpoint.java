@@ -43,7 +43,11 @@ public class LeerlingEndpoint {
 		leerling.setAchternaam(createLeerlingDto.getAchternaam());
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
-		leerling.setLeerlingNummer(Integer.valueOf(createLeerlingDto.getLeerlingnummer()));
+		try{
+			leerling.setLeerlingNummer(Integer.valueOf(createLeerlingDto.getLeerlingnummer()));
+		}catch (Exception e){
+			System.out.println("Wij vullen het leerlingnummer niet zelf in. Deze wordt gegenereerd als id");
+		}
 		this.ls.save(leerling);
 	}
 

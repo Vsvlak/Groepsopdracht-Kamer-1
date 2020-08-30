@@ -2,11 +2,14 @@ package com.cs.cijferSysteem.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.dto.KlasDto;
 
 @Service
 @Transactional

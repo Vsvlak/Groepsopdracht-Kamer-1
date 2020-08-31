@@ -3,13 +3,19 @@ package com.cs.cijferSysteem.dto;
 
 public class CreateToetsDto {
 
-
+    private Long docentId;
     private String datum;
-    private String vak;
+    private Long vakId;
     private String tijd;
+    private Long klasId;
 
+    public Long getDocentId() {
+        return docentId;
+    }
 
-
+    public void setDocentId(Long docentId) {
+        this.docentId = docentId;
+    }
 
     public void setDatum(String datum) {
         this.datum = datum;
@@ -27,13 +33,20 @@ public class CreateToetsDto {
         return datum;
     }
 
-
-    public String getVak() {
-        return vak;
+    public Long getVakId() {
+        return vakId;
     }
 
-    public void setVak(String vak) {
-        this.vak = vak;
+    public void setVakId(Long vakId) {
+        this.vakId = vakId;
     }
+
+	public Long getKlasId() {
+		return klasId;
+	}
+
+	public void setKlasId(Long klasId) {
+		this.klasId = klasId;
+	}
 }
 

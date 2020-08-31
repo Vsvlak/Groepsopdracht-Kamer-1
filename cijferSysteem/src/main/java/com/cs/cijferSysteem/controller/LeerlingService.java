@@ -1,5 +1,6 @@
 package com.cs.cijferSysteem.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -20,12 +21,11 @@ public class LeerlingService {
 		lr.save(leerling);
 	}
 
-	public Iterable<Leerling> laatLeerlingZien(){
+	public List<Leerling> laatLeerlingZien(){
 		return lr.findAll();
 	}
 	
 	public Optional<Leerling> toonLeerling(Long id) {
 		return lr.findById(id);
 	}
-	
 }

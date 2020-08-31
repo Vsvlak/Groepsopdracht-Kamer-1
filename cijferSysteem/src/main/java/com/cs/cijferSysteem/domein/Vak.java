@@ -1,40 +1,44 @@
 package com.cs.cijferSysteem.domein;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Vak {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String naam;
-
-	@ManyToMany(mappedBy = "vakken", cascade = {CascadeType.ALL})
-	private List<Docent> docenten;
-
-	@ManyToMany(mappedBy = "vakkenpakket", cascade = {CascadeType.ALL})
-	private List<Klas> klassen;
 	
 	@OneToMany
-	private List<Toets> toetsen;
-	
-	public List<Docent> getDocenten(Docent d) {
+	private List<Docentvak> docentvakken;
+
+	public List<Docent> getDocenten() {
+		List<Docent> docenten = new ArrayList<>();
+		for(Docentvak dv : docentvakken) {
+			docenten.add(dv.getDocent());
+		}
 		return docenten;
-	}
-	public void setDocenten(List<Docent> docenten) {
-		this.docenten = docenten;
-	}
+	}	
 	
-	
+	public void voegDocentVakToe(Docentvak dv) {
+		docentvakken.add(dv);
+	}
+
+	public List<Docentvak> getDocentvakken() {
+		return docentvakken;
+	}
+
+	public void setDocentvakken(List<Docentvak> docentvakken) {
+		this.docentvakken = docentvakken;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -49,5 +53,20 @@ public class Vak {
 
 	public void setNaam(String naam) {
 		this.naam = naam;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj != null && ((Vak) obj).naam.equals(this.naam);
+//		if (obj == null) {
+//			return false;
+//		}
+//		if (obj instanceof Vak) {
+//			return ((Vak) obj).getNaam().equals(this.naam);
+//
+//		} else {
+//			return false;
+//		}
+	}
+
 }

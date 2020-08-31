@@ -26,19 +26,24 @@ public class Leerling {
 	private List<Klas> klassen;
 	
 	@OneToMany
-	private List<ToetsCijfer> cijfers;
+	private List<Cijfer> cijfers;
 	
-	public void voegCijferToe(ToetsCijfer tc) {
+	public void voegKlasToe(Klas k) {
+		klassen.add(k);
+	}
+	
+	public void voegCijferToe(Cijfer tc) {
 		cijfers.add(tc);
 	}
 	
-	public List<ToetsCijfer> getCijfers() {
+	public List<Cijfer> getCijfers() {
 		return cijfers;
 	}
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -46,6 +51,7 @@ public class Leerling {
 	public LocalDate getGeboorteDatum() {
 		return geboorteDatum;
 	}
+
 	public void setGeboorteDatum(LocalDate geboorteDatum) {
 		this.geboorteDatum = geboorteDatum;
 	}
@@ -73,5 +79,10 @@ public class Leerling {
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
 	}
+
+	public List<Klas> getKlassen() {
+		return klassen;
+	}
+	
 }
 

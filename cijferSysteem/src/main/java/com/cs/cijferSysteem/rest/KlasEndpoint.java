@@ -1,13 +1,10 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
-<<<<<<< HEAD
+
 
 import java.util.Optional;
 
-=======
-import java.util.Optional;
->>>>>>> Developer
 import java.util.stream.Stream;
 
 
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
@@ -31,6 +29,7 @@ import com.cs.cijferSysteem.domein.Docentvak;
 
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import com.cs.cijferSysteem.dto.DocentVakDto;
 import com.cs.cijferSysteem.dto.KlasDto;
@@ -47,6 +46,8 @@ public class KlasEndpoint {
 	VakService vs;	
 	@Autowired
 	DocentVakService dvs;	
+	@Autowired
+	DocentService ds;
 	
 	@GetMapping("/klassenOverzicht")
 	public Stream<KlasDto> toonKlassenOverzicht(){
@@ -97,7 +98,12 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/voegDocentVakToe/{klasid}")
 	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVakDto dto) {
-		Docentvak dv = dvs.getByDocentIdAndVakId(dto.getDocentid(), dto.getVakid());
+		
+    	Optional <Docent> docentOptional = ds.toonDocentById(dto.getDocentid());
+    	Optional <Vak> vakOptional = vs.toonVakById(dto.getVakid());
+    	
+    	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
+	
 		Klas k = ks.getKlasById(klasid).get();
 		if(!k.getDocentvakken().contains(dv)) {
 			k.voegDocentVakToe(dv);

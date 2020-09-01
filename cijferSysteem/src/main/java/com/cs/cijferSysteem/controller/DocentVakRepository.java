@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.domein.Vak;
 
 public interface DocentVakRepository extends JpaRepository<Docentvak, Long> {
-	Docentvak findByDocentIdAndVakId(Long docentid, Long vakid);
-	List<Docentvak> findByDocentId(Long docentid);
-	List<Docentvak> findByVakId(Long vakid);
+	Docentvak findByDocentAndVak(Docent docent, Vak vak);
+	List<Docentvak> findByDocent(Docent docent);
+	List<Docentvak> findByVak(Vak vak);
 	Optional<Docentvak> findById(Long docentvakid);
 }

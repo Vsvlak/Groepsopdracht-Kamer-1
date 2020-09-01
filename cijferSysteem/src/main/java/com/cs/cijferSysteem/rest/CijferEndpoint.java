@@ -2,6 +2,7 @@ package com.cs.cijferSysteem.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.CijferService;
+import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.ToetsService;
+import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Cijfer;
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Leerling;
 import com.cs.cijferSysteem.domein.Toets;
+import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CijferDto;
 import com.cs.cijferSysteem.dto.LeerlingCijfersVanDocentVakDto;
 
@@ -31,6 +36,10 @@ public class CijferEndpoint {
 	ToetsService ts;
 	@Autowired
 	KlasService ks;
+	@Autowired
+	DocentService ds;
+	@Autowired
+	VakService vs;
 	
     @GetMapping("/toetsCijferOverzicht")
     public Stream<CijferDto> geefOverzichtToetsCijfering() {
@@ -41,7 +50,10 @@ public class CijferEndpoint {
     public List<LeerlingCijfersVanDocentVakDto> leeringCijfersVanDocentVak(@PathVariable("docentid") Long docentid, @ PathVariable("vakid") Long vakid, @PathVariable("klasid") Long klasid) {
     	List<Leerling> leerlingen = ks.getKlasById(klasid).get().getLeerlingen();
     	
-    	Docentvak dv = dvs.getByDocentIdAndVakId(docentid, vakid);
+    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Vak> vakOptional = vs.toonVakById(vakid);
+    	
+    	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
     	Iterable<Toets> toetsen = ts.findToetsByDocentvakAndKlas(dv.getId(), klasid);
     	    	
     	//Deze lijst wordt returned

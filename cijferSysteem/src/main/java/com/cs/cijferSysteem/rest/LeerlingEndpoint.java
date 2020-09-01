@@ -55,7 +55,12 @@ public class LeerlingEndpoint {
 		leerling.setAchternaam(createLeerlingDto.getAchternaam());
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
+		try {
 		leerling.setLeerlingNummer(Integer.valueOf(createLeerlingDto.getLeerlingnummer()));
+		} catch (Exception e) {
+			System.out.println("gaat niet, maar ok zo ");
+		}
+		
 		this.ls.save(leerling);
 	}
 

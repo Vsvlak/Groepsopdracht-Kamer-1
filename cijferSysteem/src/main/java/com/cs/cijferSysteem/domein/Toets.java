@@ -19,13 +19,13 @@ public class Toets {
 	private LocalDate datum;
 	private LocalTime tijd;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Klas klas;
 
-	@ManyToOne
+	@ManyToOne (optional = false)
 	private Docentvak docentvak;
 
-	@OneToMany
+	@OneToMany ()
 	private List<Cijfer> cijfers;
 
 	public void voegCijferToe(Cijfer tc) {

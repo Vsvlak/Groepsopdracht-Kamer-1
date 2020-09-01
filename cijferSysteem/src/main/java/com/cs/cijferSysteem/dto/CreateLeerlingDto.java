@@ -8,6 +8,7 @@ public class CreateLeerlingDto {
     String geboortedatum;
     String leerlingnummer;
 
+
     public CreateLeerlingDto() {};
     
     public CreateLeerlingDto(Long id, String voornaam, String achternaam, String geboortedatum) {

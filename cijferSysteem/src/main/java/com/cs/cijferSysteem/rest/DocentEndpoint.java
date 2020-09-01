@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.cijferSysteem.controller.DocentService;
+
 import com.cs.cijferSysteem.controller.VakService;
 import com.cs.cijferSysteem.domein.Docent;
+
 import com.cs.cijferSysteem.domein.Docentvak;
 import com.cs.cijferSysteem.domein.Klas;
+
 import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.DocentDto;
 import com.cs.cijferSysteem.dto.KlasDto;
@@ -28,10 +31,28 @@ public class DocentEndpoint {
 	DocentService ds;
 	@Autowired
 	VakService vs;
+	
+	@PostMapping("api/maakDocent")
+	public void maakDocent(@RequestBody Docent docent) { 
+		ds.maakDocent(docent);
+	}
+	
 
+	@PostMapping("api/editDocent/{id}")
+	public void updateDocent(@RequestBody Docent docent) { 
+		ds.update(docent);
+	}
+
+
+	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
+	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody Docentvak dv) {
+		ds.toonDocentById(docentid).get().voegDocentVakToe(dv);
+	} 
+	
 	@GetMapping("/docentOverzicht")
 	public Stream<DocentDto> geefOverzichtDocent() {
 		return ds.laatDocentZien().stream().map(d -> new DocentDto(d.getId(), d.getAchternaam(), d.getVoornaam()));
+
 	}
 	
 	@GetMapping("/docent/{id}")
@@ -58,13 +79,5 @@ public class DocentEndpoint {
 		return docenten.stream().map(d -> new DocentDto(d.getId(), d.getAchternaam(), d.getVoornaam()));
 	}
 	
-	@PostMapping("api/maakDocent")
-	public void maakDocent(@RequestBody Docent docent) { 
-		ds.maakDocent(docent);
-	}
-	
-	@PostMapping("/api/voegDocentVakToeAanDocent/{docentid}")
-	public void voegDocentVakToeAanDocent(@PathVariable("docentid") Long docentid, @RequestBody Docentvak dv) {
-		ds.toonDocentById(docentid).get().voegDocentVakToe(dv);
-	}	
-}
+} 
+

@@ -10,9 +10,9 @@ function laatDocentenZien(vakid) {
             document.getElementById("tabel").innerHTML += "<tr><td><b>Id.<b></td><td><b>Voornaam</b></td><td><b>Achternaam</b></td></tr>"
             for (var x = 0; x < alleinfo.length; x++) {
                 document.getElementById("tabel").innerHTML += "<tr>" +
-                    "<td id=idPass>"+alleinfo[x].id+"</td>"+ 
-                    "<td id=voornaamPass>" + alleinfo[x].voornaam + "</td>" +
-                    "<td>" + alleinfo[x].achternaam + "</td>" +
+                    "<td id=idPass"+[x]+">"+alleinfo[x].id+"</td>"+ 
+                    "<td id=voornaamPass"+[x]+">" + alleinfo[x].voornaam + "</td>" +
+                    "<td id=achternaamPass"+[x]+">" + alleinfo[x].achternaam + "</td>" +
                     "<td><img src='EditButton.png' class='editB' id=editButton"+ x + " style='height:20px;width20px;' Onclick= editDocent("+ x + ")></td>" +
                     "</tr>";                
                 }
@@ -20,6 +20,7 @@ function laatDocentenZien(vakid) {
                 document.getElementById("tabel").innerHTML += "<tr><td> Er staan nog geen docenten in het docentenoverzicht </td></tr>";
             }
             document.getElementById("tabel").innerHTML += "<button onclick = openModal(document.getElementById('modal'))>+ Docent</button>";
+            document.getElementById("tabel").innerHTML += "<button onclick = laatDocentenTabelZien()> Refresh </button>";
         }
         
     }
@@ -29,27 +30,7 @@ function laatDocentenZien(vakid) {
     xhr.send();
 
 }
-function editDocent(x){ 
 
-   console.log("tijd om te editten in rij : " + x);
-    
-    //var rowSelected = document.getElementById.rows[x].innerHTML;
-
-    var y = document.getElementById("tabel").rows[x+1].innerHTML; // plus 1, zodat hij de tabeltitels skipt
-    console.log("DOCENT SELECTED:   " + y);
-   // console.log("HOE ALLEEN VOORNAAM? " + y.getElementById("voornaamPass"));
-
-
-    // var w = document.getElementById("voornaamPass")."alleinfo" + [x] + ".voornaam") ;
-
-    console.log("SELECTEREN DOCENT BIJ VOORNAAM:  waarde w = " + w + " ---- waarde x = " + x);
-
-
-
-    // var w = document.getElementById("alleinfo"+ [x] + ".id");
-    // console.log("SELECTEREN VAN DOCENT MET ID:  " + w);
-
-}
 
 
 function maakDocentAan() {

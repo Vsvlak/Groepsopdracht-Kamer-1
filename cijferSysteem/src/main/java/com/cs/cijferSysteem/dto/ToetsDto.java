@@ -4,53 +4,27 @@ public class ToetsDto {
 	private Long id;
 	private String datum;
 	private String tijd;
-	private String vak;
-	private String docent;
-	private String klas;
+//	private String vak;
+//	private String docent;
+//	private String klas;
+	private Long vakid;
+	private Long docentid;
+	private Long klasid;
 	
-	public ToetsDto() {}
+
+	public ToetsDto() { 
+		
+	}
 	
-	public ToetsDto(Long id, String datum, String tijd) {
+	public ToetsDto(Long id, String datum, String tijd, Long vakid, Long docentid, Long klasid) {
 		super();
 		this.id = id;
 		this.datum = datum;
 		this.tijd = tijd;
+		this.vakid = vakid;
+		this.docentid = docentid;
+		this.klasid = klasid;
 	}
-	
-	public ToetsDto(Long id, String datum, String tijd, String vak, String docent, String klas) {
-		super();
-		this.id = id;
-		this.datum = datum;
-		this.tijd = tijd;
-		this.vak = vak;
-		this.docent = docent;
-		this.klas = klas;
-	}
-
-	public String getKlas() {
-		return klas;
-	}
-
-	public void setKlas(String klas) {
-		this.klas = klas;
-	}
-
-	public String getVak() {
-		return vak;
-	}
-
-	public void setVak(String vak) {
-		this.vak = vak;
-	}
-
-	public String getDocent() {
-		return docent;
-	}
-
-	public void setDocent(String docent) {
-		this.docent = docent;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -68,5 +42,25 @@ public class ToetsDto {
 	}
 	public void setTijd(String tijd) {
 		this.tijd = tijd;
-	}		
+	}
+	public Long getVakid() {
+		return vakid;
+	}
+	public void setVakid(Long vakid) {
+		this.vakid = vakid;
+	}
+	public Long getDocentid() {
+		return docentid;
+	}
+	public void setDocentid(Long docentid) {
+		this.docentid = docentid;
+	}
+	public Long getKlasid() {
+		return klasid;
+	}
+	public void setKlasid(Long klasid) {
+		this.klasid = klasid;
+	}
+	
+	
 }

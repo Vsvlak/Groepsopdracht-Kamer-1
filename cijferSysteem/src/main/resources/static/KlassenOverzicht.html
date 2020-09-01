@@ -9,6 +9,7 @@
     <link href="Menu.css" rel="stylesheet">
     <script defer src="KlassenOverzicht.js"></script>
     <script defer src="modal.js"></script>
+    <script defer src="Editfunction.js"></script>
 </head>
 
 <body onload=laatKlassenZien()>
@@ -50,6 +51,21 @@
     </div>
 
     <div id="overlay"></div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="title">
+          <div class="title">Edit klas</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-text"> ID <input type="text" id="idEdit" class="modal-textInput"> </div>
+          <div class="modal-text"> Naam <input type="text" id="naamEdit" class="modal-textInput"> </div>
+          <div class="modal-text"> Niveau <input type="text" id="niveauEdit" class="modal-textInput"></div>
+        </div>
+        <button data-create-button class="create-button" onclick=postEditKlasData()>Edit Klas</button>
+      </div>
+      <div id="overlay"></div>
     </div>
 </body>
 

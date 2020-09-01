@@ -9,7 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Klas {
@@ -22,6 +28,12 @@ public class Klas {
 	@ManyToMany
 	private List<Leerling> leerlingen;
 
+
+	@ManyToMany
+	@JsonIgnore
+	private List<Vak> vakkenpakket;
+	
+	
 	@ManyToMany(mappedBy = "klassen", cascade = CascadeType.ALL)
 	private List<Docentvak> docentvakken;
 
@@ -60,10 +72,6 @@ public class Klas {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getNaam() {
 		return naam;
 	}
@@ -91,7 +99,7 @@ public class Klas {
 		}
 		return vakken;
 	}
-	
+
 	public List<Docent> getDocenten(){
 		List<Docent> docenten = new ArrayList<>();
 		for(Docentvak dv : docentvakken) {

@@ -56,19 +56,5 @@ public class LeerlingEndpoint {
 		}
 		this.ls.save(leerling);
 	}
-
-
-	
-//	@GetMapping("/leerlingOverzicht/{voornaam}")
-//	public List<Leerling> search(@PathVariable("voornaam") String voornaam) {
-//		return ls.search(voornaam);
-
-//	@GetMapping("/leerlingOverzicht/{start}/{end}")
-//	public List<Leerling> search(@PathVariable("start") int start, @PathVariable("end") int end){ 
-//		return ls.search(start, end);
-//		
-
-//	}
-
 }
 

@@ -11,6 +11,7 @@
   <link href="Menu.css" rel="stylesheet">
   <script defer src="Leerlingoverzicht.js"></script>
   <script defer src="modal.js"></script>
+  <script defer src="Editfunction.js"></script>
 
 </head>
 
@@ -56,6 +57,24 @@
   </div>
     <div id="overlay"></div>
   </div>
+
+
+  <div class="modal" id="editModal">
+    <div class="title">
+      <div class="title">Edit leerling</div>
+      <button data-close-button class="close-button">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text"> Id <input type="text" id="idEdit" class="modal-textInput"> id uneditable maken</div>
+      <div class="modal-text"> Voornaam <input type="text" id="voornaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Achternaam <input type="text" id="achternaamEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Geboortedatum (DD-MM-YYYY) <input type="text" id="geboortedatumEdit" class="modal-textInput"></div>
+      <div class="modal-text"> Leerlingnummer <input type="text" id="leerlingnummerEdit" class="modal-textInput"></div>
+    </div>
+    <button data-create-button class="create-button" onclick=postEditLeerlingData()>Edit Leerling</button>
+  </div>
+  <div id="overlay"></div>
+</div>
 
 </body>
 

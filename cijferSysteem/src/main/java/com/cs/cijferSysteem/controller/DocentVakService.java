@@ -2,11 +2,15 @@ package com.cs.cijferSysteem.controller;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cs.cijferSysteem.domein.Docent;
 import com.cs.cijferSysteem.domein.Docentvak;
+import com.cs.cijferSysteem.domein.Vak;
+
 
 @Service
 @Transactional
@@ -25,15 +29,15 @@ public class DocentVakService {
 		return dvr.findAll();
 	}
 	
-	public Docentvak getByDocentIdAndVakId(Long docentid, Long vakid){
-		return dvr.findByDocentIdAndVakId(docentid, vakid);
+	public Docentvak getByDocentAndVak(Docent docent, Vak vak){
+		return dvr.findByDocentAndVak(docent, vak);
 	}
 	
-	public List<Docentvak> getByDocentId(Long docentid){
-		return dvr.findByDocentId(docentid);
+	public List<Docentvak> getByDocent(Docent docent){
+		return dvr.findByDocent(docent);
 	}
 	
-	public List<Docentvak> getByVakId(Long vakid){
-		return dvr.findByVakId(vakid);
+	public List<Docentvak> getByVak(Vak vak){
+		return dvr.findByVak(vak);
 	}
 }

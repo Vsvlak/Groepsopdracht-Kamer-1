@@ -1,6 +1,7 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,11 @@ public class DocentVakEndpoint {
 	
 	@GetMapping("/klassenVanDocentEnVak/{docentid}/{vakid}")
 	public Stream<KlasDto> geefKlassenVanDocentVak(@PathVariable("docentid") Long docentid, @PathVariable("vakid") Long vakid){
-		List<Klas> klassen = dvs.getByDocentIdAndVakId(docentid, vakid).getKlassen();
+		
+    	Optional <Docent> docentOptional = ds.toonDocentById(docentid);
+    	Optional <Vak> vakOptional = vs.toonVakById(vakid);
+    	
+		List<Klas> klassen = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get()).getKlassen();
 		return klassen.stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	

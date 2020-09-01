@@ -48,6 +48,7 @@ function maakVakkenDropdown() {
             var info = JSON.parse(this.responseText);
             for (var x = 0; x < info.length; x++) {
                 document.getElementById("kiesvak").innerHTML += "<option>" + info[x].id + ". " + info[x].naam + "</option>";
+           
             }
         }
     }

@@ -1,8 +1,12 @@
 package com.cs.cijferSysteem.rest;
 
 import java.util.List;
+
+
 import java.util.Optional;
+
 import java.util.stream.Stream;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cs.cijferSysteem.controller.DocentService;
 import com.cs.cijferSysteem.controller.DocentVakService;
 import com.cs.cijferSysteem.controller.KlasService;
 import com.cs.cijferSysteem.controller.LeerlingService;
 import com.cs.cijferSysteem.controller.VakService;
+
+
+import com.cs.cijferSysteem.domein.Docent;
+
+
 import com.cs.cijferSysteem.domein.Docentvak;
+
 import com.cs.cijferSysteem.domein.Klas;
 import com.cs.cijferSysteem.domein.Leerling;
+import com.cs.cijferSysteem.domein.Vak;
 import com.cs.cijferSysteem.dto.CreateLeerlingDto;
 import com.cs.cijferSysteem.dto.DocentVakDto;
 import com.cs.cijferSysteem.dto.KlasDto;
@@ -34,21 +46,25 @@ public class KlasEndpoint {
 	VakService vs;	
 	@Autowired
 	DocentVakService dvs;	
+	@Autowired
+	DocentService ds;
 	
 	@GetMapping("/klassenOverzicht")
 	public Stream<KlasDto> toonKlassenOverzicht(){
 		return ks.laatKlasZien().stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
 	
+
 	@GetMapping("/klas/{klasid}")
 	public Optional<KlasDto> getKlasById(@PathVariable("klasid") Long klasid){
 		return ks.getKlasById(klasid).map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
-	
+
 	@GetMapping("/vakkenVanKlas/{id}")
 	public Stream<DocentVakDto> toonVakkenVanKlas(@PathVariable("id") Long id){
 		List<Docentvak> docentvakken = ks.getKlasById(id).get().getDocentvakken();
 		return docentvakken.stream().map(d -> new DocentVakDto(d.getId(), d.getDocent().getId(), d.getVak().getId(), d.getDocent().getAchternaam(), d.getVak().getNaam()));
+
 	}
 	
 	@GetMapping("/leerlingenInKlas/{klasid}")
@@ -61,6 +77,11 @@ public class KlasEndpoint {
 	public void maakVak(@RequestBody Klas k) {
 		System.out.println(k.getId());
 		ks.update(k);
+	}
+	
+	@PostMapping("api/editKlas/{id}")
+	public void updateKlas(@RequestBody Klas klas) { 
+		ks.update(klas);
 	}
 	
 	@PostMapping("/api/voegLeerlingToe")
@@ -77,7 +98,12 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/voegDocentVakToe/{klasid}")
 	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVakDto dto) {
-		Docentvak dv = dvs.getByDocentIdAndVakId(dto.getDocentid(), dto.getVakid());
+		
+    	Optional <Docent> docentOptional = ds.toonDocentById(dto.getDocentid());
+    	Optional <Vak> vakOptional = vs.toonVakById(dto.getVakid());
+    	
+    	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
+	
 		Klas k = ks.getKlasById(klasid).get();
 		if(!k.getDocentvakken().contains(dv)) {
 			k.voegDocentVakToe(dv);

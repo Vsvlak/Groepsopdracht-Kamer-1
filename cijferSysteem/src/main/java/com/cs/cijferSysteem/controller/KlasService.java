@@ -28,4 +28,5 @@ public class KlasService {
 	public Optional<Klas> getKlasById(Long id) {
 		return kr.findById(id);
 	}
+	
 }

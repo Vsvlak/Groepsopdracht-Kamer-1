@@ -31,17 +31,17 @@ public class LeerlingEndpoint {
 	public Optional<CreateLeerlingDto> getLeerlingById(@PathVariable("id") Long id){
 		return ls.toonLeerling(id).map(l -> new CreateLeerlingDto(l.getId(), l.getAchternaam(), l.getVoornaam(), l.getGeboorteDatum().toString()));
 	}
-	
+
 	@GetMapping("/cijfersVanLeerling/{id}")
 	public Stream<CijferDto> toonCijfersVanLeerling(@PathVariable("id") Long id){
 		return ls.toonLeerling(id).get().getCijfers().stream().map(c -> new CijferDto(c.getId(), c.getCijfer()));
 	}
-	
+
 	@GetMapping("/klassenVanLeerling/{leerlingid}")
 	public Stream<KlasDto> toonKlassenVanLeerling(@PathVariable("leerlingid")Long leerlingid){
 		return ls.toonLeerling(leerlingid).get().getKlassen().stream().map(k -> new KlasDto(k.getId(), k.getNaam(), k.getNiveau()));
 	}
-	
+
 	@PostMapping("/api/maakLeerling")
 	public void maakLeerlingAan(@RequestBody CreateLeerlingDto createLeerlingDto){
 		Leerling leerling = new Leerling();
@@ -56,5 +56,15 @@ public class LeerlingEndpoint {
 		}
 		this.ls.save(leerling);
 	}
-}
 
+	@PostMapping("api/editLeerling/{id}")
+	public void update(@RequestBody CreateLeerlingDto createLeerlingDto, @PathVariable("id") Long id) { 
+		Leerling leerling = ls.toonLeerling(id).get();
+		leerling.setVoornaam(createLeerlingDto.getVoornaam());
+		leerling.setAchternaam(createLeerlingDto.getAchternaam());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		leerling.setGeboorteDatum(LocalDate.parse(createLeerlingDto.getGeboortedatum(), formatter));
+		leerling.setLeerlingNummer(Integer.valueOf(createLeerlingDto.getLeerlingnummer()));
+		this.ls.save(leerling);
+	}
+}

@@ -4,9 +4,9 @@ public class ToetsDto {
 	private Long id;
 	private String datum;
 	private String tijd;
-//	private String vak;
-//	private String docent;
-//	private String klas;
+	private String vaknaam;
+	private String docentnaam;
+	private String klasnaam;
 	private Long vakid;
 	private Long docentid;
 	private Long klasid;
@@ -60,6 +60,30 @@ public class ToetsDto {
 	}
 	public void setKlasid(Long klasid) {
 		this.klasid = klasid;
+	}
+
+	public String getVaknaam() {
+		return vaknaam;
+	}
+
+	public void setVaknaam(String vaknaam) {
+		this.vaknaam = vaknaam;
+	}
+
+	public String getDocentnaam() {
+		return docentnaam;
+	}
+
+	public void setDocentnaam(String docentnaam) {
+		this.docentnaam = docentnaam;
+	}
+
+	public String getKlasnaam() {
+		return klasnaam;
+	}
+
+	public void setKlasnaam(String klasnaam) {
+		this.klasnaam = klasnaam;
 	}
 	
 	

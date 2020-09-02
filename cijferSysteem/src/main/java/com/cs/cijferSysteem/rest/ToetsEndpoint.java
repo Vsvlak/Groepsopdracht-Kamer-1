@@ -41,9 +41,18 @@ public class ToetsEndpoint {
     DocentVakService dvs;
 
     @GetMapping("/toetsOverzicht")
-    public Stream<ToetsDto> geefOverzichtLeerling() {
-    	
-        return ts.laatToetsZien().stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
+    public List<ToetsDto> geefOverzichtLeerling() {
+    	List<Toets> toetsen = ts.laatToetsZien();
+    	List<ToetsDto> dtos = new ArrayList<>();
+    	for(Toets t : toetsen) {
+    		ToetsDto dto = new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId());
+    		dto.setDocentnaam(t.getDocent().getAchternaam());
+    		dto.setVaknaam(t.getVak().getNaam());
+    		dto.setKlasnaam(t.getKlas().getNaam());
+    		dtos.add(dto);
+    	}
+    	return dtos;
+    	//return ts.laatToetsZien().stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
     }
 
     @GetMapping("/toets/{toetsid}")
@@ -106,11 +115,10 @@ public class ToetsEndpoint {
     }
     
     @PostMapping("/api/maakToets")
-    public void maakToetsAan(@RequestBody CreateToetsDto createToetsDto) {
-    	
-    	Klas k = ks.getKlasById(createToetsDto.getKlasId()).get();
-    	Optional <Docent> docentOptional = ds.toonDocentById(createToetsDto.getDocentId());
-    	Optional <Vak> vakOptional = vs.toonVakById(createToetsDto.getVakId());
+    public void maakToetsAan(@RequestBody ToetsDto toetsDto) {
+    	Klas k = ks.getKlasById(toetsDto.getKlasid()).get();
+    	Optional <Docent> docentOptional = ds.toonDocentById(toetsDto.getDocentid());
+    	Optional <Vak> vakOptional = vs.toonVakById(toetsDto.getVakid());
     	
     	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
 
@@ -118,9 +126,9 @@ public class ToetsEndpoint {
         DateTimeFormatter formatterTijd = DateTimeFormatter.ofPattern("HH:mm");
         
     	Toets toets = new Toets();
-        toets.setDatum(LocalDate.parse(createToetsDto.getDatum(), formatter));
+        toets.setDatum(LocalDate.parse(toetsDto.getDatum(), formatter));
 
-        toets.setTijd(LocalTime.parse(createToetsDto.getTijd(), formatterTijd));
+        toets.setTijd(LocalTime.parse(toetsDto.getTijd(), formatterTijd));
         toets.setDocentvak(dv);
         toets.setKlas(k);
         ts.save(toets);  

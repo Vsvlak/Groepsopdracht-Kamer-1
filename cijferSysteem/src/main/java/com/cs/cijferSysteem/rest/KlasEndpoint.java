@@ -86,6 +86,7 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/voegLeerlingToe")
 	public void voegLeerlingToe(@RequestBody KlasLeerlingDto klasLeerlingDto) {
+		System.out.println(klasLeerlingDto.getKlasid() + " " + klasLeerlingDto.getLeerlingid());
 		Klas k = ks.getKlasById(klasLeerlingDto.getKlasid()).get();
 		Leerling l = ls.toonLeerling(klasLeerlingDto.getLeerlingid()).get();
 		if(!k.getLeerlingen().contains(l)) {
@@ -98,18 +99,13 @@ public class KlasEndpoint {
 	
 	@PostMapping("/api/voegDocentVakToe/{klasid}")
 	public void voegDocentVakToe(@PathVariable("klasid") Long klasid, @RequestBody DocentVakDto dto) {
-		
-    	Optional <Docent> docentOptional = ds.toonDocentById(dto.getDocentid());
-    	Optional <Vak> vakOptional = vs.toonVakById(dto.getVakid());
+    	Docentvak dv = dvs.getDocentVakById(dto.getId()).get();
+    	Klas k = ks.getKlasById(klasid).get();
     	
-    	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());
-	
-		Klas k = ks.getKlasById(klasid).get();
-		if(!k.getDocentvakken().contains(dv)) {
-			k.voegDocentVakToe(dv);
-			dv.voegKlasToe(k);
-			ks.update(k);
-			dvs.save(dv);
-		}
+		k.voegDocentVakToe(dv);
+		dv.voegKlasToe(k);
+		
+		ks.update(k);
+		dvs.save(dv);
 	}
 }

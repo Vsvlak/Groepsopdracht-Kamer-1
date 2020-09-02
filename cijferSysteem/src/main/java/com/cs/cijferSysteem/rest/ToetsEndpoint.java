@@ -85,7 +85,16 @@ public class ToetsEndpoint {
     	for(Docentvak dv : docentvakken) {
     		toetsen.addAll(dv.getToetsen());
     	}
-    	return toetsen.stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
+    	List<ToetsDto> dtos = new ArrayList<ToetsDto>();
+    	for(Toets t : toetsen) {
+    		ToetsDto dto = new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId());
+    		dto.setDocentnaam(t.getDocent().getAchternaam());
+    		dto.setVaknaam(t.getVak().getNaam());
+    		dto.setKlasnaam(t.getKlas().getNaam());
+    		dtos.add(dto);
+    	}
+    	return dtos.stream();
+    	//return toetsen.stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
     }
     
     @GetMapping("toonToetsenVanKlas/{klasid}")

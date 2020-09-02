@@ -35,6 +35,6 @@ public class DocentService {
 	public Optional<Docent> getDocentById(Long id) {
 		return dr.findById(id);
 	}
-
+	
 }
 

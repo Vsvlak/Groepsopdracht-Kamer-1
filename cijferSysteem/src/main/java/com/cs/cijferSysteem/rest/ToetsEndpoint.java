@@ -111,6 +111,7 @@ public class ToetsEndpoint {
     	
     	Klas k = ks.getKlasById(createToetsDto.getKlasId()).get();
     	Optional <Docent> docentOptional = ds.toonDocentById(createToetsDto.getDocentId());
+	
     	Optional <Vak> vakOptional = vs.toonVakById(createToetsDto.getVakId());
     	
     	Docentvak dv = dvs.getByDocentAndVak(docentOptional.get(), vakOptional.get());

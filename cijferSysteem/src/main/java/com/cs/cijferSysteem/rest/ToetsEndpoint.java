@@ -99,7 +99,16 @@ public class ToetsEndpoint {
     
     @GetMapping("toonToetsenVanKlas/{klasid}")
     public Stream<ToetsDto> toonToetsenVanKlas(@PathVariable("klasid") Long klasid){
-    	return ts.findToetsByKlas(klasid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
+    	List<ToetsDto> dtos = new ArrayList<ToetsDto>();
+    	for(Toets t : ts.findToetsByKlas(klasid)) {
+    		ToetsDto dto = new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId());
+    		dto.setDocentnaam(t.getDocent().getAchternaam());
+    		dto.setVaknaam(t.getVak().getNaam());
+    		dto.setKlasnaam(t.getKlas().getNaam());
+    		dtos.add(dto);
+    	}
+    	return dtos.stream();
+    	//return ts.findToetsByKlas(klasid).stream().map(t -> new ToetsDto(t.getId(), t.getDatum().toString(), t.getTijd().toString(), t.getVak().getId(), t.getDocent().getId(), t.getKlas().getId()));
     }
     
     @GetMapping("toonToetsenVanDocentEnVak/{docentid}/{vakid}")
